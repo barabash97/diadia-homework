@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
 
+import java.util.Scanner;
+
 /**
  * Questa classe modella una partita del gioco
  *
@@ -10,9 +12,9 @@ package it.uniroma3.diadia;
 
 public class Partita {
 
-	private boolean finita;
-	private Labirinto labirinto;
-	private Giocatore giocatore;
+	private boolean finita; //Flag se la partita è terminata
+	private Labirinto labirinto; //oggetto Labirinto
+	private Giocatore giocatore; // oggetto Giocatore
 	/**
 	 * Construttore della classe partita
 	 * Inizializza le stanze e labirinto
@@ -20,7 +22,7 @@ public class Partita {
 	 * Imposta: partita vinta = false
 	 */
 	public Partita() {
-		creaStanze();
+		creaStanze(); //Inizializzazione delle stanza e attrezzi
 		this.finita = false;
 		this.giocatore = new Giocatore("Vladimir");
 	}
@@ -90,20 +92,36 @@ public class Partita {
 		this.finita = true;
 	}
 
+	/**
+	 * Getter oggetto Labirinto
+	 * @return
+	 */
 	public Labirinto getLabirinto() {
 		return this.labirinto;
 	}
 
+	/**
+	 * Getter oggetto Giocatore
+	 * @return
+	 */
 	public Giocatore getGiocatore() {
 		return this.giocatore;
 	}
-
+	
+	/**
+	 * Setter oggetto Giocatore
+	 * @param giocatore
+	 */
 	public void setGiocatore(Giocatore giocatore) {
 		this.giocatore = giocatore;
 	}
 	
-	
-	public boolean prendereAttrezzo(String nomeAttrezzo) {
+	/**
+	 * Riferimento ad attrezzo della stanza corrente
+	 * @param nomeAttrezzo
+	 * @return
+	 */
+	public boolean getAttrezzoStanzaCorrente(String nomeAttrezzo) {
 		Attrezzo a = this.getLabirinto().getStanzaCorrente().getAttrezzo(nomeAttrezzo);
 		
 		if(a == null) {
@@ -112,5 +130,13 @@ public class Partita {
 		
 		return false;
 	}
-
+	
+	public void prendereAttrezzo() {
+		System.out.println(this.getLabirinto().getStanzaCorrente().toStringAttrezzi());
+		System.out.println("Il nome dell\'attrezzo da mettere nello zaino:");
+		Scanner scannerDiLinee = new Scanner(System.in);
+		String nomeOggetto = scannerDiLinee.nextLine();
+		Attrezzo a = this.getLabirinto().getStanzaCorrente().getAttrezzo(nomeOggetto);
+		this.getGiocatore().prendereAttrezzo(a);
+	}
 }

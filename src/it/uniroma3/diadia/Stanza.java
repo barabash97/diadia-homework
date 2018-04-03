@@ -210,5 +210,20 @@ public class Stanza {
 		Stanza s = (Stanza) o;
 		return (this.getNome() == s.getNome());
 	}
+	
+	/**
+	 * Stampa attrezzi nella stanza
+	 * @return
+	 */
+	public String toStringAttrezzi() {
+		StringBuilder risultato = new StringBuilder();
+		risultato.append("\nAttrezzi nella stanza: ");
+		for (Attrezzo attrezzo : this.attrezzi) {
+			if (attrezzo != null) {
+				risultato.append(attrezzo.toString() + " ");
+			}
+		}
+		return risultato.toString();
+	}
 
 }

@@ -24,20 +24,20 @@ public class DiaDia {
 			+ "o regalarli se pensi che possano ingraziarti qualcuno.\n\n"
 			+ "Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	static final private String[] elencoComandi = { "vai", "aiuto", "fine" };
+	static final private String[] elencoComandi = { "vai", "aiuto", "fine", "prendi"};
 
 	private Partita partita;
-
+	private static Scanner scannerDiLinee = new Scanner(System.in);
+	
 	public DiaDia() {
 		this.partita = new Partita();
 	}
 
 	public void gioca() {
 		String istruzione;
-		Scanner scannerDiLinee;
 
 		System.out.println(MESSAGGIO_BENVENUTO);
-		scannerDiLinee = new Scanner(System.in);
+	
 		do
 			istruzione = scannerDiLinee.nextLine();
 		while (!processaIstruzione(istruzione));
@@ -61,6 +61,10 @@ public class DiaDia {
 			this.vai(comandoDaEseguire.getParametro());
 		else if (comandoDaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
+		else if (comandoDaEseguire.getNome().equals("prendi"))
+			this.prendere();
+		else if (comandoDaEseguire.getNome().equals("stampa"))
+			System.out.println("TODO");
 		else
 			System.out.println("Comando sconosciuto");
 		if (this.partita.vinta()) {
@@ -104,6 +108,19 @@ public class DiaDia {
 	 */
 	private void fine() {
 		System.out.println("Grazie di aver giocato!"); // si desidera smettere
+	}
+	
+	private void prendere() {
+		System.out.println("Parametri: oggetto");
+		switch(scannerDiLinee.nextLine()) {
+		case "oggetto":
+			this.partita.prendereAttrezzo();
+			break;
+		
+		default:
+			System.out.println("Comando sconosciuto");
+			break;
+		}
 	}
 	
 	

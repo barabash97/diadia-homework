@@ -51,7 +51,11 @@ public class Giocatore {
 		this.cfu--;
 	}
 	
-	
+	/**
+	 * Aggiungere attrezzo nella borsa
+	 * @param attrezzo
+	 * @return
+	 */
 	public boolean prendereAttrezzo(Attrezzo attrezzo) {
 		
 		if(attrezzo == null) {
@@ -59,7 +63,7 @@ public class Giocatore {
 		}
 		
 		if(this.getBorsa().possibileAggiungereAttrezzo(attrezzo)) {
-			this.getBorsa().addAttrezzo(attrezzo);
+			return this.getBorsa().addAttrezzo(attrezzo);
 		}
 		
 		return false;
