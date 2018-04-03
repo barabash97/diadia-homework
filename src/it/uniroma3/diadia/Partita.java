@@ -103,5 +103,14 @@ public class Partita {
 	}
 	
 	
+	public boolean prendereAttrezzo(String nomeAttrezzo) {
+		Attrezzo a = this.getLabirinto().getStanzaCorrente().getAttrezzo(nomeAttrezzo);
+		
+		if(a == null) {
+			return false;
+		}
+		
+		return false;
+	}
 
 }

@@ -52,4 +52,17 @@ public class Giocatore {
 	}
 	
 	
+	public boolean prendereAttrezzo(Attrezzo attrezzo) {
+		
+		if(attrezzo == null) {
+			return false;
+		}
+		
+		if(this.getBorsa().possibileAggiungereAttrezzo(attrezzo)) {
+			this.getBorsa().addAttrezzo(attrezzo);
+		}
+		
+		return false;
+	}
+	
 }

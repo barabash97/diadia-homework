@@ -8,6 +8,7 @@ package it.uniroma3.diadia;
  */
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
+	public final static int DEFAULT_NUMERO_MAX_ATTREZZI = 10;
 	private Attrezzo[] attrezzi; //Array di attrezzi
 	private int numeroAttrezzi; //contatore di attrezzi
 	private int pesoMax; // peso massimo della borsa
@@ -29,7 +30,7 @@ public class Borsa {
 	 */
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax; 
-		this.attrezzi = new Attrezzo[10]; // speriamo che bastino...
+		this.attrezzi = new Attrezzo[DEFAULT_NUMERO_MAX_ATTREZZI]; // speriamo che bastino...
 		this.numeroAttrezzi = 0;
 	}
 
@@ -40,7 +41,7 @@ public class Borsa {
 	 * @return ritorna true se attrezzo è stato aggiunto, altrimenti false
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
+		if (!this.pesoSufficientePerAggingereAttrezzo(attrezzo))
 			return false;
 		if (this.numeroAttrezzi == 10)
 			return false;
@@ -98,14 +99,29 @@ public class Borsa {
 		return this.getAttrezzo(nomeAttrezzo) != null;
 	}
 	
-	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
-		Attrezzo a = null;
-		// ---> TODO (implementare questo metodo) <---
-		return a;
+	/**
+	 * Rimuovere un attrezzo dalla borsa
+	 * @param nomeAttrezzo nome stringa dell'attrezzo
+	 * @return restituisce true se l'attrezzo è stato rimosso, altrimenti false
+	 */
+	public boolean removeAttrezzo(String nomeAttrezzo) {
+		
+		int i;
+		
+		for(i = 0; i < this.numeroAttrezzi; i++) {
+			if(this.attrezzi[i].getNome().equals(nomeAttrezzo)) {
+				this.attrezzi[i] = this.attrezzi[this.numeroAttrezzi - 1];
+				this.attrezzi[this.numeroAttrezzi - 1] = null;
+				this.decrementaNumeroAttrezzi();
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	/**
-	 * Stampa stringa del contenuto della borsa
+	 * Restituisce la stringa con il contenuto della borsa
 	 */
 	public String toString() {
 		StringBuilder s = new StringBuilder();
@@ -117,4 +133,65 @@ public class Borsa {
 			s.append("Borsa vuota");
 		return s.toString();
 	}
+	
+	/**
+	 * Decrementa il numero di attrezzi nella borsa
+	 */
+	public void decrementaNumeroAttrezzi() {
+		this.numeroAttrezzi--;
+	}
+	
+	/**
+	 * Controlla se la borsa è piena
+	 * @return
+	 */
+	public boolean isPieno() {
+		return this.getNumeroAttrezzi() == DEFAULT_NUMERO_MAX_ATTREZZI;
+	}
+	
+	/**
+	 * Il peso rimasto della borsa è sufficiente per aggiungere attrezzo
+	 * @param attrezzo
+	 * @return ritorna true se peso è sufficiente, altrimenti false
+	 */
+	public boolean pesoSufficientePerAggingereAttrezzo(Attrezzo attrezzo) {
+		return this.getPeso() + attrezzo.getPeso() <= this.getPesoMax();
+	}
+	
+	/**
+	 * Controllo se è possibile aggiungere attrezzo nella borsa 
+	 * @param attrezzo
+	 * @return
+	 */
+	public boolean possibileAggiungereAttrezzo(Attrezzo attrezzo) {
+		
+		if(attrezzo == null) {
+			return false;
+		}
+		
+		if(!this.isPieno() && this.pesoSufficientePerAggingereAttrezzo(attrezzo)) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+
+	/**
+	 * Getter numero attrezzi nella borsa
+	 * @return
+	 */
+	public int getNumeroAttrezzi() {
+		return numeroAttrezzi;
+	}
+
+	/**
+	 * Setter numero attrezzi nella borsa
+	 * @param numeroAttrezzi
+	 */
+	public void setNumeroAttrezzi(int numeroAttrezzi) {
+		this.numeroAttrezzi = numeroAttrezzi;
+	}
+	
+	
 }

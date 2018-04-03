@@ -105,9 +105,12 @@ public class DiaDia {
 	private void fine() {
 		System.out.println("Grazie di aver giocato!"); // si desidera smettere
 	}
-
+	
+	
 	public static void main(String[] argc) {
 		DiaDia gioco = new DiaDia();
 		gioco.gioca();
 	}
+	
+	
 }
