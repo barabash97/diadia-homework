@@ -1,5 +1,10 @@
 package it.uniroma3.diadia;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.giocatore.Giocatore;
+
 /**
  * Questa classe modella una partita del gioco
  *
@@ -71,7 +76,7 @@ public class Partita {
 	 * @return vero se partita vinta
 	 */
 	public boolean vinta() {
-		return this.getLabirinto().stanzaUguali();
+		return this.getLabirinto().stanzeUguali();
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.ambienti;
 
 public class Labirinto {
 	
@@ -19,7 +19,7 @@ public class Labirinto {
 	 * Controllo se le due stanze sono uguali
 	 * @return
 	 */
-	public boolean stanzaUguali() {
+	public boolean stanzeUguali() {
 		return this.getStanzaCorrente().equals(this.getStanzaFinale());
 	}
 	
@@ -40,5 +40,11 @@ public class Labirinto {
 		this.stanzaFinale = stanzaFinale;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		Labirinto l = (Labirinto) o;
+		return this.getStanzaCorrente().equals(l.getStanzaCorrente()) && 
+				this.getStanzaFinale().equals(l.getStanzaFinale());
+	}
 	
 }

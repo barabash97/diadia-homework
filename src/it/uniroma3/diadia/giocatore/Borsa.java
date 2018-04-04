@@ -1,4 +1,6 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.giocatore;
+
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
  * Memorizza gli oggetti di un giocatore
@@ -41,9 +43,9 @@ public class Borsa {
 	 * @return ritorna true se attrezzo è stato aggiunto, altrimenti false
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		if (!this.pesoSufficientePerAggingereAttrezzo(attrezzo))
+		if (!this.pesoSufficientePerAggiungereAttrezzo(attrezzo))
 			return false;
-		if (this.numeroAttrezzi == 10)
+		if (this.numeroAttrezzi == DEFAULT_NUMERO_MAX_ATTREZZI)
 			return false;
 		this.attrezzi[this.numeroAttrezzi] = attrezzo;
 		this.numeroAttrezzi++;
@@ -78,7 +80,10 @@ public class Borsa {
 	public int getPeso() {
 		int peso = 0;
 		for (int i = 0; i < this.numeroAttrezzi; i++)
-			peso += this.attrezzi[i].getPeso();
+			if(this.attrezzi[i] != null) {
+				peso += this.attrezzi[i].getPeso();
+			}
+			
 		return peso;
 	}
 	
@@ -131,6 +136,7 @@ public class Borsa {
 				s.append(attrezzi[i].toString() + " ");
 		} else
 			s.append("Borsa vuota");
+		s.append("\nPeso della borsa: " + this.getPeso() + "kg");
 		return s.toString();
 	}
 	
@@ -146,7 +152,7 @@ public class Borsa {
 	 * @return
 	 */
 	public boolean isPieno() {
-		return this.getNumeroAttrezzi() == DEFAULT_NUMERO_MAX_ATTREZZI;
+		return ((this.getNumeroAttrezzi() == DEFAULT_NUMERO_MAX_ATTREZZI) || (this.getPeso() == DEFAULT_PESO_MAX_BORSA));
 	}
 	
 	/**
@@ -154,8 +160,8 @@ public class Borsa {
 	 * @param attrezzo
 	 * @return ritorna true se peso è sufficiente, altrimenti false
 	 */
-	public boolean pesoSufficientePerAggingereAttrezzo(Attrezzo attrezzo) {
-		return this.getPeso() + attrezzo.getPeso() <= this.getPesoMax();
+	public boolean pesoSufficientePerAggiungereAttrezzo(Attrezzo attrezzo) {
+		return ((this.getPeso() + attrezzo.getPeso()) <= this.getPesoMax());
 	}
 	
 	/**
@@ -169,7 +175,7 @@ public class Borsa {
 			return false;
 		}
 		
-		if(!this.isPieno() && this.pesoSufficientePerAggingereAttrezzo(attrezzo)) {
+		if(!this.isPieno() && this.pesoSufficientePerAggiungereAttrezzo(attrezzo)) {
 			return true;
 		} else {
 			return false;
