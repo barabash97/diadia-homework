@@ -5,28 +5,33 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.attrezzi.Attrezzo;
+
 public class GiocatoreTest {
 	
 	private Giocatore giocatore;
-	
+	private Attrezzo osso;
 	@Before
 	public void setUp() throws Exception {
 		this.giocatore = new Giocatore("Vladimir");
+		this.osso = new Attrezzo("osso", 3);
 	}
 
 	@Test
-	public void testGiocatore() {
-		fail("Not yet implemented");
+	public void testGiocatoreIstanziato() {
+		assertTrue(this.giocatore != null);
 	}
 
 	@Test
 	public void testDecrementaCfu() {
-		//assertNotEquals(this.giocatore.getCfu(), this.giocatore.);
+		int cfuPrima = this.giocatore.getCfu();
+		this.giocatore.decrementaCfu();
+		assertNotEquals(cfuPrima, this.giocatore.getCfu());
 	}
 
 	@Test
 	public void testPrendereAttrezzo() {
-		fail("Not yet implemented");
+		assertTrue(this.giocatore.getBorsa().addAttrezzo(this.osso));
 	}
-
+	
 }
