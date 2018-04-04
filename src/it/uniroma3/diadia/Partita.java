@@ -1,7 +1,5 @@
 package it.uniroma3.diadia;
 
-import java.util.Scanner;
-
 /**
  * Questa classe modella una partita del gioco
  *
@@ -35,6 +33,7 @@ public class Partita {
 		/* crea gli attrezzi */
 		Attrezzo lanterna = new Attrezzo("lanterna", 3);
 		Attrezzo osso = new Attrezzo("osso", 1);
+		Attrezzo chiave = new Attrezzo("chiave", 5);
 
 		/* crea stanze del labirinto */
 		Stanza atrio = new Stanza("Atrio");
@@ -131,12 +130,34 @@ public class Partita {
 		return false;
 	}
 	
-	public void prendereAttrezzo() {
-		System.out.println(this.getLabirinto().getStanzaCorrente().toStringAttrezzi());
-		System.out.println("Il nome dell\'attrezzo da mettere nello zaino:");
-		Scanner scannerDiLinee = new Scanner(System.in);
-		String nomeOggetto = scannerDiLinee.nextLine();
-		Attrezzo a = this.getLabirinto().getStanzaCorrente().getAttrezzo(nomeOggetto);
-		this.getGiocatore().prendereAttrezzo(a);
+	/**
+	 * Prendere attrezzo dalla stanza
+	 */
+	public void prendiAttrezzo(String nomeAttrezzo) {
+		Attrezzo a = this.getLabirinto().getStanzaCorrente().getAttrezzo(nomeAttrezzo);
+		boolean flag = this.getGiocatore().prendereAttrezzo(a);
+		if(flag) {
+			this.getLabirinto().getStanzaCorrente().removeAttrezzo(a);
+			System.out.println("Attrezzo è stato aggiunto nello zaino");
+		} else {
+			System.out.println("Non è stato possibile aggiungere attrezzo nello zaino");
+		}
 	}
+	
+	/**
+	 * Posare attrezzo dallo zaino
+	 * @param nomeAttrezzo
+	 */
+	public void posaAttrezzo(String nomeAttrezzo) {
+		Attrezzo a = this.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo);
+		boolean flag = this.getLabirinto().getStanzaCorrente().addAttrezzo(a);
+		if(flag) {
+			this.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
+			System.out.println("Attrezzo è stato posato nella stanza");
+		} else {
+			System.out.println("Non è stato possibile posare attrezzo nella stanza");
+		}
+	}
+	
+	
 }

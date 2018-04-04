@@ -24,11 +24,11 @@ public class DiaDia {
 			+ "o regalarli se pensi che possano ingraziarti qualcuno.\n\n"
 			+ "Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	static final private String[] elencoComandi = { "vai", "aiuto", "fine", "prendi"};
+	static final private String[] elencoComandi = { "vai", "aiuto", "fine", "prendi", "posa", "stampa"};
 
 	private Partita partita;
 	private static Scanner scannerDiLinee = new Scanner(System.in);
-	
+
 	public DiaDia() {
 		this.partita = new Partita();
 	}
@@ -37,7 +37,7 @@ public class DiaDia {
 		String istruzione;
 
 		System.out.println(MESSAGGIO_BENVENUTO);
-	
+
 		do
 			istruzione = scannerDiLinee.nextLine();
 		while (!processaIstruzione(istruzione));
@@ -62,9 +62,11 @@ public class DiaDia {
 		else if (comandoDaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
 		else if (comandoDaEseguire.getNome().equals("prendi"))
-			this.prendere();
+			this.prendi(comandoDaEseguire.getParametro());
+		else if (comandoDaEseguire.getNome().equals("posa"))
+			this.posa(comandoDaEseguire.getParametro());
 		else if (comandoDaEseguire.getNome().equals("stampa"))
-			System.out.println("TODO");
+			this.stampa(comandoDaEseguire.getParametro());
 		else
 			System.out.println("Comando sconosciuto");
 		if (this.partita.vinta()) {
@@ -109,25 +111,64 @@ public class DiaDia {
 	private void fine() {
 		System.out.println("Grazie di aver giocato!"); // si desidera smettere
 	}
-	
-	private void prendere() {
-		System.out.println("Parametri: oggetto");
-		switch(scannerDiLinee.nextLine()) {
-		case "oggetto":
-			this.partita.prendereAttrezzo();
-			break;
+
+	/**
+	 * Elabora il comando prendi
+	 */
+	private void prendi(String parametro) {
 		
+		if (parametro == null) {
+			System.out.println("Parametro sconosciuto");
+			return;
+		}
+		
+		this.partita.prendiAttrezzo(parametro);
+		
+	}
+	
+	/**
+	 * Comando stampa
+	 * @param parametro
+	 */
+	private void stampa(String parametro) {
+		if (parametro == null) {
+			System.out.println("Parametro sconosciuto");
+			return;
+		}
+		switch (parametro) {
+		case "zaino":
+			System.out.println(this.partita.getGiocatore().getBorsa().toString());
+			break;
+		case "stanza":
+			System.out.println(this.partita.getLabirinto().getStanzaCorrente().toString());
+			break;
 		default:
 			System.out.println("Comando sconosciuto");
 			break;
 		}
 	}
-	
-	
+
+	/**
+	 * Posare oggetti
+	 */
+	private void posa(String parametro) {
+		if (parametro == null) {
+			System.out.println("Parametro sconosciuto");
+			return;
+		}
+		
+		this.partita.posaAttrezzo(parametro);
+		
+	}
+
+	/**
+	 * Funzione main per esecuzione iniziale del programma
+	 * 
+	 * @param argc
+	 */
 	public static void main(String[] argc) {
 		DiaDia gioco = new DiaDia();
 		gioco.gioca();
 	}
-	
-	
+
 }
