@@ -18,18 +18,28 @@ public class LabirintoTest {
 		this.labirinto = new Labirinto(this.stanzaCorrente, this.stanzaFinale);
 	}
 
+	
 	@Test
-	public void testLabirinto() {
-		//TODO
-	}
-
-	@Test
-	public void testStanzeUguali() {
+	public void testStanzeUguali_uguali() {
 		assertEquals(this.initLabirinto(), this.labirinto);
 	}
+	
+	@Test
+	public void testStanzeUguali_diverse() {
+		assertNotEquals(this.initLabirinto(), this.initDiversoLabirinto());
+	}
+	
 	
 	public Labirinto initLabirinto() {
 		return new Labirinto(new Stanza("N11"), new Stanza("Biblioteca"));
 	}
+	
+	public Labirinto initDiversoLabirinto() {
+		return new Labirinto(new Stanza("N10"), new Stanza("Campus One"));
+	}
+	
+	
+	
+	
 	
 }

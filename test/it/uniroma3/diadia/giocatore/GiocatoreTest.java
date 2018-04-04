@@ -30,8 +30,23 @@ public class GiocatoreTest {
 	}
 
 	@Test
-	public void testPrendereAttrezzo() {
+	public void testPrendereAttrezzo_borsaNonPiena() {
 		assertTrue(this.giocatore.getBorsa().addAttrezzo(this.osso));
 	}
 	
+	@Test
+	public void testPrendereAttrezzo_borsaPiena() {
+		assertFalse(oggettoGiocatorePienoAttrezzi().getBorsa().addAttrezzo(new Attrezzo("attrezzo", 1)));
+	}
+	
+	/**
+	 * Oggetto Giocatore pieno di attrezzi
+	 * @return
+	 */
+	public Giocatore oggettoGiocatorePienoAttrezzi() {
+		Giocatore g = new Giocatore("Vladimir");
+		Attrezzo a = new Attrezzo("pieno", g.getBorsa().getPesoMax());
+		g.getBorsa().addAttrezzo(a);
+		return g;
+	}
 }
