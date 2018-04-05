@@ -26,7 +26,7 @@ public class DiaDia {
 			+ "o regalarli se pensi che possano ingraziarti qualcuno.\n\n"
 			+ "Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	static final private String[] elencoComandi = { "vai", "aiuto", "fine", "prendi", "posa", "stampa"};
+	static final private String[] elencoComandi = { "vai", "aiuto", "fine", "prendi", "posa", "stampa" };
 
 	private Partita partita;
 	private static Scanner scannerDiLinee = new Scanner(System.in);
@@ -53,24 +53,35 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire = new Comando(istruzione);
+
 		if (comandoDaEseguire.getNome() == null) {
 			return false;
 		}
-		if (comandoDaEseguire.getNome().equals("fine")) {
+
+		switch (comandoDaEseguire.getNome()) {
+		case "aiuto": // Comando: aiuto (lista comandi)
+			this.aiuto();
+			break;
+		case "fine": // Comando: fine partita
 			this.fine();
 			return true;
-		} else if (comandoDaEseguire.getNome().equals("vai"))
+		case "vai": // Comando: vai
 			this.vai(comandoDaEseguire.getParametro());
-		else if (comandoDaEseguire.getNome().equals("aiuto"))
-			this.aiuto();
-		else if (comandoDaEseguire.getNome().equals("prendi"))
-			this.prendi(comandoDaEseguire.getParametro());
-		else if (comandoDaEseguire.getNome().equals("posa"))
-			this.posa(comandoDaEseguire.getParametro());
-		else if (comandoDaEseguire.getNome().equals("stampa"))
+			break;
+		case "stampa": // Comando: stampa borsa, stampa stanza
 			this.stampa(comandoDaEseguire.getParametro());
-		else
+			break;
+		case "posa": // Comando: posa <nomeAttrezzo>
+			this.posa(comandoDaEseguire.getParametro());
+			break;
+		case "prendi": // Comando: prendi <nomeAttrezzo>
+			this.prendi(comandoDaEseguire.getParametro());
+			break;
+		default: // Comando sconosciuto
 			System.out.println("Comando sconosciuto");
+			break;
+		}
+
 		if (this.partita.vinta()) {
 			System.out.println("Hai vinto!");
 			return true;
@@ -84,6 +95,7 @@ public class DiaDia {
 	 * Stampa informazioni di aiuto.
 	 */
 	private void aiuto() {
+		System.out.println("Lista comandi:");
 		for (int i = 0; i < elencoComandi.length; i++)
 			System.out.print(elencoComandi[i] + " ");
 		System.out.println();
@@ -108,59 +120,68 @@ public class DiaDia {
 	}
 
 	/**
-	 * Comando "Fine".
+	 * Comando "Fine partita".
 	 */
 	private void fine() {
 		System.out.println("Grazie di aver giocato!"); // si desidera smettere
 	}
 
 	/**
-	 * Elabora il comando prendi
+	 * Prendi attrezzo dalla stanza
+	 * 
+	 * @param parametro
+	 *            nome attrezzo
 	 */
 	private void prendi(String parametro) {
-		
+
 		if (parametro == null) {
 			System.out.println("Parametro sconosciuto");
 			return;
 		}
-		
+
 		this.partita.prendiAttrezzo(parametro);
-		
+
 	}
-	
+
+	/**
+	 * Posare attrezzi nella stanza
+	 * 
+	 * @param parametro
+	 *            nome attrezzo
+	 */
+	private void posa(String parametro) {
+		if (parametro == null) {
+			System.out.println("Non è stato inserito il nome dell\'attrezzo");
+			return;
+		}
+
+		this.partita.posaAttrezzo(parametro);
+
+	}
+
 	/**
 	 * Comando stampa
+	 * 
 	 * @param parametro
 	 */
 	private void stampa(String parametro) {
+		
 		if (parametro == null) {
-			System.out.println("Parametro sconosciuto");
+			System.out.println("Non è stato inserito il nome dell\'attrezzo");
 			return;
 		}
+
 		switch (parametro) {
-		case "zaino":
+		case "borsa": // comando: stampa borsa
 			System.out.println(this.partita.getGiocatore().getBorsa().toString());
 			break;
-		case "stanza":
+		case "stanza": // comando: stampa stanza corrente
 			System.out.println(this.partita.getLabirinto().getStanzaCorrente().toString());
 			break;
 		default:
 			System.out.println("Comando sconosciuto");
 			break;
 		}
-	}
-
-	/**
-	 * Posare oggetti
-	 */
-	private void posa(String parametro) {
-		if (parametro == null) {
-			System.out.println("Parametro sconosciuto");
-			return;
-		}
-		
-		this.partita.posaAttrezzo(parametro);
-		
 	}
 
 	/**

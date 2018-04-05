@@ -15,8 +15,6 @@ public class PartitaTest {
 	@Before
 	public void setUp() throws Exception {
 		this.partita = new Partita();
-		
-		new Attrezzo("bicchiere", 1);
 		this.chiave = new Attrezzo("chiave", 1);
 		
 		this.partita.getLabirinto().getStanzaCorrente().addAttrezzo(this.chiave);
