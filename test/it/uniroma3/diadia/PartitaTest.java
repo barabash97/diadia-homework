@@ -16,10 +16,8 @@ public class PartitaTest {
 	public void setUp() throws Exception {
 		this.partita = new Partita();
 		this.chiave = new Attrezzo("chiave", 1);
-		
-		this.partita.getLabirinto().getStanzaCorrente().addAttrezzo(this.chiave);
 	}
-
+	
 	@Test
 	public void testVinta_nonVinta() {
 		assertFalse(this.partita.vinta());
@@ -43,20 +41,18 @@ public class PartitaTest {
 
 	@Test
 	public void testPrendiAttrezzo() {
-		Partita p = new Partita();
 		Attrezzo a = new Attrezzo("attrezzo", 1);
-		p.getLabirinto().getStanzaCorrente().addAttrezzo(a);
-		p.prendiAttrezzo(a.getNome());
-		assertTrue(p.getGiocatore().getBorsa().hasAttrezzo(a.getNome()));
+		this.partita.getLabirinto().getStanzaCorrente().addAttrezzo(a);
+		this.partita.prendiAttrezzo(a.getNome());
+		assertTrue(this.partita.getGiocatore().getBorsa().hasAttrezzo(a.getNome()));
 	}
 
 	@Test
 	public void testPosaAttrezzo() {
-		Partita p = new Partita();
 		Attrezzo a = new Attrezzo("attrezzo", 1);
-		p.getGiocatore().getBorsa().addAttrezzo(a);
-		p.posaAttrezzo(a.getNome());
-		assertFalse(p.getGiocatore().getBorsa().hasAttrezzo(a.getNome()));
+		this.partita.getGiocatore().getBorsa().addAttrezzo(a);
+		this.partita.posaAttrezzo(a.getNome());
+		assertFalse(this.partita.getGiocatore().getBorsa().hasAttrezzo(a.getNome()));
 	}
 	
 	public Partita oggettoPartitaStanzeUguali() {
