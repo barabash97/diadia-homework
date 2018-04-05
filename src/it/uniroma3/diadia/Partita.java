@@ -38,7 +38,6 @@ public class Partita {
 		/* crea gli attrezzi */
 		Attrezzo lanterna = new Attrezzo("lanterna", 3);
 		Attrezzo osso = new Attrezzo("osso", 1);
-		Attrezzo chiave = new Attrezzo("chiave", 5);
 
 		/* crea stanze del labirinto */
 		Stanza atrio = new Stanza("Atrio");
