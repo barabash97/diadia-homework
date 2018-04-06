@@ -50,7 +50,9 @@ public class Giocatore {
 	 * Decremento CFU
 	 */
 	public void decrementaCfu() {
-		this.cfu--;
+		if(this.cfu > 0) {
+			this.cfu--;
+		}
 	}
 	
 	/**

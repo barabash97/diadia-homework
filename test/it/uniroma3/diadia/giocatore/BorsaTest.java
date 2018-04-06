@@ -28,18 +28,6 @@ public class BorsaTest {
 		this.borsa.addAttrezzo(chiave);
 	}
 	
-	/**
-	 * Generare borsa piena di attrezzi
-	 * @return
-	 */
-	public Borsa generareBorsaPiena() {
-		Borsa b = new Borsa();
-		Attrezzo a = new Attrezzo("pieno", b.getPesoMax());
-		b.addAttrezzo(a);
-		return b;
-	}
-	
-	
 	@Test
 	public void testHasAttrezzo_presente() {
 		assertTrue(this.borsa.hasAttrezzo(this.osso.getNome()));
