@@ -14,13 +14,15 @@ public class StanzaTest {
 	private Stanza aulaVuota;
 	private Attrezzo osso;
 	private Attrezzo chiave;
+	private Attrezzo attrezzoNonInStanza;
+	
 	@Before
 	public void setUp() throws Exception {
 		this.aulaN11 = new Stanza("N11");
 		this.aulaVuota = new Stanza("vuota");
 		this.osso = new Attrezzo("osso", 3);
 		this.chiave = new Attrezzo("chiave", 5);
-		new Attrezzo("bicchiere", 10);
+		this.attrezzoNonInStanza = new Attrezzo("attrezzoNonInStanza", 1);
 		this.aulaN11.addAttrezzo(this.chiave);
 		this.aulaN11.addAttrezzo(this.osso);
 	}
@@ -47,7 +49,7 @@ public class StanzaTest {
 	
 	@Test
 	public void testGetAttrezzo_nonPresente() {
-		assertNotEquals(new Attrezzo("oggettoVuoto", 10), this.aulaN11.getAttrezzo("osso"));
+		assertNotEquals(this.attrezzoNonInStanza, this.aulaN11.getAttrezzo("osso"));
 	}
 	
 	

@@ -11,6 +11,7 @@ public class GiocatoreTest {
 	
 	private Giocatore giocatore;
 	private Attrezzo osso;
+	
 	@Before
 	public void setUp() throws Exception {
 		this.giocatore = new Giocatore("Vladimir");

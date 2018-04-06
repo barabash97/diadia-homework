@@ -9,20 +9,25 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class BorsaTest {
 	
-	Borsa borsa;
-	Attrezzo osso;
-	Attrezzo chiave;
-	Attrezzo attrezzoNonPresente;
+	private Borsa borsa;
+	private Borsa borsaVuota;
+	private Attrezzo osso;
+	private Attrezzo chiave;
+	private Attrezzo attrezzoNonPresente;
+	private Attrezzo attrezzoPesoMassimo;
 	
 	@Before
 	public void setUp() throws Exception {
 		this.borsa = new Borsa();
+		this.borsaVuota = new Borsa();
 		this.osso = new Attrezzo("osso",5);
 		this.chiave = new Attrezzo("chiave", 5);
 		this.attrezzoNonPresente = new Attrezzo("nonPresente", 5);
+		this.attrezzoPesoMassimo = new Attrezzo("attrezzoPesoMassimo", this.borsa.getPesoMax());
 		this.borsa.addAttrezzo(osso);
 		this.borsa.addAttrezzo(chiave);
 	}
+	
 	/**
 	 * Generare borsa piena di attrezzi
 	 * @return
@@ -34,14 +39,6 @@ public class BorsaTest {
 		return b;
 	}
 	
-	
-	/**
-	 * Generare borsa senza attrezzi
-	 * @return
-	 */
-	public Borsa generareBorsaVuota() {
-		return new Borsa();
-	}
 	
 	@Test
 	public void testHasAttrezzo_presente() {
@@ -55,22 +52,24 @@ public class BorsaTest {
 	
 	@Test
 	public void testIsPieno_pieno() {
-		assertTrue(this.generareBorsaPiena().isPieno());
+		this.borsa.addAttrezzo(this.attrezzoPesoMassimo);
+		assertTrue(this.borsa.isPieno());
 	}
 	
 	@Test
 	public void testIsPieno_nonPieno() {
-		assertFalse(this.generareBorsaVuota().isPieno());
+		assertFalse(new Borsa().isPieno());
 	}
 	
 	@Test
 	public void testIsVuoto_vuoto() {
-		assertTrue(this.generareBorsaVuota().isEmpty());
+		assertTrue(new Borsa().isEmpty());
 	}
 	
 	@Test
 	public void testIsVuoto_nonVuoto() {
-		assertFalse(this.generareBorsaPiena().isEmpty());
+		this.borsa.addAttrezzo(this.attrezzoPesoMassimo);
+		assertFalse(this.borsa.isEmpty());
 	}
 	
 	@Test
@@ -87,11 +86,12 @@ public class BorsaTest {
 	
 	@Test 
 	public void testPesoSufficientePerAggiungereAttrezzo_borsaVuota() {
-		assertTrue(this.generareBorsaVuota().addAttrezzo(new Attrezzo("attrezzo", 3)));
+		assertTrue(this.borsaVuota.addAttrezzo(new Attrezzo("attrezzo", 3)));
 	}
 	
 	@Test 
 	public void testPesoSufficientePerAggiungereAttrezzo_borsaPiena() {
-		assertFalse(this.generareBorsaPiena().addAttrezzo(new Attrezzo("attrezzo", 3)));
+		this.borsa.addAttrezzo(this.attrezzoPesoMassimo);
+		assertFalse(this.borsa.addAttrezzo(new Attrezzo("attrezzo", 3)));
 	}
 }

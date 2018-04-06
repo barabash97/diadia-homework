@@ -25,7 +25,7 @@ public class Labirinto {
 	
 	
 	public Stanza getStanzaCorrente() {
-		return stanzaCorrente;
+		return this.stanzaCorrente;
 	}
 
 	public void setStanzaCorrente(Stanza stanzaIniziale) {
@@ -33,7 +33,7 @@ public class Labirinto {
 	}
 
 	public Stanza getStanzaFinale() {
-		return stanzaFinale;
+		return this.stanzaFinale;
 	}
 
 	public void setStanzaFinale(Stanza stanzaFinale) {

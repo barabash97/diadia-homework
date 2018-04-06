@@ -38,8 +38,4 @@ public class LabirintoTest {
 		return new Labirinto(new Stanza("N10"), new Stanza("Campus One"));
 	}
 	
-	
-	
-	
-	
 }

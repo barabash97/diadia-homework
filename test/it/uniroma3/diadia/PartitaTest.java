@@ -10,12 +10,12 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class PartitaTest {
 	
 	private Partita partita;
-	private Attrezzo chiave;
+	private Attrezzo attrezzo;
 	
 	@Before
 	public void setUp() throws Exception {
 		this.partita = new Partita();
-		this.chiave = new Attrezzo("chiave", 1);
+		this.attrezzo = new Attrezzo("attrezzo", 1);
 	}
 	
 	@Test
@@ -26,12 +26,14 @@ public class PartitaTest {
 	@Test 
 	
 	public void testVinta_finitiCfu() {
-		assertFalse(oggettoPartitaGiocatoreZeroCfu().vinta());
+		this.partita.getGiocatore().setCfu(0);
+		assertFalse(this.partita.vinta());
 	}
 	
 	@Test
 	public void testVinta_stanzeUguali() {
-		assertTrue(oggettoPartitaStanzeUguali().vinta());
+		this.partita.getLabirinto().setStanzaCorrente(this.partita.getLabirinto().getStanzaFinale());
+		assertTrue(this.partita.vinta());
 	}
 
 	@Test
@@ -41,35 +43,16 @@ public class PartitaTest {
 
 	@Test
 	public void testPrendiAttrezzo() {
-		Attrezzo a = new Attrezzo("attrezzo", 1);
-		this.partita.getLabirinto().getStanzaCorrente().addAttrezzo(a);
-		this.partita.prendiAttrezzo(a.getNome());
-		assertTrue(this.partita.getGiocatore().getBorsa().hasAttrezzo(a.getNome()));
+		this.partita.getLabirinto().getStanzaCorrente().addAttrezzo(this.attrezzo);
+		this.partita.prendiAttrezzo(this.attrezzo.getNome());
+		assertTrue(this.partita.getGiocatore().getBorsa().hasAttrezzo(this.attrezzo.getNome()));
 	}
 
 	@Test
 	public void testPosaAttrezzo() {
-		Attrezzo a = new Attrezzo("attrezzo", 1);
-		this.partita.getGiocatore().getBorsa().addAttrezzo(a);
-		this.partita.posaAttrezzo(a.getNome());
-		assertFalse(this.partita.getGiocatore().getBorsa().hasAttrezzo(a.getNome()));
+		this.partita.getGiocatore().getBorsa().addAttrezzo(this.attrezzo);
+		this.partita.posaAttrezzo(this.attrezzo.getNome());
+		assertFalse(this.partita.getGiocatore().getBorsa().hasAttrezzo(this.attrezzo.getNome()));
 	}
-	
-	public Partita oggettoPartitaStanzeUguali() {
-		Partita p = new Partita();
-		
-		p.getLabirinto().setStanzaCorrente(p.getLabirinto().getStanzaFinale());
-		
-		return p;
-	}
-	
-	public Partita oggettoPartitaGiocatoreZeroCfu() {
-		Partita p = new Partita();
-		
-		p.getGiocatore().setCfu(0);
-		
-		return p;
-	}
-
 	
 }
