@@ -58,6 +58,12 @@ public class DiaDia {
 			return false;
 		}
 
+		switchComandi(comandoDaEseguire);
+
+		return checkPartitaVinta();
+	}
+
+	public boolean switchComandi(Comando comandoDaEseguire) {
 		switch (comandoDaEseguire.getNome()) {
 		case "aiuto": // Comando: aiuto (lista comandi)
 			this.aiuto();
@@ -81,7 +87,14 @@ public class DiaDia {
 			System.out.println("Comando sconosciuto");
 			break;
 		}
-
+		return false;
+	}
+	
+	/**
+	 * Controllo se la partita è vinta
+	 * @return
+	 */
+	public boolean checkPartitaVinta() {
 		if (this.partita.vinta()) {
 			System.out.println("Hai vinto!");
 			return true;
