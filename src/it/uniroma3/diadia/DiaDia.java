@@ -148,7 +148,7 @@ public class DiaDia {
 	private void prendi(String parametro) {
 
 		if (parametro == null) {
-			System.out.println("Parametro sconosciuto");
+			System.out.println("Non è stato inserito il nome dell\'attrezzo");
 			return;
 		}
 
@@ -180,7 +180,8 @@ public class DiaDia {
 	private void stampa(String parametro) {
 		
 		if (parametro == null) {
-			System.out.println("Non è stato inserito il nome dell\'attrezzo");
+			System.out.println(this.partita.getGiocatore().getBorsa().toString());
+			System.out.println(this.partita.getLabirinto().getStanzaCorrente().toString());
 			return;
 		}
 
