@@ -163,5 +163,17 @@ public class Partita {
 		}
 	}
 	
+	/**
+	 * Controllo se la partita è vinta
+	 * @return
+	 */
+	public boolean checkPartitaVinta() {
+		if (this.vinta()) {
+			System.out.println("Hai vinto!");
+			return true;
+		} else
+			return false;
+	}
+	
 	
 }
