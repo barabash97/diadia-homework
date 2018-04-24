@@ -3,6 +3,8 @@ package it.uniroma3.diadia;
 public class ComandoAiuto implements Comando {
 	
 	private String[] elencoComandi; 
+	private String parametro;
+	private String nome;
 	
 	public ComandoAiuto(String[] elencoComandi) {
 		this.elencoComandi = elencoComandi;
@@ -18,8 +20,23 @@ public class ComandoAiuto implements Comando {
 
 	@Override
 	public void setParametro(String parametro) {
-		// TODO Auto-generated method stub
+		this.parametro = parametro;
+	}
+	
+	
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	@Override
+	public String getNome() {
+		return this.nome;
+	}
+
+	@Override
+	public String getParametro() {
+		return this.parametro;
 	}
 
 }

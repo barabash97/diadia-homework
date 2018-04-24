@@ -6,7 +6,8 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class ComandoVai implements Comando {
 	
-	private String direzione;
+	private String parametro;
+	private String nome;
 	
 	@Override
 	public void esegui(Partita partita) {
@@ -16,12 +17,12 @@ public class ComandoVai implements Comando {
 		Stanza stanzaCorrente = partita.getLabirinto().getStanzaCorrente();
 		Stanza prossimaStanza = null;
 		
-		if (this.direzione == null) {
+		if (this.parametro == null) {
 			System.out.println("Dove vuoi andare ?");
 			return;
 		}
 			
-		prossimaStanza = stanzaCorrente.getStanzaAdiacente(direzione);
+		prossimaStanza = stanzaCorrente.getStanzaAdiacente(parametro);
 		
 		if (prossimaStanza == null)
 			System.out.println("Direzione inesistente");
@@ -32,9 +33,29 @@ public class ComandoVai implements Comando {
 		System.out.println(stanzaCorrente.getDescrizione());
 	}
 
-	@Override
-	public void setParametro(String parametro) {
-		this.direzione = parametro;
+	/**
+	 * @return the parametro
+	 */
+	public String getParametro() {
+		return parametro;
 	}
 
+	@Override
+	public void setParametro(String parametro) {
+		this.parametro = parametro;
+	}
+
+	@Override
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	
 }

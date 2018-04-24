@@ -41,18 +41,5 @@ public class PartitaTest {
 		assertFalse(this.partita.isFinita());
 	}
 
-	@Test
-	public void testPrendiAttrezzo() {
-		this.partita.getLabirinto().getStanzaCorrente().addAttrezzo(this.attrezzo);
-		this.partita.prendiAttrezzo(this.attrezzo.getNome());
-		assertTrue(this.partita.getGiocatore().getBorsa().hasAttrezzo(this.attrezzo.getNome()));
-	}
-
-	@Test
-	public void testPosaAttrezzo() {
-		this.partita.getGiocatore().getBorsa().addAttrezzo(this.attrezzo);
-		this.partita.posaAttrezzo(this.attrezzo.getNome());
-		assertFalse(this.partita.getGiocatore().getBorsa().hasAttrezzo(this.attrezzo.getNome()));
-	}
 	
 }

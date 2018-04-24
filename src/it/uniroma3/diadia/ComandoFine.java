@@ -1,6 +1,13 @@
 package it.uniroma3.diadia;
 
 public class ComandoFine implements Comando {
+	
+	private String parametro;
+	private String nome;
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	@Override
 	public void esegui(Partita partita) {
@@ -11,8 +18,17 @@ public class ComandoFine implements Comando {
 
 	@Override
 	public void setParametro(String parametro) {
-		// TODO Auto-generated method stub
+		this.parametro = parametro;
+	}
 
+	@Override
+	public String getNome() {
+		return this.nome;
+	}
+
+	@Override
+	public String getParametro() {
+		return this.parametro;
 	}
 
 }

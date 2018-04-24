@@ -1,30 +1,44 @@
 package it.uniroma3.diadia;
 
 public class ComandoPosa implements Comando {
-	
+
 	/**
 	 * Nome dell'oggetto da posare
 	 */
-	private String nomeAttrezzo;
-	
+	private String parametro;
+
+	/**
+	 * Nome comando
+	 */
+	private String nome;
+
 	@Override
 	public void esegui(Partita partita) {
-		if (this.nomeAttrezzo == null) {
+		if (this.parametro == null) {
 			System.out.println("Non è stato inserito il nome dell\'attrezzo");
 			return;
 		}
 
-		partita.posaAttrezzo(this.getNomeOggetto());
+		partita.posaAttrezzo(this.getParametro());
 
+	}
+
+	public String getParametro() {
+		return parametro;
 	}
 
 	@Override
 	public void setParametro(String parametro) {
-		this.nomeAttrezzo = parametro;
+		this.parametro = parametro;
 	}
 
-	public String getNomeOggetto() {
-		return nomeAttrezzo;
+	@Override
+	public String getNome() {
+		return nome;
 	}
-	
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 }

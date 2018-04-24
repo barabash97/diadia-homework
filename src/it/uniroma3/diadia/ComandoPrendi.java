@@ -5,26 +5,41 @@ public class ComandoPrendi implements Comando {
 	/**
 	 * Nome dell'oggetto da prendere
 	 */
-	private String nomeAttrezzo;
+	private String parametro;
+	
+	/**
+	 * Nome comando
+	 */
+	private String nome;
 	
 	@Override
 	public void esegui(Partita partita) {
-		if (this.getNomeOggetto() == null) {
+		if (this.getParametro() == null) {
 			System.out.println("Non è stato inserito il nome dell\'attrezzo");
 			return;
 		}
 
-		partita.prendiAttrezzo(this.nomeAttrezzo);
+		partita.prendiAttrezzo(this.parametro);
 
 	}
 
+	public String getParametro() {
+		return parametro;
+	}
+	
 	@Override
 	public void setParametro(String parametro) {
-		this.nomeAttrezzo = parametro;
+		this.parametro = parametro;
+	}
+	
+	@Override
+	public String getNome() {
+		return nome;
 	}
 
-	public String getNomeOggetto() {
-		return nomeAttrezzo;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
+	
 }

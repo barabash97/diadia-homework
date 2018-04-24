@@ -2,6 +2,9 @@ package it.uniroma3.diadia;
 
 public class ComandoGuarda implements Comando {
 
+	private String nome;
+	private String parametro;
+
 	@Override
 	public void esegui(Partita partita) {
 		this.generazioneStampa("stanza", partita);
@@ -9,26 +12,22 @@ public class ComandoGuarda implements Comando {
 		this.generazioneStampa("borsa", partita);
 	}
 
-	@Override
-	public void setParametro(String parametro) {
-		// TODO Auto-generated method stub
-
-	}
-	
 	/**
 	 * Generazione delle stampa in base al parametro
+	 * 
 	 * @param oggettoStampa
 	 * @param partita
 	 */
 	public void generazioneStampa(String oggettoStampa, Partita partita) {
-		
-		if(oggettoStampa == null) {
+
+		if (oggettoStampa == null) {
 			return;
 		}
-		
-		System.out.println("########################### " + oggettoStampa.toUpperCase() + " ####################################");
+
+		System.out.println(
+				"########################### " + oggettoStampa.toUpperCase() + " ####################################");
 		System.out.println("");
-		switch(oggettoStampa) {
+		switch (oggettoStampa) {
 		case "giocatore":
 			System.out.println(partita.getGiocatore().toString());
 			break;
@@ -38,12 +37,32 @@ public class ComandoGuarda implements Comando {
 		case "borsa":
 			System.out.println(partita.getGiocatore().getBorsa().toString());
 			break;
-			
+
 		default:
 			System.out.println("----------------------------------------------------------------------------------");
 			break;
 		}
 		System.out.println("");
-		System.out.println("########################### FINE " + oggettoStampa.toUpperCase() + " ###############################");
+		System.out.println(
+				"########################### FINE " + oggettoStampa.toUpperCase() + " ###############################");
+	}
+
+	@Override
+	public void setParametro(String parametro) {
+		this.parametro = parametro;
+
+	}
+
+	@Override
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getParametro() {
+		return parametro;
 	}
 }
