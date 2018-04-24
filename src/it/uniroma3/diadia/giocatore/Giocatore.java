@@ -73,4 +73,15 @@ public class Giocatore {
 		return false;
 	}
 	
+	/**
+	 * Descrizione del giocatore
+	 */
+	public String toString() {
+		StringBuilder stringa = new StringBuilder("");
+		
+		stringa.append("Nome del giocatore: " + this.getNome() + "\n");
+		stringa.append("CFU: " + this.getCfu() + "\n");
+		
+		return stringa.toString();
+	}
 }
