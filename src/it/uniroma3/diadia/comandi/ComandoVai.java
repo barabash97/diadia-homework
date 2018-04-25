@@ -1,5 +1,6 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.comandi;
 
+import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.giocatore.Giocatore;
@@ -8,6 +9,10 @@ public class ComandoVai implements Comando {
 	
 	private String parametro;
 	private String nome;
+	
+	public ComandoVai() {
+		this.setNome("vai");
+	}
 	
 	@Override
 	public void esegui(Partita partita) {

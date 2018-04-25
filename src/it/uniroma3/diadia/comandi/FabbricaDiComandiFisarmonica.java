@@ -1,4 +1,4 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.comandi;
 
 import java.util.Scanner;
 
@@ -47,5 +47,14 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi {
 		
 		return comando;
 	}
+
+	/**
+	 * @return the elencocomandi
+	 */
+	public static String[] getElencoComandi() {
+		return elencoComandi;
+	}
+	
+	
 
 }

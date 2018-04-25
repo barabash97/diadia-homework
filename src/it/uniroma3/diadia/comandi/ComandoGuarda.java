@@ -1,10 +1,17 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.comandi;
+
+import it.uniroma3.diadia.Partita;
 
 public class ComandoGuarda implements Comando {
 
 	private String nome;
 	private String parametro;
-
+	
+	
+	public ComandoGuarda() {
+		this.setNome("guarda");
+	}
+	
 	@Override
 	public void esegui(Partita partita) {
 		this.generazioneStampa("stanza", partita);

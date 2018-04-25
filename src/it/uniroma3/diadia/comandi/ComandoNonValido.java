@@ -1,10 +1,16 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.comandi;
+
+import it.uniroma3.diadia.Partita;
 
 public class ComandoNonValido implements Comando {
 	
 	private String nome;
 	private String parametro;
 	
+	
+	public ComandoNonValido() {
+		this.setNome("");
+	}
 	@Override
 	public void esegui(Partita partita) {
 		System.out.println("Comando non valido.");
