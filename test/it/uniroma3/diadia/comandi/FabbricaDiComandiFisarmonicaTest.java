@@ -18,13 +18,8 @@ public class FabbricaDiComandiFisarmonicaTest {
 	private ComandoFine comandoFine;
 	private ComandoAiuto comandoAiuto;
 	private ComandoNonValido comandoNonValido;
-	private Partita partita;
-	private Attrezzo attrezzo;
-
 	@Before
 	public void setUp() throws Exception {
-		this.partita = new Partita();
-		this.attrezzo = new Attrezzo("lampada", 1);
 		this.fabbricaComandi = new FabbricaDiComandiFisarmonica();
 		this.comandoVaiSud = new ComandoVai();
 		this.comandoVaiSud.setParametro("sud");
@@ -78,6 +73,13 @@ public class FabbricaDiComandiFisarmonicaTest {
 		Comando c = this.fabbricaComandi.costruisciComando("fine");
 		assertEquals(this.comandoFine.getNome(), c.getNome());
 		assertEquals(this.comandoFine.getParametro(), c.getParametro());
+	}
+	
+	@Test
+	public void testCostruisciComando_aiuto() {
+		Comando c = this.fabbricaComandi.costruisciComando("aiuto");
+		assertEquals(this.comandoAiuto.getNome(), c.getNome());
+		assertEquals(this.comandoAiuto.getParametro(), c.getParametro());
 	}
 
 }
