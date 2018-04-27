@@ -59,7 +59,12 @@ public class DiaDia {
 		
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
-
+		
+		if(this.partita.checkPartitaPersa()) {
+			System.out.println("Hai perso!");
+			comandoDaEseguire = factory.costruisciComando("fine");
+			comandoDaEseguire.esegui(this.partita);
+		}
 		return this.partita.checkPartitaVinta();
 	}
 	

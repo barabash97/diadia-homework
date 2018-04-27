@@ -175,5 +175,12 @@ public class Partita {
 			return false;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean checkPartitaPersa() {
+		return (this.getGiocatore().getCfu() == 0) ? true : false;
+	}
 	
 }
