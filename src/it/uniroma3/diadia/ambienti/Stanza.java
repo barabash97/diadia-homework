@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import java.lang.StringBuilder;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo. Una stanza e' un luogo
@@ -110,11 +111,11 @@ public class Stanza {
 	 * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		
-		if(attrezzo == null) {
+
+		if (attrezzo == null) {
 			return false;
 		}
-		
+
 		if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
 			this.attrezzi[numeroAttrezzi] = attrezzo;
 			this.numeroAttrezzi++;
@@ -132,17 +133,17 @@ public class Stanza {
 	 */
 	public String toString() {
 		StringBuilder risultato = new StringBuilder();
-		
+
 		risultato.append(this.nome);
 		risultato.append("\nUscite: ");
-		
+
 		for (String direzione : this.direzioni)
 			if (direzione != null)
 				risultato.append(" " + direzione);
-		
+
 		risultato.append("\n");
-		
-		if(this.numeroAttrezzi > 0) {
+
+		if (this.numeroAttrezzi > 0) {
 			risultato.append("Attrezzi nella stanza: ");
 			for (Attrezzo attrezzo : this.attrezzi) {
 				if (attrezzo != null) {
@@ -152,7 +153,7 @@ public class Stanza {
 		} else {
 			risultato.append("Non ci sono attrezzi nella stanza");
 		}
-		
+
 		return risultato.toString();
 	}
 
@@ -221,25 +222,26 @@ public class Stanza {
 			direzioni[i] = this.direzioni[i];
 		return direzioni;
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		Stanza s = (Stanza) o;
 		return (this.getNome() == s.getNome());
 	}
-	
+
 	/**
-	 * Stampa attrezzi nella stanza
+	 * to string attrezzi
 	 * @return
 	 */
 	public String toStringAttrezzi() {
 		StringBuilder risultato = new StringBuilder();
+
 		risultato.append("\nAttrezzi nella stanza: ");
-		
-		if(this.numeroAttrezzi == 0) {
+
+		if (this.numeroAttrezzi == 0) {
 			risultato.append("Non ci sono attrezzi nella stanza");
 		}
-		
+
 		for (Attrezzo attrezzo : this.attrezzi) {
 			if (attrezzo != null) {
 				risultato.append(attrezzo.toString() + " ");
