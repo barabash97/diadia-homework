@@ -55,7 +55,7 @@ public class StanzaTest {
 	
 	@Test
 	public void testRemoveAttrezzo_nonPresente() {
-		assertTrue(this.aulaN11.addAttrezzo(this.osso));
+		assertTrue(this.aulaN11.removeAttrezzo(this.osso));
 	}
 	
 	@Test
