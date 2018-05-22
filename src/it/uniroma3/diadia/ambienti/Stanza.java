@@ -177,7 +177,7 @@ public class Stanza {
 	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		Iterator<Attrezzo> it = this.attrezzi.iterator();
-
+		
 		while (it.hasNext()) {
 			Attrezzo a = it.next();
 			if (a.getNome().equals(nomeAttrezzo)) {
@@ -215,12 +215,13 @@ public class Stanza {
 		if (this.attrezzi.size() == 0) {
 			risultato.append("Non ci sono attrezzi nella stanza");
 		}
-
-		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo != null) {
-				risultato.append(attrezzo.toString() + " ");
-			}
+		
+		Iterator<Attrezzo> it = this.attrezzi.iterator();
+		while(it.hasNext()) {
+			Attrezzo attrezzo = it.next();
+			risultato.append(attrezzo.toString() + " ");
 		}
+		
 		return risultato.toString();
 	}
 
