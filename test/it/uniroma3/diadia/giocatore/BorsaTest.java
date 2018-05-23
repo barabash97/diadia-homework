@@ -2,6 +2,11 @@ package it.uniroma3.diadia.giocatore;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.SortedSet;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +24,7 @@ public class BorsaTest {
 	@Before
 	public void setUp() throws Exception {
 		this.borsa = new Borsa();
-		this.borsaVuota = new Borsa();
+		this.borsaVuota = new Borsa(100);
 		this.osso = new Attrezzo("osso",5);
 		this.chiave = new Attrezzo("chiave", 5);
 		this.attrezzoNonPresente = new Attrezzo("nonPresente", 5);
@@ -81,5 +86,55 @@ public class BorsaTest {
 	public void testPesoSufficientePerAggiungereAttrezzo_borsaPiena() {
 		this.borsa.addAttrezzo(this.attrezzoPesoMassimo);
 		assertFalse(this.borsa.addAttrezzo(new Attrezzo("attrezzo", 3)));
+	}
+	
+	@Test
+	public void testGetContenutoOrdinatoPerPeso_presenzaAttrezzi() {
+		Attrezzo a1 = new Attrezzo("aaaaaa", 1);
+		Attrezzo a2 = new Attrezzo("bbbbbb", 2);
+		Attrezzo a3 = new Attrezzo("cccccc", 3);
+		Attrezzo a4 = new Attrezzo("dddddd", 4);
+		this.borsaVuota.addAttrezzo(a1);
+		this.borsaVuota.addAttrezzo(a2);
+		this.borsaVuota.addAttrezzo(a3);
+		this.borsaVuota.addAttrezzo(a4);
+		List<Attrezzo> listaAttrezzi = this.borsaVuota.getContenutoOrdinatoPerPeso();
+		Iterator<Attrezzo> it = listaAttrezzi.iterator();
+		assertEquals(a1, it.next());
+		assertEquals(a2, it.next());
+		assertEquals(a3, it.next());
+		assertEquals(a4, it.next());
+	}
+	
+	@Test
+	public void testGetContenutoOrdinatoPerPeso_vuotoAttrezzi() {
+		List<Attrezzo> listaAttrezzi = this.borsaVuota.getContenutoOrdinatoPerPeso();
+		Iterator<Attrezzo> it = listaAttrezzi.iterator();
+		assertFalse(it.hasNext());
+	}
+	
+	@Test
+	public void testGetContenutoOrdinatoPerNome_presenzaAttrezzi() {
+		Attrezzo a1 = new Attrezzo("aaaaaa", 1);
+		Attrezzo a2 = new Attrezzo("bbbbbb", 2);
+		Attrezzo a3 = new Attrezzo("cccccc", 3);
+		Attrezzo a4 = new Attrezzo("dddddd", 4);
+		this.borsaVuota.addAttrezzo(a1);
+		this.borsaVuota.addAttrezzo(a2);
+		this.borsaVuota.addAttrezzo(a3);
+		this.borsaVuota.addAttrezzo(a4);
+		SortedSet<Attrezzo> listaAttrezzi = this.borsaVuota.getContenutoOrdinatoPerNome();
+		Iterator<Attrezzo> it = listaAttrezzi.iterator();
+		assertEquals(a1, it.next());
+		assertEquals(a2, it.next());
+		assertEquals(a3, it.next());
+		assertEquals(a4, it.next());
+	}
+	
+	@Test
+	public void testGetContenutoOrdinatoPerNome_vuotoAttrezzi() {
+		SortedSet<Attrezzo> listaAttrezzi = this.borsaVuota.getContenutoOrdinatoPerNome();
+		Iterator<Attrezzo> it = listaAttrezzi.iterator();
+		assertFalse(it.hasNext());
 	}
 }

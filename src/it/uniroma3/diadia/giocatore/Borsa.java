@@ -1,10 +1,15 @@
 package it.uniroma3.diadia.giocatore;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -15,9 +20,10 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  *
  */
 public class Borsa {
+	
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
-	private Map<String, Attrezzo> attrezzi; // Array di attrezzi
-	private int pesoMax; // peso massimo della borsa
+	private Map<String, Attrezzo> attrezzi;
+	private int pesoMax;
 
 	/**
 	 * Costruttore senza paramentri
@@ -228,6 +234,24 @@ public class Borsa {
 		if (pesoMax != other.pesoMax)
 			return false;
 		return true;
+	}
+	
+	/**
+	 * Contenuto ordinato per peso
+	 * @return
+	 */
+	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
+		List<Attrezzo> data = new ArrayList<>(this.attrezzi.values());
+		ContenutoOrdinatoPerPeso order = new ContenutoOrdinatoPerPeso();
+		Collections.sort(data, order);
+		return data;
+	}
+
+	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome() {
+		ContenutoOrdinatoPerPeso order = new ContenutoOrdinatoPerPeso();
+		SortedSet<Attrezzo> data = new TreeSet<>(order);
+		data.addAll(this.attrezzi.values());
+		return data;
 	}
 	
 	
