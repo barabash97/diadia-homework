@@ -141,7 +141,7 @@ public class BorsaTest {
 	}
 	
 	@Test
-	public void testGetContenutoRaggruppatoPerPeso() {
+	public void testGetContenutoRaggruppatoPerPeso_presente() {
 		Attrezzo a1 = new Attrezzo("aaaaaa", 1);
 		Attrezzo a2 = new Attrezzo("bbbbbb", 2);
 		Attrezzo a3 = new Attrezzo("cccccc", 3);
@@ -151,11 +151,28 @@ public class BorsaTest {
 		assertTrue(this.borsaVuota.addAttrezzo(a3));
 		assertTrue(this.borsaVuota.addAttrezzo(a4));
 		Map<Integer, Set<Attrezzo>> data = this.borsaVuota.getContenutoRaggruppatoPerPeso();
-		System.out.println(data);
 		assertTrue(data.get(1).contains(a1));
 		assertTrue(data.get(2).contains(a2));
 		assertTrue(data.get(3).contains(a3));
 		assertTrue(data.get(4).contains(a4));
+		
+	}
+	
+	@Test
+	public void testGetContenutoRaggruppatoPerNome_presente() {
+		Attrezzo a1 = new Attrezzo("aaaaaa", 1);
+		Attrezzo a2 = new Attrezzo("bbbbbb", 2);
+		Attrezzo a3 = new Attrezzo("cccccc", 3);
+		Attrezzo a4 = new Attrezzo("dddddd", 4);
+		assertTrue(this.borsaVuota.addAttrezzo(a1));
+		assertTrue(this.borsaVuota.addAttrezzo(a2));
+		assertTrue(this.borsaVuota.addAttrezzo(a3));
+		assertTrue(this.borsaVuota.addAttrezzo(a4));
+		Map<String, Set<Attrezzo>> data = this.borsaVuota.getContenutoRaggruppatoPerNome();
+		assertTrue(data.get(a1.getNome()).contains(a1));
+		assertTrue(data.get(a2.getNome()).contains(a2));
+		assertTrue(data.get(a3.getNome()).contains(a3));
+		assertTrue(data.get(a4.getNome()).contains(a4));
 		
 	}
 }

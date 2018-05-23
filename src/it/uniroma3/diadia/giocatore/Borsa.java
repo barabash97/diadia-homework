@@ -21,7 +21,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  *
  */
 public class Borsa {
-	
+
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
 	private Map<String, Attrezzo> attrezzi;
 	private int pesoMax;
@@ -127,8 +127,8 @@ public class Borsa {
 	 */
 	public boolean removeAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = this.getAttrezzo(nomeAttrezzo);
-		
-		if(a != null) {
+
+		if (a != null) {
 			this.attrezzi.remove(nomeAttrezzo);
 			return true;
 		}
@@ -144,7 +144,7 @@ public class Borsa {
 		if (!this.isEmpty()) {
 			s.append("Contenuto borsa (" + this.getPeso() + "kg/" + this.getPesoMax() + "kg): ");
 			Iterator<String> it = this.attrezzi.keySet().iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				String key = it.next();
 				s.append(this.attrezzi.get(key).toString() + " ");
 			}
@@ -153,7 +153,6 @@ public class Borsa {
 		s.append("\nPeso della borsa: " + this.getPeso() + "kg");
 		return s.toString();
 	}
-
 
 	/**
 	 * Controlla se la borsa è piena
@@ -203,7 +202,9 @@ public class Borsa {
 		return this.attrezzi.size();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -215,7 +216,9 @@ public class Borsa {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -236,20 +239,22 @@ public class Borsa {
 			return false;
 		return true;
 	}
-	
+
 	/**
 	 * Contenuto ordinato per peso
+	 * 
 	 * @return
 	 */
-	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
+	public List<Attrezzo> getContenutoOrdinatoPerPeso() {
 		List<Attrezzo> data = new ArrayList<>(this.attrezzi.values());
 		ContenutoOrdinatoPerPeso order = new ContenutoOrdinatoPerPeso();
 		Collections.sort(data, order);
 		return data;
 	}
-	
+
 	/**
 	 * Contenuto ordinato per nome
+	 * 
 	 * @return
 	 */
 	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome() {
@@ -258,37 +263,39 @@ public class Borsa {
 		data.addAll(this.attrezzi.values());
 		return data;
 	}
-	
+
 	/**
 	 * Contenuto raggruppato per peso
+	 * 
 	 * @return
 	 */
-	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+	public Map<Integer, Set<Attrezzo>> getContenutoRaggruppatoPerPeso() {
 		Map<Integer, Set<Attrezzo>> out = new HashMap<>();
 		Iterator<String> keys = this.attrezzi.keySet().iterator();
-		while(keys.hasNext()) {
+		while (keys.hasNext()) {
 			Set<Attrezzo> data = new HashSet<>();
 			Attrezzo a = this.attrezzi.get(keys.next());
 			data.add(a);
-			System.out.println(data);
 			out.put(a.getPeso(), data);
 		}
 		return out;
 	}
-	
+
 	/**
 	 * Contenuto raggruppato per nome
+	 * 
 	 * @return
 	 */
-//	public Map<String,Set<Attrezzo>> getContenutoRaggruppatoPerNome(){
-//		Map<String, Set<Attrezzo>> data = new HashMap<>();
-//		Iterator<String> keys = this.attrezzi.keySet().iterator();
-//		while(keys.hasNext()) {
-//			Attrezzo a = this.attrezzi.get(keys.next());
-//			data.put(a.getNome(), (Set<Attrezzo>) a);
-//		}
-//		return data;
-//	}
-	
-	
+	public Map<String, Set<Attrezzo>> getContenutoRaggruppatoPerNome() {
+		Map<String, Set<Attrezzo>> out = new HashMap<>();
+		Iterator<String> keys = this.attrezzi.keySet().iterator();
+		while (keys.hasNext()) {
+			Set<Attrezzo> data = new HashSet<>();
+			Attrezzo a = this.attrezzi.get(keys.next());
+			data.add(a);
+			out.put(a.getNome(), data);
+		}
+		return out;
+	}
+
 }
