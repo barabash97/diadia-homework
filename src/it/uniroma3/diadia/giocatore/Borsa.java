@@ -42,7 +42,7 @@ public class Borsa {
 	 */
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
-		this.attrezzi = new HashMap<>(); // speriamo che bastino...
+		this.attrezzi = new HashMap<>();
 	}
 
 	/**
