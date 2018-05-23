@@ -196,4 +196,39 @@ public class Borsa {
 		return this.attrezzi.size();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((attrezzi == null) ? 0 : attrezzi.hashCode());
+		result = prime * result + pesoMax;
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Borsa other = (Borsa) obj;
+		if (attrezzi == null) {
+			if (other.attrezzi != null)
+				return false;
+		} else if (!attrezzi.equals(other.attrezzi))
+			return false;
+		if (pesoMax != other.pesoMax)
+			return false;
+		return true;
+	}
+	
+	
 }
