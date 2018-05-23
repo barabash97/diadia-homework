@@ -144,17 +144,18 @@ public class BorsaTest {
 	public void testGetContenutoRaggruppatoPerPeso() {
 		Attrezzo a1 = new Attrezzo("aaaaaa", 1);
 		Attrezzo a2 = new Attrezzo("bbbbbb", 2);
-		Attrezzo a3 = new Attrezzo("cccccc", 1);
-		Attrezzo a4 = new Attrezzo("dddddd", 3);
-		this.borsaVuota.addAttrezzo(a1);
-		this.borsaVuota.addAttrezzo(a2);
-		this.borsaVuota.addAttrezzo(a3);
-		this.borsaVuota.addAttrezzo(a4);
-		Map<Integer, Set<Attrezzo>> data = this.borsa.getContenutoRaggruppatoPerPeso();
+		Attrezzo a3 = new Attrezzo("cccccc", 3);
+		Attrezzo a4 = new Attrezzo("dddddd", 4);
+		assertTrue(this.borsaVuota.addAttrezzo(a1));
+		assertTrue(this.borsaVuota.addAttrezzo(a2));
+		assertTrue(this.borsaVuota.addAttrezzo(a3));
+		assertTrue(this.borsaVuota.addAttrezzo(a4));
+		Map<Integer, Set<Attrezzo>> data = this.borsaVuota.getContenutoRaggruppatoPerPeso();
+		System.out.println(data);
 		assertTrue(data.get(1).contains(a1));
-		assertTrue(data.get(1).contains(a3));
 		assertTrue(data.get(2).contains(a2));
-		assertTrue(data.get(3).contains(a4));
+		assertTrue(data.get(3).contains(a3));
+		assertTrue(data.get(4).contains(a4));
 		
 	}
 }

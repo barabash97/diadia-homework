@@ -270,6 +270,7 @@ public class Borsa {
 			Set<Attrezzo> data = new HashSet<>();
 			Attrezzo a = this.attrezzi.get(keys.next());
 			data.add(a);
+			System.out.println(data);
 			out.put(a.getPeso(), data);
 		}
 		return out;
@@ -279,15 +280,15 @@ public class Borsa {
 	 * Contenuto raggruppato per nome
 	 * @return
 	 */
-	public Map<String,Set<Attrezzo>> getContenutoRaggruppatoPerNome(){
-		Map<String, Set<Attrezzo>> data = new HashMap<>();
-		Iterator<String> keys = this.attrezzi.keySet().iterator();
-		while(keys.hasNext()) {
-			Attrezzo a = this.attrezzi.get(keys.next());
-			data.put(a.getNome(), (Set<Attrezzo>) a);
-		}
-		return data;
-	}
+//	public Map<String,Set<Attrezzo>> getContenutoRaggruppatoPerNome(){
+//		Map<String, Set<Attrezzo>> data = new HashMap<>();
+//		Iterator<String> keys = this.attrezzi.keySet().iterator();
+//		while(keys.hasNext()) {
+//			Attrezzo a = this.attrezzi.get(keys.next());
+//			data.put(a.getNome(), (Set<Attrezzo>) a);
+//		}
+//		return data;
+//	}
 	
 	
 }
