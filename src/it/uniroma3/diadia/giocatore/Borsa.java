@@ -1,8 +1,10 @@
 package it.uniroma3.diadia.giocatore;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -14,7 +16,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  */
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
-	private List<Attrezzo> attrezzi; // Array di attrezzi
+	private Map<String, Attrezzo> attrezzi; // Array di attrezzi
 	private int pesoMax; // peso massimo della borsa
 
 	/**
@@ -34,7 +36,7 @@ public class Borsa {
 	 */
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
-		this.attrezzi = new LinkedList<>(); // speriamo che bastino...
+		this.attrezzi = new HashMap<>(); // speriamo che bastino...
 	}
 
 	/**
@@ -46,7 +48,7 @@ public class Borsa {
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if (!this.pesoSufficientePerAggiungereAttrezzo(attrezzo))
 			return false;
-		this.attrezzi.add(attrezzo);
+		this.attrezzi.put(attrezzo.getNome(), attrezzo);
 		return true;
 	}
 
@@ -68,16 +70,7 @@ public class Borsa {
 	 *         altrimenti null
 	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		Iterator<Attrezzo> it = this.attrezzi.iterator();
-
-		while (it.hasNext()) {
-			Attrezzo tmp = it.next();
-			if (tmp.getNome().equals(nomeAttrezzo)) {
-				return tmp;
-			}
-		}
-
-		return null;
+		return this.attrezzi.get(nomeAttrezzo);
 	}
 
 	/**
@@ -88,11 +81,11 @@ public class Borsa {
 	public int getPeso() {
 
 		int sommaPeso = 0;
-		Iterator<Attrezzo> it = this.attrezzi.iterator();
+		Iterator<String> it = this.attrezzi.keySet().iterator();
 
 		while (it.hasNext()) {
-			Attrezzo a = it.next();
-			sommaPeso += a.getPeso();
+			String key = it.next();
+			sommaPeso += this.attrezzi.get(key).getPeso();
 		}
 
 		return sommaPeso;
@@ -129,7 +122,8 @@ public class Borsa {
 		Attrezzo a = this.getAttrezzo(nomeAttrezzo);
 		
 		if(a != null) {
-			return this.attrezzi.remove(a);
+			this.attrezzi.remove(nomeAttrezzo);
+			return true;
 		}
 
 		return false;
@@ -142,10 +136,10 @@ public class Borsa {
 		StringBuilder s = new StringBuilder();
 		if (!this.isEmpty()) {
 			s.append("Contenuto borsa (" + this.getPeso() + "kg/" + this.getPesoMax() + "kg): ");
-			Iterator<Attrezzo> it = this.attrezzi.iterator();
+			Iterator<String> it = this.attrezzi.keySet().iterator();
 			while(it.hasNext()) {
-				Attrezzo a = it.next();
-				s.append(a.toString() + " ");
+				String key = it.next();
+				s.append(this.attrezzi.get(key).toString() + " ");
 			}
 		} else
 			s.append("Borsa vuota");

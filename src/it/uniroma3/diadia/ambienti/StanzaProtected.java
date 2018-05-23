@@ -21,7 +21,7 @@ import java.util.Set;
 public class StanzaProtected {
 
 	protected String nome;
-	protected Set<Attrezzo> attrezzi;
+	protected Map<String, Attrezzo> attrezzi;
 	protected Map<String, Stanza> stanzeAdiacenti;
 	protected Set<String> direzioni;
 
@@ -35,7 +35,7 @@ public class StanzaProtected {
 		this.nome = nome;
 		this.direzioni = new HashSet<>();
 		this.stanzeAdiacenti = new HashMap<>();
-		this.attrezzi = new HashSet<>();
+		this.attrezzi = new HashMap<>();
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class StanzaProtected {
 	 * 
 	 * @return la collezione di attrezzi nella stanza.
 	 */
-	public Set<Attrezzo> getAttrezzi() {
+	public Map<String, Attrezzo> getAttrezzi() {
 		return this.attrezzi;
 	}
 
@@ -115,7 +115,8 @@ public class StanzaProtected {
 			return false;
 		}
 
-		return this.attrezzi.add(attrezzo);
+		Attrezzo a = this.attrezzi.put(attrezzo.getNome(), attrezzo);
+		return (a == null) ? true : false;
 
 	}
 
@@ -139,10 +140,11 @@ public class StanzaProtected {
 
 		if (this.attrezzi.size() > 0) {
 			risultato.append("Attrezzi nella stanza: ");
-			for (Attrezzo attrezzo : this.attrezzi) {
-				if (attrezzo != null) {
-					risultato.append(attrezzo.toString() + " ");
-				}
+			Set<String> keys = this.attrezzi.keySet();
+			Iterator<String> it = keys.iterator();
+			while (it.hasNext()) {
+				String str = it.next();
+				risultato.append(this.attrezzi.get(str).toString() + " ");
 			}
 		} else {
 			risultato.append("Non ci sono attrezzi nella stanza");
@@ -157,16 +159,7 @@ public class StanzaProtected {
 	 * @return true se l'attrezzo esiste nella stanza, false altrimenti.
 	 */
 	public boolean hasAttrezzo(String nomeAttrezzo) {
-
-		Iterator<Attrezzo> it = this.attrezzi.iterator();
-		while (it.hasNext()) {
-			Attrezzo a = it.next();
-			if (a.getNome().equals(nomeAttrezzo)) {
-				return true;
-			}
-		}
-
-		return false;
+		return this.attrezzi.containsKey(nomeAttrezzo);
 	}
 
 	/**
@@ -176,16 +169,7 @@ public class StanzaProtected {
 	 * @return l'attrezzo presente nella stanza. null se l'attrezzo non e' presente.
 	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		Iterator<Attrezzo> it = this.attrezzi.iterator();
-
-		while (it.hasNext()) {
-			Attrezzo a = it.next();
-			if (a.getNome().equals(nomeAttrezzo)) {
-				return a;
-			}
-		}
-
-		return null;
+		return this.attrezzi.get(nomeAttrezzo);
 	}
 
 	/**
@@ -195,7 +179,8 @@ public class StanzaProtected {
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
-		return this.attrezzi.remove(attrezzo);
+		Attrezzo a = this.attrezzi.remove(attrezzo.getNome());
+		return (a != null);
 	}
 
 	public Set<String> getDirezioni() {
@@ -215,12 +200,12 @@ public class StanzaProtected {
 		if (this.attrezzi.size() == 0) {
 			risultato.append("Non ci sono attrezzi nella stanza");
 		}
-
-		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo != null) {
-				risultato.append(attrezzo.toString() + " ");
-			}
+		Iterator<String> it = this.attrezzi.keySet().iterator();
+		while (it.hasNext()) {
+			String key = it.next();
+			risultato.append(this.attrezzi.get(key).toString() + " ");
 		}
+
 		return risultato.toString();
 	}
 
