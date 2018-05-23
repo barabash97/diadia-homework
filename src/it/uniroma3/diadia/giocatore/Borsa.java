@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -255,6 +256,36 @@ public class Borsa {
 		ContenutoOrdinatoPerPeso order = new ContenutoOrdinatoPerPeso();
 		SortedSet<Attrezzo> data = new TreeSet<>(order);
 		data.addAll(this.attrezzi.values());
+		return data;
+	}
+	
+	/**
+	 * Contenuto raggruppato per peso
+	 * @return
+	 */
+	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+		Map<Integer, Set<Attrezzo>> out = new HashMap<>();
+		Iterator<String> keys = this.attrezzi.keySet().iterator();
+		while(keys.hasNext()) {
+			Set<Attrezzo> data = new HashSet<>();
+			Attrezzo a = this.attrezzi.get(keys.next());
+			data.add(a);
+			out.put(a.getPeso(), data);
+		}
+		return out;
+	}
+	
+	/**
+	 * Contenuto raggruppato per nome
+	 * @return
+	 */
+	public Map<String,Set<Attrezzo>> getContenutoRaggruppatoPerNome(){
+		Map<String, Set<Attrezzo>> data = new HashMap<>();
+		Iterator<String> keys = this.attrezzi.keySet().iterator();
+		while(keys.hasNext()) {
+			Attrezzo a = this.attrezzi.get(keys.next());
+			data.put(a.getNome(), (Set<Attrezzo>) a);
+		}
 		return data;
 	}
 	
