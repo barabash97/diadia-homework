@@ -111,12 +111,12 @@ public class Stanza {
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 
-		if (attrezzo == null) {
+		if (attrezzo == null || this.attrezzi.containsKey(attrezzo.getNome())) {
 			return false;
 		}
-
+		
 		Attrezzo a = this.attrezzi.put(attrezzo.getNome(), attrezzo);
-		return (a == null) ? true : false;
+		return true;
 
 	}
 
