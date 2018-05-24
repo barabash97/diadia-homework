@@ -258,7 +258,7 @@ public class Borsa {
 	 * @return
 	 */
 	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome() {
-		ContenutoOrdinatoPerPeso order = new ContenutoOrdinatoPerPeso();
+		ContenutoOrdinatoPerNome order = new ContenutoOrdinatoPerNome();
 		SortedSet<Attrezzo> data = new TreeSet<>(order);
 		data.addAll(this.attrezzi.values());
 		return data;
