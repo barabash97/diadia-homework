@@ -163,6 +163,17 @@ public class BorsaTest {
 		assertTrue(data.get(this.libro.getNome()).contains(this.libro));	
 	}
 	
+	@Test
+	public void testGetSortedSetOrdinatoPerPeso() {
+		Borsa b = this.getAttrezziToCompareInBorsaPesoDiverso();
+		SortedSet<Attrezzo> data = b.getSortedSetOrdinatoPerPeso();
+		Iterator<Attrezzo> it = data.iterator();
+		assertEquals(this.pesoUno, it.next());
+		assertEquals(this.pesoDue, it.next());
+		assertEquals(this.pesoTre, it.next());
+		assertEquals(this.pesoQuattro, it.next());
+	}
+	
 	public Borsa getAttrezziToCompareInBorsa() {
 		Borsa b = new Borsa(100000);
 		b.addAttrezzo(this.piuma);

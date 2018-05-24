@@ -297,5 +297,16 @@ public class Borsa {
 		}
 		return out;
 	}
+	
+	/**
+	 * SortedSet attrezzi ordinati per peso
+	 * @return
+	 */
+	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
+		ContenutoOrdinatoPerPeso order = new ContenutoOrdinatoPerPeso();
+		SortedSet<Attrezzo> listaAttrezzi = new TreeSet<>(order);
+		listaAttrezzi.addAll(this.attrezzi.values());
+		return listaAttrezzi;
+	}
 
 }
