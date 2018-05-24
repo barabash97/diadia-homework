@@ -30,11 +30,16 @@ public class BorsaTest {
 	private Attrezzo pesoDue;
 	private Attrezzo pesoTre;
 	private Attrezzo pesoQuattro;
+	private Borsa borsaVuotaPesoMaxElevato;
+	private Borsa borsaVuotaPesoPoco;
+	private Attrezzo attrezzoPesoElevato;
 	
 	@Before
 	public void setUp() throws Exception {
 		this.borsa = new Borsa();
 		this.borsaVuota = new Borsa(100);
+		this.borsaVuotaPesoMaxElevato = new Borsa(100000);
+		this.borsaVuotaPesoPoco = new Borsa(1);
 		this.osso = new Attrezzo("osso",5);
 		this.chiave = new Attrezzo("chiave", 5);
 		this.attrezzoNonPresente = new Attrezzo("nonPresente", 5);
@@ -50,6 +55,7 @@ public class BorsaTest {
 		this.pesoDue = new Attrezzo("pesoDue", 2);
 		this.pesoTre = new Attrezzo("pesoTre", 3);
 		this.pesoQuattro = new Attrezzo("pesoQuattro", 4);
+		this.attrezzoPesoElevato = new Attrezzo("attrezzo", 100000);
 	}
 	
 	@Test
@@ -105,6 +111,19 @@ public class BorsaTest {
 	public void testPesoSufficientePerAggiungereAttrezzo_borsaPiena() {
 		this.borsa.addAttrezzo(this.attrezzoPesoMassimo);
 		assertFalse(this.borsa.addAttrezzo(new Attrezzo("attrezzo", 3)));
+	}
+	
+	@Test
+	public void testAddAttrezzo_DieciAttrezzi() {
+		for(int i = 1; i <= 11; i++) {
+			String str = "attrezzo" + i;
+			Attrezzo a = new Attrezzo(str, i);
+			assertTrue(this.borsaVuota.addAttrezzo(a));
+		}
+	}
+	
+	public void testAddAttrezzo_pesoInsufficiente() {
+		assertFalse(this.borsaVuotaPesoPoco.addAttrezzo(this.attrezzoPesoMassimo));
 	}
 	
 	@Test
