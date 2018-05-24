@@ -174,6 +174,15 @@ public class BorsaTest {
 		assertEquals(this.pesoQuattro, it.next());
 	}
 	
+	@Test
+	public void testGetSortedSetOrdinatoPerPeso_pesoUgualeNomeDiverso() {
+		Borsa b = this.getAttrezziToCompareInBorsaPesoDiversoStessoNome();
+		SortedSet<Attrezzo> data = b.getSortedSetOrdinatoPerPeso();
+		Iterator<Attrezzo> it = data.iterator();
+		assertEquals(this.chiave, it.next());
+		assertEquals(this.osso, it.next());
+	}
+	
 	public Borsa getAttrezziToCompareInBorsa() {
 		Borsa b = new Borsa(100000);
 		b.addAttrezzo(this.piuma);
@@ -190,6 +199,13 @@ public class BorsaTest {
 		b.addAttrezzo(this.pesoDue);
 		b.addAttrezzo(this.pesoTre);
 		b.addAttrezzo(this.pesoQuattro);
+		return b;
+	}
+	
+	public Borsa getAttrezziToCompareInBorsaPesoDiversoStessoNome() {
+		Borsa b = new Borsa(100000);
+		b.addAttrezzo(this.osso);
+		b.addAttrezzo(this.chiave);
 		return b;
 	}
 }
