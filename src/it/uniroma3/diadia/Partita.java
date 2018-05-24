@@ -154,15 +154,25 @@ public class Partita {
 	 */
 	public void posaAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = this.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo);
-		boolean flag = this.getLabirinto().getStanzaCorrente().addAttrezzo(a);
+		boolean flag = false;
+		if(!this.controlloPresenzaAttrezzoInUnaDelleDueStanze(nomeAttrezzo) && a != null) {
+			flag = true;
+		}
 		if(flag) {
-			this.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
-			System.out.println("Attrezzo è stato posato nella stanza");
+			if(this.getLabirinto().getStanzaCorrente().addAttrezzo(a)) {
+				this.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
+				System.out.println("Attrezzo è stato posato nella stanza");
+			}
+			
 		} else {
 			System.out.println("Non è stato possibile posare attrezzo nella stanza");
 		}
 	}
 	
+	public boolean controlloPresenzaAttrezzoInUnaDelleDueStanze(String nomeAttrezzo) {
+		return (this.getLabirinto().getStanzaCorrente().hasAttrezzo(nomeAttrezzo) == true 
+				|| this.getLabirinto().getStanzaFinale().hasAttrezzo(nomeAttrezzo) == true);
+	}
 	/**
 	 * Controllo se la partita è vinta
 	 * @return

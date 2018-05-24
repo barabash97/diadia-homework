@@ -40,6 +40,19 @@ public class PartitaTest {
 	public void testIsFinita_nonFinita() {
 		assertFalse(this.partita.isFinita());
 	}
+	
+	@Test
+	public void testControlloPresenzaAttrezzoInUnaDelleDueStanze() {
+		String nomeAttrezzo = attrezzo.getNome();
+		assertTrue(this.partita.getGiocatore().getBorsa().addAttrezzo(attrezzo));
+		assertFalse(this.partita.controlloPresenzaAttrezzoInUnaDelleDueStanze(nomeAttrezzo));
+		this.partita.posaAttrezzo(nomeAttrezzo);
+		assertTrue(this.partita.controlloPresenzaAttrezzoInUnaDelleDueStanze(nomeAttrezzo));
+		this.partita.prendiAttrezzo(nomeAttrezzo);
+		assertFalse(this.partita.controlloPresenzaAttrezzoInUnaDelleDueStanze(nomeAttrezzo));
+
+		
+	}
 
 	
 }
