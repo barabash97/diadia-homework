@@ -164,7 +164,7 @@ public class BorsaTest {
 	}
 	
 	@Test
-	public void testGetSortedSetOrdinatoPerPeso() {
+	public void testGetSortedSetOrdinatoPerPeso_pesoDiversoNomeDiverso() {
 		Borsa b = this.getAttrezziToCompareInBorsaPesoDiverso();
 		SortedSet<Attrezzo> data = b.getSortedSetOrdinatoPerPeso();
 		Iterator<Attrezzo> it = data.iterator();
@@ -181,6 +181,12 @@ public class BorsaTest {
 		Iterator<Attrezzo> it = data.iterator();
 		assertEquals(this.chiave, it.next());
 		assertEquals(this.osso, it.next());
+	}
+	@Test
+	public void testGetSortedSetOrdinatoPerPeso_borsaVuota() {
+		SortedSet<Attrezzo> data = this.borsaVuota.getSortedSetOrdinatoPerPeso();
+		Iterator<Attrezzo> it = data.iterator();
+		assertFalse(it.hasNext());
 	}
 	
 	public Borsa getAttrezziToCompareInBorsa() {
