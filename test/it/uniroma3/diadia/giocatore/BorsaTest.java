@@ -26,6 +26,10 @@ public class BorsaTest {
 	private Attrezzo ps;
 	private Attrezzo piuma;
 	private Attrezzo libro;
+	private Attrezzo pesoUno;
+	private Attrezzo pesoDue;
+	private Attrezzo pesoTre;
+	private Attrezzo pesoQuattro;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -42,6 +46,10 @@ public class BorsaTest {
 		this.ps = new Attrezzo("ps", 5);
 		this.piuma = new Attrezzo("piuma", 1);
 		this.libro = new Attrezzo("libro", 5);
+		this.pesoUno = new Attrezzo("pesoUno", 1);
+		this.pesoDue = new Attrezzo("pesoDue", 2);
+		this.pesoTre = new Attrezzo("pesoTre", 3);
+		this.pesoQuattro = new Attrezzo("pesoQuattro", 4);
 	}
 	
 	@Test
@@ -122,7 +130,6 @@ public class BorsaTest {
 		Borsa b = this.getAttrezziToCompareInBorsa();
 		SortedSet<Attrezzo> listaAttrezzi = b.getContenutoOrdinatoPerNome();
 		Iterator<Attrezzo> it = listaAttrezzi.iterator();
-		System.out.println(listaAttrezzi);
 		assertEquals(this.libro, it.next());
 		assertEquals(this.piombo, it.next());
 		assertEquals(this.piuma, it.next());
@@ -136,32 +143,24 @@ public class BorsaTest {
 		assertFalse(it.hasNext());
 	}
 	
-	//@Test
+	@Test
 	public void testGetContenutoRaggruppatoPerPeso_presente() {
-		Borsa b = this.getAttrezziToCompareInBorsa();
+		Borsa b = this.getAttrezziToCompareInBorsaPesoDiverso();
 		Map<Integer, Set<Attrezzo>> data = b.getContenutoRaggruppatoPerPeso();
-//		assertTrue(data.get(1).contains(a1));
-//		assertTrue(data.get(2).contains(a2));
-//		assertTrue(data.get(3).contains(a3));
-//		assertTrue(data.get(4).contains(a4));
-		
+		assertTrue(data.get(this.pesoUno.getPeso()).contains(this.pesoUno));
+		assertTrue(data.get(this.pesoDue.getPeso()).contains(this.pesoDue));
+		assertTrue(data.get(this.pesoTre.getPeso()).contains(this.pesoTre));
+		assertTrue(data.get(this.pesoQuattro.getPeso()).contains(this.pesoQuattro));	
 	}
 	
-	//@Test
+	@Test
 	public void testGetContenutoRaggruppatoPerNome_presente() {
-//		Attrezzo a1 = new Attrezzo("aaaaaa", 1);
-//		Attrezzo a2 = new Attrezzo("bbbbbb", 2);
-//		Attrezzo a3 = new Attrezzo("cccccc", 3);
-//		Attrezzo a4 = new Attrezzo("dddddd", 4);
-//		assertTrue(this.borsaVuota.addAttrezzo(a1));
-//		assertTrue(this.borsaVuota.addAttrezzo(a2));
-//		assertTrue(this.borsaVuota.addAttrezzo(a3));
-//		assertTrue(this.borsaVuota.addAttrezzo(a4));
-//		Map<String, Set<Attrezzo>> data = this.borsaVuota.getContenutoRaggruppatoPerNome();
-//		assertTrue(data.get(a1.getNome()).contains(a1));
-//		assertTrue(data.get(a2.getNome()).contains(a2));
-//		assertTrue(data.get(a3.getNome()).contains(a3));
-//		assertTrue(data.get(a4.getNome()).contains(a4));
+		Borsa b = this.getAttrezziToCompareInBorsa();
+		Map<String, Set<Attrezzo>> data = b.getContenutoRaggruppatoPerNome();
+		assertTrue(data.get(this.piuma.getNome()).contains(this.piuma));
+		assertTrue(data.get(this.ps.getNome()).contains(this.ps));
+		assertTrue(data.get(this.piombo.getNome()).contains(this.piombo));
+		assertTrue(data.get(this.libro.getNome()).contains(this.libro));	
 	}
 	
 	public Borsa getAttrezziToCompareInBorsa() {
@@ -170,6 +169,16 @@ public class BorsaTest {
 		b.addAttrezzo(this.ps);
 		b.addAttrezzo(this.libro);
 		b.addAttrezzo(this.piombo);
+		return b;
+	}
+	
+	
+	public Borsa getAttrezziToCompareInBorsaPesoDiverso() {
+		Borsa b = new Borsa(100000);
+		b.addAttrezzo(this.pesoUno);
+		b.addAttrezzo(this.pesoDue);
+		b.addAttrezzo(this.pesoTre);
+		b.addAttrezzo(this.pesoQuattro);
 		return b;
 	}
 }
