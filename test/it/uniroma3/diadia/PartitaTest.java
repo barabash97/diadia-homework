@@ -44,7 +44,7 @@ public class PartitaTest {
 	@Test
 	public void testControlloPresenzaAttrezzoInUnaDelleDueStanze() {
 		String nomeAttrezzo = attrezzo.getNome();
-		assertTrue(this.partita.getGiocatore().getBorsa().addAttrezzo(this.attrezzo));
+		assertTrue(this.partita.getGiocatore().getBorsa().addAttrezzo(attrezzo));
 		assertFalse(this.partita.controlloPresenzaAttrezzoInUnaDelleDueStanze(nomeAttrezzo));
 		this.partita.posaAttrezzo(nomeAttrezzo);
 		assertTrue(this.partita.controlloPresenzaAttrezzoInUnaDelleDueStanze(nomeAttrezzo));
