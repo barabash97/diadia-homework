@@ -63,6 +63,9 @@ public class Partita {
 		/* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);
 		atrio.addAttrezzo(osso);
+		for(int i = 0; i < 10; i++) {
+			atrio.addAttrezzo(new Attrezzo("attrezzo" + i, i));
+		}
 
 		// Generazione delle stanza di inizio e fine di gioco
 		this.labirinto = new Labirinto(atrio, biblioteca);
