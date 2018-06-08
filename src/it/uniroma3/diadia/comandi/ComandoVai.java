@@ -5,10 +5,7 @@ import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
-public class ComandoVai implements Comando {
-	
-	private String parametro;
-	private String nome;
+public class ComandoVai extends AbstractComando implements Comando {
 	
 	public ComandoVai() {
 		this.setNome("vai");
@@ -22,12 +19,12 @@ public class ComandoVai implements Comando {
 		Stanza stanzaCorrente = partita.getLabirinto().getStanzaCorrente();
 		Stanza prossimaStanza = null;
 		
-		if (this.parametro == null) {
+		if (this.getParametro() == null) {
 			System.out.println("Dove vuoi andare ?");
 			return;
 		}
 			
-		prossimaStanza = stanzaCorrente.getStanzaAdiacente(parametro);
+		prossimaStanza = stanzaCorrente.getStanzaAdiacente(this.getParametro());
 		
 		if (prossimaStanza == null)
 			System.out.println("Direzione inesistente");
@@ -36,30 +33,6 @@ public class ComandoVai implements Comando {
 			giocatore.decrementaCfu();
 		}
 		System.out.println(stanzaCorrente.getDescrizione());
-	}
-
-	/**
-	 * @return the parametro
-	 */
-	public String getParametro() {
-		return parametro;
-	}
-
-	@Override
-	public void setParametro(String parametro) {
-		this.parametro = parametro;
-	}
-
-	@Override
-	public String getNome() {
-		return nome;
-	}
-
-	/**
-	 * @param nome the nome to set
-	 */
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	

@@ -2,10 +2,9 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 
-public class ComandoGuarda implements Comando {
+public class ComandoGuarda extends AbstractComando implements Comando {
 
-	private String nome;
-	private String parametro;
+
 	
 	
 	public ComandoGuarda() {
@@ -54,22 +53,4 @@ public class ComandoGuarda implements Comando {
 				"########################### FINE " + oggettoStampa.toUpperCase() + " ###############################");
 	}
 
-	@Override
-	public void setParametro(String parametro) {
-		this.parametro = parametro;
-
-	}
-
-	@Override
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getParametro() {
-		return parametro;
-	}
 }

@@ -2,17 +2,8 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 
-public class ComandoPrendi implements Comando {
+public class ComandoPrendi extends AbstractComando implements Comando {
 	
-	/**
-	 * Nome dell'oggetto da prendere
-	 */
-	private String parametro;
-	
-	/**
-	 * Nome comando
-	 */
-	private String nome;
 	
 	public ComandoPrendi() {
 		this.setNome("prendi");
@@ -25,27 +16,11 @@ public class ComandoPrendi implements Comando {
 			return;
 		}
 
-		partita.prendiAttrezzo(this.parametro);
+		partita.prendiAttrezzo(this.getParametro());
 
-	}
-
-	public String getParametro() {
-		return parametro;
 	}
 	
-	@Override
-	public void setParametro(String parametro) {
-		this.parametro = parametro;
-	}
-	
-	@Override
-	public String getNome() {
-		return nome;
-	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 	
 }
