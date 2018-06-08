@@ -1,9 +1,13 @@
 package it.uniroma3.diadia.comandi;
 
+import it.uniroma3.diadia.Partita;
+
 public abstract class AbstractComando {
 	
 	private String parametro;
 	private String nome;
+	
+	public abstract void esegui(Partita partita);
 	
 	/**
 	 * @return the parametro
@@ -32,7 +36,8 @@ public abstract class AbstractComando {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
+	
 	
 	
 	

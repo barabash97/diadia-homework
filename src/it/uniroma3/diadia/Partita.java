@@ -1,5 +1,10 @@
 package it.uniroma3.diadia;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -15,17 +20,16 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class Partita {
 
-	private boolean finita; //Flag se la partita è terminata
-	private Labirinto labirinto; //oggetto Labirinto
+	private boolean finita; // Flag se la partita è terminata
+	private Labirinto labirinto; // oggetto Labirinto
 	private Giocatore giocatore; // oggetto Giocatore
+
 	/**
-	 * Construttore della classe partita
-	 * Inizializza le stanze e labirinto
-	 * Inizializza: CFU 
-	 * Imposta: partita vinta = false
+	 * Construttore della classe partita Inizializza le stanze e labirinto
+	 * Inizializza: CFU Imposta: partita vinta = false
 	 */
 	public Partita() {
-		creaStanze(); //Inizializzazione delle stanza e attrezzi
+		creaStanze(); // Inizializzazione delle stanza e attrezzi
 		this.finita = false;
 		this.giocatore = new Giocatore("Vladimir");
 	}
@@ -63,7 +67,7 @@ public class Partita {
 		/* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);
 		atrio.addAttrezzo(osso);
-		for(int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) {
 			atrio.addAttrezzo(new Attrezzo("attrezzo" + i, i));
 		}
 
@@ -100,6 +104,7 @@ public class Partita {
 
 	/**
 	 * Getter oggetto Labirinto
+	 * 
 	 * @return
 	 */
 	public Labirinto getLabirinto() {
@@ -108,76 +113,82 @@ public class Partita {
 
 	/**
 	 * Getter oggetto Giocatore
+	 * 
 	 * @return
 	 */
 	public Giocatore getGiocatore() {
 		return this.giocatore;
 	}
-	
+
 	/**
 	 * Setter oggetto Giocatore
+	 * 
 	 * @param giocatore
 	 */
 	public void setGiocatore(Giocatore giocatore) {
 		this.giocatore = giocatore;
 	}
-	
+
 	/**
 	 * Riferimento ad attrezzo della stanza corrente
+	 * 
 	 * @param nomeAttrezzo
 	 * @return
 	 */
 	public boolean getAttrezzoStanzaCorrente(String nomeAttrezzo) {
 		Attrezzo a = this.getLabirinto().getStanzaCorrente().getAttrezzo(nomeAttrezzo);
-		
-		if(a == null) {
+
+		if (a == null) {
 			return false;
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * Prendere attrezzo dalla stanza
 	 */
 	public void prendiAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = this.getLabirinto().getStanzaCorrente().getAttrezzo(nomeAttrezzo);
 		boolean flag = this.getGiocatore().prendereAttrezzo(a);
-		if(flag) {
+		if (flag) {
 			this.getLabirinto().getStanzaCorrente().removeAttrezzo(a);
 			System.out.println("Attrezzo è stato aggiunto nello zaino");
 		} else {
 			System.out.println("Non è stato possibile aggiungere attrezzo nello zaino");
 		}
 	}
-	
+
 	/**
 	 * Posare attrezzo dallo zaino
+	 * 
 	 * @param nomeAttrezzo
 	 */
 	public void posaAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = this.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo);
 		boolean flag = false;
-		if(!this.controlloPresenzaAttrezzoInUnaDelleDueStanze(nomeAttrezzo) && a != null) {
+		if (!this.controlloPresenzaAttrezzoInUnaDelleDueStanze(nomeAttrezzo) && a != null) {
 			flag = true;
 		}
-		if(flag) {
-			if(this.getLabirinto().getStanzaCorrente().addAttrezzo(a)) {
+		if (flag) {
+			if (this.getLabirinto().getStanzaCorrente().addAttrezzo(a)) {
 				this.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
 				System.out.println("Attrezzo è stato posato nella stanza");
 			}
-			
+
 		} else {
 			System.out.println("Non è stato possibile posare attrezzo nella stanza");
 		}
 	}
-	
+
 	public boolean controlloPresenzaAttrezzoInUnaDelleDueStanze(String nomeAttrezzo) {
-		return (this.getLabirinto().getStanzaCorrente().hasAttrezzo(nomeAttrezzo) == true 
+		return (this.getLabirinto().getStanzaCorrente().hasAttrezzo(nomeAttrezzo) == true
 				|| this.getLabirinto().getStanzaFinale().hasAttrezzo(nomeAttrezzo) == true);
 	}
+
 	/**
 	 * Controllo se la partita è vinta
+	 * 
 	 * @return
 	 */
 	public boolean checkPartitaVinta() {
@@ -187,7 +198,7 @@ public class Partita {
 		} else
 			return false;
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -196,4 +207,37 @@ public class Partita {
 		return (this.getGiocatore().getCfu() == 0) ? true : false;
 	}
 	
+	/**
+	 * Stanza ordinata per numero attrezzi
+	 * @param param
+	 * @return
+	 */
+	public Map<String, Stanza> getStanzaAdiacenteConNumeroAttrezzi() {
+		Set<String> direzioniValide = this.getLabirinto().getStanzaCorrente().getDirezioni();
+		Map<String, Stanza> map = new HashMap<>();
+		Iterator<String> it = direzioniValide.iterator();
+
+		if (it.hasNext() == false) {
+			return null;
+		}
+
+		Stanza primaStanza = this.getLabirinto().getStanzaCorrente().getStanzaAdiacente(it.next());
+		Stanza maxAttrezzi = primaStanza;
+		Stanza minAttrezzi = primaStanza;
+
+		while (it.hasNext()) {
+			String direzione = it.next();
+			Stanza stanza = this.getLabirinto().getStanzaCorrente().getStanzaAdiacente(direzione);
+			if (maxAttrezzi.getAttrezzi().size() < stanza.getAttrezzi().size()) {
+				maxAttrezzi = stanza;
+			}
+			if (stanza.getAttrezzi().size() < minAttrezzi.getAttrezzi().size()) {
+				minAttrezzi = stanza;
+			}
+		}
+		map.put("max", maxAttrezzi);
+		map.put("min", minAttrezzi);
+		return map;
+	}
+
 }

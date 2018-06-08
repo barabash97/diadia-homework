@@ -7,13 +7,13 @@ import org.junit.Test;
 
 public class AbstractComandoTest {
 
-	private AbstractComandoAlfa comandoAstratto;
+	private AbstractComandoFake comandoAstratto;
 	private String paramEmpty;
 	private String param;
 
 	@Before
 	public void setUp() throws Exception {
-		this.comandoAstratto = new AbstractComandoAlfa();
+		this.comandoAstratto = new AbstractComandoFake();
 		this.param = new String("parametro");
 		this.paramEmpty = new String("");
 	}
