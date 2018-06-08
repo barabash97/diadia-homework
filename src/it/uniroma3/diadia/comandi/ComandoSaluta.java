@@ -11,7 +11,9 @@ public class ComandoSaluta extends AbstractComando implements Comando {
 	
 	@Override
 	public void esegui(Partita partita) {
+		
 		AbstractPersonaggio p = partita.getLabirinto().getStanzaCorrente().getPersonaggio();
+		
 		if(p != null) {
 			p.saluta();
 		}else {
