@@ -18,3 +18,5 @@ public class ComandoInteragisci extends AbstractComando implements Comando {
 			System.out.println(MESSAGGIO_CON_CHI);
 	}
 }
+
+//END COMANDO

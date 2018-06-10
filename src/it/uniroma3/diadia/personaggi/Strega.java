@@ -4,11 +4,12 @@ import java.util.Map;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Strega extends AbstractPersonaggio {
 	private static final String MESSAGGIO_STANZA_MENO_ATTREZZI = "Sarai trasferito nella stanza con meno attrezzi!";
 	private static final String MESSAGGIO_STANZA_PIU_ATTREZZI = "Sarai trasferito nella stanza con più attrezzi!";
-	
+	private static final String RISATA = "HAHAHAH";
 	
 	public Strega(String nome, String presentaz) {
 		super(nome, presentaz);
@@ -23,6 +24,12 @@ public class Strega extends AbstractPersonaggio {
 		}
 		partita.getLabirinto().setStanzaCorrente(stanze.get("max"));
 		return MESSAGGIO_STANZA_PIU_ATTREZZI;
+	}
+
+	@Override
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		this.setAttrezzo(attrezzo);
+		return RISATA;
 	}
 	
 

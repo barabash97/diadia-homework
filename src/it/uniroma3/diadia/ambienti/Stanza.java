@@ -154,7 +154,15 @@ public class Stanza {
 
 		return risultato.toString();
 	}
-
+	
+	private String toStringPersonaggio() {
+		StringBuilder risultato = new StringBuilder();
+		if(this.getPersonaggio() != null) {
+			risultato.append("Personaggio\n");
+			risultato.append(this.getPersonaggio().toString());
+		}
+		return risultato.toString();
+	}
 	/**
 	 * Controlla se un attrezzo esiste nella stanza (uguaglianza sul nome).
 	 * 
