@@ -13,6 +13,7 @@ public class ComandoFine extends AbstractComando implements Comando {
 		StringBuilder s = new StringBuilder();
 		this.setNome("fine");
 		s.append("Grazie di aver giocato!\n");
+		System.exit(1);
 		return s.toString();
 	}
 

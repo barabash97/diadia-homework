@@ -22,7 +22,8 @@ import it.uniroma3.diadia.personaggi.Strega;
  */
 
 public class Partita {
-
+	
+	private InterfacciaUtenteConsole io;
 	private boolean finita; // Flag se la partita è terminata
 	private Labirinto labirinto; // oggetto Labirinto
 	private Giocatore giocatore; // oggetto Giocatore
@@ -32,6 +33,7 @@ public class Partita {
 	 * Inizializza: CFU Imposta: partita vinta = false
 	 */
 	public Partita() {
+		this.io = new InterfacciaUtenteConsole();
 		creaStanze(); // Inizializzazione delle stanza e attrezzi
 		this.finita = false;
 		this.giocatore = new Giocatore("Vladimir");
@@ -166,9 +168,9 @@ public class Partita {
 		boolean flag = this.getGiocatore().prendereAttrezzo(a);
 		if (flag) {
 			this.getLabirinto().getStanzaCorrente().removeAttrezzo(a);
-			System.out.println("Attrezzo è stato aggiunto nello zaino");
+			this.io.mostraMessaggio("Attrezzo è stato aggiunto nello zaino");
 		} else {
-			System.out.println("Non è stato possibile aggiungere attrezzo nello zaino");
+			this.io.mostraMessaggio("Non è stato possibile aggiungere attrezzo nello zaino");
 		}
 	}
 
@@ -186,11 +188,11 @@ public class Partita {
 		if (flag) {
 			if (this.getLabirinto().getStanzaCorrente().addAttrezzo(a)) {
 				this.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
-				System.out.println("Attrezzo è stato posato nella stanza");
+				this.io.mostraMessaggio("Attrezzo è stato posato nella stanza");
 			}
 
 		} else {
-			System.out.println("Non è stato possibile posare attrezzo nella stanza");
+			this.io.mostraMessaggio("Non è stato possibile posare attrezzo nella stanza");
 		}
 	}
 
@@ -206,7 +208,7 @@ public class Partita {
 	 */
 	public boolean checkPartitaVinta() {
 		if (this.vinta()) {
-			System.out.println("Hai vinto!");
+			this.io.mostraMessaggio("Hai vinto!");
 			return true;
 		} else
 			return false;

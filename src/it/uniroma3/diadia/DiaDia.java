@@ -1,8 +1,5 @@
 package it.uniroma3.diadia;
 
-import java.util.Scanner;
-
-import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 
@@ -31,10 +28,11 @@ public class DiaDia {
 	
 
 	private Partita partita;
-	private static Scanner scannerDiLinee = new Scanner(System.in);
-
+	private InterfacciaUtenteConsole io;
+	
 	public DiaDia() {
 		this.partita = new Partita();
+		this.io = new InterfacciaUtenteConsole();
 	}
 
 	public void gioca() {
@@ -43,7 +41,7 @@ public class DiaDia {
 		System.out.println(MESSAGGIO_BENVENUTO);
 
 		do
-			istruzione = scannerDiLinee.nextLine();
+			istruzione = this.io.prendiIstruzione();
 		while (!processaIstruzione(istruzione));
 	}
 
