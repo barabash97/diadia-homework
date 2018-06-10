@@ -28,7 +28,7 @@ public class DiaDia {
 	
 
 	private Partita partita;
-	private InterfacciaUtenteConsole io;
+	private InterfacciaUtente io;
 	
 	public DiaDia() {
 		this.partita = new Partita();

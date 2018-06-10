@@ -23,7 +23,7 @@ import it.uniroma3.diadia.personaggi.Strega;
 
 public class Partita {
 	
-	private InterfacciaUtenteConsole io;
+	private InterfacciaUtente io;
 	private boolean finita; // Flag se la partita è terminata
 	private Labirinto labirinto; // oggetto Labirinto
 	private Giocatore giocatore; // oggetto Giocatore
