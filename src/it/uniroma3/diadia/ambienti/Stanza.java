@@ -151,7 +151,7 @@ public class Stanza {
 		} else {
 			risultato.append("Non ci sono attrezzi nella stanza");
 		}
-
+		risultato.append(this.toStringPersonaggio());
 		return risultato.toString();
 	}
 	

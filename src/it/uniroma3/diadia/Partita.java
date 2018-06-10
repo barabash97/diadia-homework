@@ -8,6 +8,7 @@ import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Giocatore;
+import it.uniroma3.diadia.personaggi.Mago;
 
 /**
  * Questa classe modella una partita del gioco
@@ -62,7 +63,7 @@ public class Partita {
 		laboratorio.impostaStanzaAdiacente("est", atrio);
 		laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
 		biblioteca.impostaStanzaAdiacente("sud", atrio);
-
+		atrio.setPersonaggio(new Mago("Mago", "ciao...", new Attrezzo("attrezzoMagico", 1)));
 		/* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);
 		atrio.addAttrezzo(osso);
