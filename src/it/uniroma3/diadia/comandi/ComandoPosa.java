@@ -9,14 +9,17 @@ public class ComandoPosa extends AbstractComando implements Comando {
 		this.setNome("posa");
 	}
 	@Override
-	public void esegui(Partita partita) {
+	public String esegui(Partita partita) {
+		StringBuilder s = new StringBuilder();
+
 		if (this.getParametro() == null) {
-			System.out.println("Non è stato inserito il nome dell\'attrezzo");
-			return;
+			s.append("Non è stato inserito il nome dell\'attrezzo");
+			return s.toString();
 		}
 
 		partita.posaAttrezzo(this.getParametro());
-
+		s.append("Attrezzo posato\n");
+		return s.toString();
 	}
 
 

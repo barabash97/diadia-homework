@@ -8,14 +8,16 @@ public class ComandoInteragisci extends AbstractComando implements Comando {
 	private String messaggio;
 
 	@Override
-	public void esegui(Partita partita) {
+	public String esegui(Partita partita) {
+		StringBuilder s = new StringBuilder();
+
 		AbstractPersonaggio personaggio;
 		personaggio = partita.getLabirinto().getStanzaCorrente().getPersonaggio();
 		if (personaggio != null) {
-			this.messaggio = personaggio.agisci(partita);
-			System.out.println(this.messaggio);
+			s.append(personaggio.agisci(partita));
 		} else
-			System.out.println(MESSAGGIO_CON_CHI);
+			s.append(MESSAGGIO_CON_CHI);
+		return s.toString();
 	}
 }
 

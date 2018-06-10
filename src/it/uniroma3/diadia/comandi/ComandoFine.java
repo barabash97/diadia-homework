@@ -9,11 +9,11 @@ public class ComandoFine extends AbstractComando implements Comando {
 	}
 
 	@Override
-	public void esegui(Partita partita) {
+	public String esegui(Partita partita) {
+		StringBuilder s = new StringBuilder();
 		this.setNome("fine");
-		System.out.println("Grazie di aver giocato!"); // si desidera smettere
-		System.exit(1);
-
+		s.append("Grazie di aver giocato!\n");
+		return s.toString();
 	}
 
 

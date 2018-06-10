@@ -4,18 +4,17 @@ import it.uniroma3.diadia.Partita;
 
 public class ComandoGuarda extends AbstractComando implements Comando {
 
-
-	
-	
 	public ComandoGuarda() {
 		this.setNome("guarda");
 	}
-	
+
 	@Override
-	public void esegui(Partita partita) {
-		this.generazioneStampa("stanza", partita);
-		this.generazioneStampa("giocatore", partita);
-		this.generazioneStampa("borsa", partita);
+	public String esegui(Partita partita) {
+		String s = new String();
+		s += this.generazioneStampa("stanza", partita);
+		s += this.generazioneStampa("giocatore", partita);
+		s += this.generazioneStampa("borsa", partita);
+		return s.toString();
 	}
 
 	/**
@@ -24,33 +23,35 @@ public class ComandoGuarda extends AbstractComando implements Comando {
 	 * @param oggettoStampa
 	 * @param partita
 	 */
-	public void generazioneStampa(String oggettoStampa, Partita partita) {
+	public String generazioneStampa(String oggettoStampa, Partita partita) {
+		StringBuilder s = new StringBuilder();
 
 		if (oggettoStampa == null) {
-			return;
+			return s.append("").toString();
 		}
 
-		System.out.println(
-				"########################### " + oggettoStampa.toUpperCase() + " ####################################");
-		System.out.println("");
+		s.append("########################### " + oggettoStampa.toUpperCase()
+				+ " ####################################\n");
+		s.append("\n");
 		switch (oggettoStampa) {
 		case "giocatore":
-			System.out.println(partita.getGiocatore().toString());
+			s.append(partita.getGiocatore().toString() + "\n");
 			break;
 		case "stanza":
-			System.out.println(partita.getLabirinto().getStanzaCorrente().toString());
+			s.append(partita.getLabirinto().getStanzaCorrente().toString() + "\n");
 			break;
 		case "borsa":
-			System.out.println(partita.getGiocatore().getBorsa().toString());
+			s.append(partita.getGiocatore().getBorsa().toString() + "\n");
 			break;
 
 		default:
-			System.out.println("----------------------------------------------------------------------------------");
+			s.append("----------------------------------------------------------------------------------\n");
 			break;
 		}
-		System.out.println("");
-		System.out.println(
-				"########################### FINE " + oggettoStampa.toUpperCase() + " ###############################");
+		s.append("\n");
+		s.append("########################### FINE " + oggettoStampa.toUpperCase()
+				+ " ###############################\n");
+		return s.toString();
 	}
 
 }

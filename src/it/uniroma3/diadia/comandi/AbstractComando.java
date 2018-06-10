@@ -7,7 +7,7 @@ public abstract class AbstractComando {
 	private String parametro;
 	private String nome;
 	
-	public abstract void esegui(Partita partita);
+	public abstract String esegui(Partita partita);
 	
 	/**
 	 * @return the parametro

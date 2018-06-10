@@ -8,7 +8,7 @@ public interface Comando {
 	 * esecuzione del comando
 	 * @param partita
 	 */
-	public void esegui(Partita partita);
+	public String esegui(Partita partita);
 	
 	/**
 	 * set parametro del comando

@@ -5,7 +5,8 @@ import it.uniroma3.diadia.Partita;
 public class AbstractComandoFake extends AbstractComando{
 
 	@Override
-	public void esegui(Partita partita) {
+	public String esegui(Partita partita) {
+		return "";
 		// TODO Auto-generated method stub
 	}
 

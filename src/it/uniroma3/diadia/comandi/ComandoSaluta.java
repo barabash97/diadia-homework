@@ -10,16 +10,18 @@ public class ComandoSaluta extends AbstractComando implements Comando {
 	}
 	
 	@Override
-	public void esegui(Partita partita) {
-		
+	public String esegui(Partita partita) {
+		StringBuilder s = new StringBuilder();
+
 		AbstractPersonaggio p = partita.getLabirinto().getStanzaCorrente().getPersonaggio();
 		
 		if(p != null) {
-			p.saluta();
+			return p.saluta();
 		}else {
-			System.out.println("Non ci sono personaggi nella stanza");
+			s.append("Non ci sono personaggi nella stanza\n");
 		}
 		
+		return s.toString();
 	}
 
 }

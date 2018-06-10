@@ -10,14 +10,16 @@ public class ComandoPrendi extends AbstractComando implements Comando {
 	}
 	
 	@Override
-	public void esegui(Partita partita) {
+	public String esegui(Partita partita) {
+		StringBuilder s = new StringBuilder();
 		if (this.getParametro() == null) {
-			System.out.println("Non è stato inserito il nome dell\'attrezzo");
-			return;
+			s.append("Non è stato inserito il nome dell\'attrezzo\n");
+			return s.toString();
 		}
 
 		partita.prendiAttrezzo(this.getParametro());
-
+		s.append("Attrezzo è stato preso\n");
+		return s.toString();
 	}
 	
 

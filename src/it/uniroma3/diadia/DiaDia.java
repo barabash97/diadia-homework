@@ -58,13 +58,15 @@ public class DiaDia {
 		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
 		
 		comandoDaEseguire = factory.costruisciComando(istruzione);
-		comandoDaEseguire.esegui(this.partita);
+		String result = comandoDaEseguire.esegui(this.partita);
 		
 		if(this.partita.checkPartitaPersa()) {
 			System.out.println("Hai perso!");
 			comandoDaEseguire = factory.costruisciComando("fine");
-			comandoDaEseguire.esegui(this.partita);
+			result = comandoDaEseguire.esegui(this.partita);
 		}
+		
+		System.out.println(result);
 		return this.partita.checkPartitaVinta();
 	}
 	

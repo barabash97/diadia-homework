@@ -12,27 +12,29 @@ public class ComandoVai extends AbstractComando implements Comando {
 	}
 	
 	@Override
-	public void esegui(Partita partita) {
-		
+	public String esegui(Partita partita) {
+		StringBuilder s = new StringBuilder();
+
 		Labirinto labirinto = partita.getLabirinto();
 		Giocatore giocatore = partita.getGiocatore();
 		Stanza stanzaCorrente = partita.getLabirinto().getStanzaCorrente();
 		Stanza prossimaStanza = null;
 		
 		if (this.getParametro() == null) {
-			System.out.println("Dove vuoi andare ?");
-			return;
+			s.append("Dove vuoi andare ?\n");
+			return s.toString();
 		}
 			
 		prossimaStanza = stanzaCorrente.getStanzaAdiacente(this.getParametro());
 		
 		if (prossimaStanza == null)
-			System.out.println("Direzione inesistente");
+			s.append("Direzione inesistente\n");
 		else {
 			labirinto.setStanzaCorrente(prossimaStanza);
 			giocatore.decrementaCfu();
 		}
-		System.out.println(stanzaCorrente.getDescrizione());
+		s.append(stanzaCorrente.getDescrizione() + "\n");
+		return s.toString();
 	}
 
 	
