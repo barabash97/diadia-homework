@@ -40,7 +40,12 @@ public abstract class AbstractPersonaggio {
 
 	@Override
 	public String toString() {
-		return this.getNome();
+		String result =  this.getNome();
+		if(attrezzo != null) {
+			result += "\nAttrezzo:" + this.attrezzo.toString();
+		}
+		
+		return result;
 	}
 	
 	/**

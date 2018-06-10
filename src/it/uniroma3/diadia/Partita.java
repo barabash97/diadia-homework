@@ -53,7 +53,7 @@ public class Partita {
 		Stanza laboratorio = new Stanza("Laboratorio Campus");
 		Stanza biblioteca = new Stanza("Biblioteca");
 		
-		AbstractPersonaggio mago = new Mago("Faust", "Salve...", new Attrezzo("attrezzoMagico", 1));
+		AbstractPersonaggio mago = new Mago("Faust", "Salve...", new Attrezzo("attrezzoMagico", 8));
 		AbstractPersonaggio cane = new Cane("Pippo", "BAU BAU...", "carne",  new Attrezzo("carne", 1));
 		AbstractPersonaggio strega = new Strega("Ursula Kemp", "Salve...");
 		
@@ -78,6 +78,10 @@ public class Partita {
 		atrio.addAttrezzo(osso);
 		for (int i = 0; i < 10; i++) {
 			atrio.addAttrezzo(new Attrezzo("attrezzo" + i, i));
+		}
+		
+		for (int i = 10; i < 20; i++) {
+			laboratorio.addAttrezzo(new Attrezzo("attrezzo" + i, i/2));
 		}
 
 		// Generazione delle stanza di inizio e fine di gioco

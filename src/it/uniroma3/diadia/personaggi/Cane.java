@@ -41,7 +41,7 @@ public class Cane extends AbstractPersonaggio {
 			stanzaCorrente.addAttrezzo(attrezzo);
 		}
 		
-		return MESSAGGIO;
+		return "Grazie per il regalo" + MESSAGGIO;
 	}
 
 	/**
