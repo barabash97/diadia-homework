@@ -22,35 +22,18 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi {
 			parametro = scannerDiParole.next();
 		}
 
-		if (nomeComando == null) {
+		StringBuilder nomeClasse
+		= new StringBuilder("it.uniroma3.diadia.comandi.Comando");
+		nomeClasse.append( Character.toUpperCase(nomeComando.charAt(0)) );
+		// es. nomeClasse: ‘it.uniroma3.diadia.comandi.ComandoV’
+		nomeClasse.append( nomeComando.substring(1) ) ;
+		// es. nomeClasse: ‘it.uniroma3.diadia.comandi.ComandoVai’
+		try {
+			comando = (Comando)Class.forName(nomeClasse.toString()).newInstance();
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			comando = new ComandoNonValido();
-			return comando;
-		} else if (nomeComando.equals("vai"))
-			comando = new ComandoVai();
-		else if (nomeComando.equals("guarda"))
-			comando = new ComandoGuarda();
-		else if (nomeComando.equals("prendi"))
-			comando = new ComandoPrendi();
-		else if (nomeComando.equals("aiuto"))
-			comando = new ComandoAiuto(this.elencoComandi);
-		else if (nomeComando.equals("fine"))
-			comando = new ComandoFine();
-		else if (nomeComando.equals("posa"))
-			comando = new ComandoPosa();
-		else if (nomeComando.equals("saluta"))
-			comando = new ComandoSaluta();
-		else if (nomeComando.equals("interagisci"))
-			comando = new ComandoInteragisci();
-		else if (nomeComando.equals("regala"))
-			comando = new ComandoRegala();
-
-		else
-			comando = new ComandoNonValido();
-		
-		if(parametro != null) {
-			comando.setParametro(parametro);
 		}
-		
+		comando.setParametro(parametro);
 		return comando;
 	}
 
