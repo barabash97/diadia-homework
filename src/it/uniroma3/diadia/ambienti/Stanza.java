@@ -158,7 +158,7 @@ public class Stanza {
 	private String toStringPersonaggio() {
 		StringBuilder risultato = new StringBuilder();
 		if(this.getPersonaggio() != null) {
-			risultato.append("Personaggio\n");
+			risultato.append("\nPersonaggio:\n");
 			risultato.append(this.getPersonaggio().toString());
 		}
 		return risultato.toString();
