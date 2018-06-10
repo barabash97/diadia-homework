@@ -18,8 +18,9 @@ public class ComandoRegala extends AbstractComando implements Comando {
 			Borsa borsa = partita.getGiocatore().getBorsa();
 			Attrezzo attrezzo = borsa.getAttrezzo(this.getParametro());
 			if(attrezzo != null) {
-				personaggio.riceviRegalo(attrezzo, partita);
+				String result = personaggio.riceviRegalo(attrezzo, partita);
 				borsa.removeAttrezzo(attrezzo.getNome());
+				System.out.println(result);
 			}
 			
 		}
