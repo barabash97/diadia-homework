@@ -26,6 +26,8 @@ public class ComandoRegala extends AbstractComando implements Comando {
 				s.append(result + "\n");
 			}
 
+		} else {
+			s.append("Devi indicare il nome dell\'attrezzo");
 		}
 
 		return s.toString();

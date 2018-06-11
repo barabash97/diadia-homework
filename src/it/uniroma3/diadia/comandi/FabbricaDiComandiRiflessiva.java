@@ -15,11 +15,11 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 		Comando comando = null;
 
 		if (scannerDiParole.hasNext()) {
-			nomeComando = scannerDiParole.next();
+			nomeComando = scannerDiParole.next().toLowerCase();
 		}
 
 		if (scannerDiParole.hasNext()) {
-			parametro = scannerDiParole.next();
+			parametro = scannerDiParole.next().toLowerCase();
 		}
 		scannerDiParole.close();
 		StringBuilder nomeClasse
