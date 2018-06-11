@@ -52,7 +52,7 @@ public class CaricatoreLabirinto {
 			this.leggiECreaStanze(); //OK
 			this.leggiInizialeEvincente(); //OK
 			this.leggiECollocaAttrezzi(); //ok
-			this.leggiEImpostaUscite();
+			this.leggiEImpostaUscite(); // ok
 		} finally {
 			try {
 				reader.close();
