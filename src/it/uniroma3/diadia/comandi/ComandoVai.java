@@ -2,7 +2,7 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.ambienti.stanze.Stanza;
 import it.uniroma3.diadia.enums.Comandi;
 import it.uniroma3.diadia.giocatore.Giocatore;
 

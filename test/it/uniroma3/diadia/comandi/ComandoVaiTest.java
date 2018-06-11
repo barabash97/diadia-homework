@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.ambienti.stanze.Stanza;
 import it.uniroma3.diadia.comandi.ComandoVai;
 import it.uniroma3.diadia.enums.Direzioni;
 

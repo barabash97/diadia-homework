@@ -1,4 +1,4 @@
-package it.uniroma3.diadia.ambienti;
+package it.uniroma3.diadia.ambienti.stanze;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;

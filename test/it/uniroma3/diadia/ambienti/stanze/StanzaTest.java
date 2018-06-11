@@ -1,11 +1,11 @@
-package it.uniroma3.diadia.ambienti;
+package it.uniroma3.diadia.ambienti.stanze;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.ambienti.stanze.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaTest {

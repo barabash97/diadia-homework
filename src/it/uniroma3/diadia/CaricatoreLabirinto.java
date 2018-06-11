@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.regex.Pattern;
 
-import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.ambienti.stanze.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 
 import it.uniroma3.diadia.CaricatoreLabirinto;
 import it.uniroma3.diadia.FormatoFileNonValidoException;
+import it.uniroma3.diadia.ambienti.stanze.Stanza;
 
 public class Labirinto {
 	

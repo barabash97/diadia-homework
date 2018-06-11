@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.ambienti.stanze.Stanza;
+
 public class LabirintoTest {
 	
 	private Stanza stanzaCorrente;
