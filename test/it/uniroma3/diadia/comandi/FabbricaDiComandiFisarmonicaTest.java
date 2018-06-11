@@ -29,7 +29,7 @@ public class FabbricaDiComandiFisarmonicaTest {
 		this.comandoPosaLampada.setParametro("lampada");
 		this.comandoGuarda = new ComandoGuarda();
 		this.comandoFine = new ComandoFine();
-		this.comandoAiuto = new ComandoAiuto(FabbricaDiComandiRiflessiva.getElencoComandi());
+		this.comandoAiuto = new ComandoAiuto();
 		this.comandoNonValido = new ComandoNonValido();
 	}
 
