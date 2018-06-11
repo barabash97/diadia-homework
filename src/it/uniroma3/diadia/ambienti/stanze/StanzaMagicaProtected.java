@@ -31,6 +31,10 @@ public class StanzaMagicaProtected extends Stanza {
 	public StanzaMagicaProtected(String nome) {
 		this(nome, SOGLIA_MAGICA_DEFAULT);
 	}
+	
+	public StanzaMagicaProtected() {
+		super();
+	}
 
 	/**
 	 * Costruttore della stanza magica

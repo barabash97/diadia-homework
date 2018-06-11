@@ -11,6 +11,9 @@ public class StanzaBloccata extends Stanza {
 	final private static String NOME_ATTREZZO_PARTICOLARE_DEFAULT = "lanterna";
 	final private static String DIREZIONE_PARTICOLARE_DEFAULT = Direzioni.NORD.toString().toLowerCase();
 	
+	public StanzaBloccata() {
+		super();
+	}
 	public StanzaBloccata(String nome) {
 		this(nome, NOME_ATTREZZO_PARTICOLARE_DEFAULT, DIREZIONE_PARTICOLARE_DEFAULT);
 	}

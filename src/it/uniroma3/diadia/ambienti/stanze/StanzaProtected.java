@@ -37,7 +37,10 @@ public class StanzaProtected {
 		this.stanzeAdiacenti = new HashMap<>();
 		this.attrezzi = new HashMap<>();
 	}
-
+	
+	public StanzaProtected() {
+		super();
+	}
 	/**
 	 * Imposta una stanza adiacente.
 	 *

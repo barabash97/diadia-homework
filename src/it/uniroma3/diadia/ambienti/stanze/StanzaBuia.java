@@ -7,7 +7,9 @@ public class StanzaBuia extends Stanza {
 	private String nomeParticolare;
 	final public static String SLOGAN = "Qui c'è un buio pesto";
 	final private static String ATTREZZO_PARTICOLARE_DEFAULT = "lanterna";
-
+	public StanzaBuia() {
+		super();
+	}
 	public StanzaBuia(String nome) {
 		this(nome, ATTREZZO_PARTICOLARE_DEFAULT);
 	}

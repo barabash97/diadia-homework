@@ -22,7 +22,10 @@ public class StanzaMagica extends Stanza {
 	private int contatoreAttrezziPosati;
 	private int sogliaMagica;
 	final private static int SOGLIA_MAGICA_DEFAULT = 3;
-
+	
+	public StanzaMagica() {
+		super();
+	}
 	/**
 	 * Construttore
 	 * 

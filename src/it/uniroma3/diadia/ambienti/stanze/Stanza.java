@@ -39,6 +39,10 @@ public class Stanza {
 		this.stanzeAdiacenti = new HashMap<>();
 		this.attrezzi = new HashMap<>();
 	}
+	
+	public Stanza() {
+		
+	}
 
 	/**
 	 * Imposta una stanza adiacente.
@@ -52,9 +56,8 @@ public class Stanza {
 		
 		direzione = direzione.toLowerCase();
 		boolean aggiornato = false;
-
 		Iterator<String> it = this.direzioni.iterator();
-
+		
 		while (it.hasNext()) {
 			String direzioneSingola = it.next();
 			if (direzioneSingola.equals(direzione)) {
@@ -62,7 +65,7 @@ public class Stanza {
 				aggiornato = true;
 			}
 		}
-
+		
 		if (!aggiornato) {
 			this.direzioni.add(direzione);
 			this.stanzeAdiacenti.put(direzione, stanza);
@@ -115,7 +118,7 @@ public class Stanza {
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 
-		if (attrezzo == null || this.attrezzi.containsKey(attrezzo.getNome())) {
+		if (attrezzo == null || attrezzo.getNome() == null || this.attrezzi.containsKey(attrezzo.getNome())) {
 			return false;
 		}
 		
@@ -253,6 +256,13 @@ public class Stanza {
 	 */
 	public void setPersonaggio(AbstractPersonaggio personaggio) {
 		this.personaggio = personaggio;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
 }
