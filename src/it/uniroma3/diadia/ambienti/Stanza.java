@@ -49,6 +49,8 @@ public class Stanza {
 	 *            stanza adiacente nella direzione indicata dal primo parametro.
 	 */
 	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
+		
+		direzione = direzione.toLowerCase();
 		boolean aggiornato = false;
 
 		Iterator<String> it = this.direzioni.iterator();

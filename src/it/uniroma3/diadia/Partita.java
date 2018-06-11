@@ -7,6 +7,7 @@ import java.util.Set;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.enums.Direzioni;
 import it.uniroma3.diadia.giocatore.Giocatore;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 import it.uniroma3.diadia.personaggi.Cane;
@@ -60,18 +61,18 @@ public class Partita {
 		AbstractPersonaggio strega = new Strega("Ursula Kemp", "Salve...");
 		
 		/* collega le stanze */
-		atrio.impostaStanzaAdiacente("nord", biblioteca);
-		atrio.impostaStanzaAdiacente("est", aulaN11);
-		atrio.impostaStanzaAdiacente("sud", aulaN10);
-		atrio.impostaStanzaAdiacente("ovest", laboratorio);
-		aulaN11.impostaStanzaAdiacente("est", laboratorio);
-		aulaN11.impostaStanzaAdiacente("ovest", atrio);
-		aulaN10.impostaStanzaAdiacente("nord", atrio);
-		aulaN10.impostaStanzaAdiacente("est", aulaN11);
-		aulaN10.impostaStanzaAdiacente("ovest", laboratorio);
-		laboratorio.impostaStanzaAdiacente("est", atrio);
-		laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
-		biblioteca.impostaStanzaAdiacente("sud", atrio);
+		atrio.impostaStanzaAdiacente(Direzioni.NORD.toString(), biblioteca);
+		atrio.impostaStanzaAdiacente(Direzioni.EST.toString(), aulaN11);
+		atrio.impostaStanzaAdiacente(Direzioni.SUD.toString(), aulaN10);
+		atrio.impostaStanzaAdiacente(Direzioni.OVEST.toString(), laboratorio);
+		aulaN11.impostaStanzaAdiacente(Direzioni.EST.toString(), laboratorio);
+		aulaN11.impostaStanzaAdiacente(Direzioni.OVEST.toString(), atrio);
+		aulaN10.impostaStanzaAdiacente(Direzioni.NORD.toString(), atrio);
+		aulaN10.impostaStanzaAdiacente(Direzioni.EST.toString(), aulaN11);
+		aulaN10.impostaStanzaAdiacente(Direzioni.OVEST.toString(), laboratorio);
+		laboratorio.impostaStanzaAdiacente(Direzioni.EST.toString(), atrio);
+		laboratorio.impostaStanzaAdiacente(Direzioni.OVEST.toString(), aulaN11);
+		biblioteca.impostaStanzaAdiacente(Direzioni.SUD.toString(), atrio);
 		atrio.setPersonaggio(mago);
 		laboratorio.setPersonaggio(strega);
 		aulaN11.setPersonaggio(cane);
