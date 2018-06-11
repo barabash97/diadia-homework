@@ -161,6 +161,26 @@ public class CaricatoreLabirinto {
 			posaAttrezzo(nomeAttrezzo, pesoAttrezzo, nomeStanza);
 		}
 	}
+	
+	private void leggiECollocaAttrezziPersonaggi() throws FormatoFileNonValidoException {
+		String specificheAttrezzi = this.leggiRigaCheCominciaPer(ATTREZZI_MARKER);
+
+		for (String specificaAttrezzo : separaStringheAlleVirgole(specificheAttrezzi)) {
+			String nomeAttrezzo = null;
+			String pesoAttrezzo = null;
+			String tipoPersonaggio = null;
+			try (Scanner scannerLinea = new Scanner(specificaAttrezzo)) {
+				check(scannerLinea.hasNext(), msgTerminazionePrecoce("il nome di un attrezzo."));
+				nomeAttrezzo = scannerLinea.next();
+				check(scannerLinea.hasNext(), msgTerminazionePrecoce("il peso dell'attrezzo " + nomeAttrezzo + "."));
+				pesoAttrezzo = scannerLinea.next();
+				check(scannerLinea.hasNext(), msgTerminazionePrecoce(
+						"il nome della stanza in cui collocare l'attrezzo " + nomeAttrezzo + "."));
+				tipoPersonaggio = scannerLinea.next();
+			}
+			posaAttrezzo(nomeAttrezzo, pesoAttrezzo, tipoPersonaggio);
+		}
+	}
 
 	private void posaAttrezzo(String nomeAttrezzo, String pesoAttrezzo, String nomeStanza)
 			throws FormatoFileNonValidoException {
@@ -175,9 +195,40 @@ public class CaricatoreLabirinto {
 			check(false, "Peso attrezzo " + nomeAttrezzo + " non valido");
 		}
 	}
+	
+	private void posaAttrezzoPersonaggio(String nomeAttrezzo, String pesoAttrezzo, String nomeTipoPersonaggio)
+			throws FormatoFileNonValidoException {
+		int peso;
+		try {
+			peso = Integer.parseInt(pesoAttrezzo);
+			Attrezzo attrezzo = new Attrezzo(nomeAttrezzo, peso);
+			check(isStanzaValida(nomeTipoPersonaggio),
+					"Attrezzo " + nomeAttrezzo + " non collocabile: stanza " + nomeTipoPersonaggio + " inesistente");
+			this.nome2stanza.get(nomeTipoPersonaggio).addAttrezzo(attrezzo);
+		} catch (NumberFormatException e) {
+			check(false, "Peso attrezzo " + nomeAttrezzo + " non valido");
+		}
+	}
+	
+
 
 	private boolean isStanzaValida(String nomeStanza) {
 		return this.nome2stanza.containsKey(nomeStanza);
+	}
+	
+	/**
+	 * 
+	 * @param nomeStanza
+	 * @param nomePersonaggio
+	 * @return
+	 */
+	private boolean isPersonaggioValido(String nomeStanza, String nomePersonaggio) {
+		boolean flagStanza = this.nome2stanza.containsKey(nomeStanza);
+		if(flagStanza) {
+			Stanza s = this.nome2stanza.get(nomeStanza);
+			return s.getPersonaggio().getNome().equals(nomePersonaggio);
+		} 
+		return flagStanza;
 	}
 
 	private void leggiEImpostaUscite() throws FormatoFileNonValidoException {
