@@ -49,8 +49,9 @@ public class CaricatoreLabirinto {
 
 	public void carica() throws FormatoFileNonValidoException {
 		try {
-			this.leggiECreaStanze();
-			this.leggiInizialeEvincente();
+			this.leggiECreaStanze(); //OK
+			this.leggiInizialeEvincente(); //OK
+			System.out.println("ok");
 			this.leggiECollocaAttrezzi();
 			this.leggiEImpostaUscite();
 		} finally {
@@ -77,27 +78,19 @@ public class CaricatoreLabirinto {
 	private void leggiECreaStanze() throws FormatoFileNonValidoException  {
 		String nomiStanze = this.leggiRigaCheCominciaPer(STANZE_MARKER);
 		for(String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
-			System.out.println(nomeStanza.trim());
 			Stanza stanza = new Stanza(nomeStanza);
 			this.nome2stanza.put(nomeStanza, stanza);
 		}
 	}
 
 	private List<String> separaStringheAlleVirgole(String string) {
-//		List<String> result = new LinkedList<>();
-//		Scanner scanner = new Scanner(string);
-//		scanner.useDelimiter(",");
-//		try (Scanner scannerDiParole = scanner) {
-//			result.add(scannerDiParole.next());
-//		}
-//		System.out.println(result);
-//		return result;
-		
-		String[] splitString = string.split(Pattern.quote(","));
 		List<String> result = new LinkedList<>();
-		for(String value : splitString) {
-			result.add(value);
+		
+		String[] arrayStringValue = string.split(Pattern.quote(","));
+		for(String singleValue : arrayStringValue) {
+			result.add(singleValue.trim());
 		}
+		
 		return result;
 	}
 
@@ -114,7 +107,7 @@ public class CaricatoreLabirinto {
 
 	private void leggiECollocaAttrezzi() throws FormatoFileNonValidoException {
 		String specificheAttrezzi = this.leggiRigaCheCominciaPer(ATTREZZI_MARKER);
-
+		
 		for(String specificaAttrezzo : separaStringheAlleVirgole(specificheAttrezzi)) {
 			String nomeAttrezzo = null;
 			String pesoAttrezzo = null;
