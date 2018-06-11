@@ -27,6 +27,7 @@ public class Labirinto {
 	 * @param finish
 	 */
 	public Labirinto(String nomeFile) {
+		
 		CaricatoreLabirinto c = null;
 		try {
 			c = new CaricatoreLabirinto(nomeFile);

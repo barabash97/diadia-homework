@@ -10,7 +10,9 @@ public class Cane extends AbstractPersonaggio {
 	
 	private static final String MESSAGGIO = "BAU BAU!";
 	
-	
+	public Cane() {
+		super();
+	}
 	public Cane(String nome, String presentaz, String ciboPreferito, Attrezzo attrezzo) {
 		this(nome, presentaz, ciboPreferito);
 		this.setAttrezzo(attrezzo);

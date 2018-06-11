@@ -15,7 +15,9 @@ public class Strega extends AbstractPersonaggio {
 	public Strega(String nome, String presentaz) {
 		super(nome, presentaz);
 	}
-
+	public Strega() {
+		super();
+	}
 	@Override
 	public String agisci(Partita partita) {
 		Map<String, Stanza> stanze = partita.getStanzaAdiacenteConNumeroAttrezzi();

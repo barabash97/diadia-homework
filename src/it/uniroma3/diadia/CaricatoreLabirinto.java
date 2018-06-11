@@ -1,11 +1,13 @@
 package it.uniroma3.diadia;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.regex.Pattern;
 
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 public class CaricatoreLabirinto {
 
@@ -23,6 +25,12 @@ public class CaricatoreLabirinto {
 
 	/* prefisso della riga contenente le specifiche dei collegamenti tra stanza nel formato <nomeStanzaDa> <direzione> <nomeStanzaA> */
 	private static final String USCITE_MARKER = "Uscite:";
+	
+	/* Personaggio */
+	private static final String PERSONAGGI_MARKER = "Personaggi:";
+	
+	/* Attrezzi per i personaggi */
+	private static final String ATTREZZI_PERSONAGGI_MARKER = "AttrezziPersonaggi:";
 
 	/*
 	 *  Esempio di un possibile file di specifica di un labirinto (vedi POO-26-eccezioni-file.pdf)
@@ -53,6 +61,8 @@ public class CaricatoreLabirinto {
 			this.leggiInizialeEvincente(); //OK
 			this.leggiECollocaAttrezzi(); //ok
 			this.leggiEImpostaUscite(); // ok
+			this.leggiPersonaggi();
+			
 		} finally {
 			try {
 				reader.close();
@@ -169,6 +179,52 @@ public class CaricatoreLabirinto {
 		Stanza partenzaDa = this.nome2stanza.get(stanzaDa);
 		Stanza arrivoA = this.nome2stanza.get(nomeA);
 		partenzaDa.impostaStanzaAdiacente(dir, arrivoA);
+	}
+	
+	private void impostaPersonaggio(String tipoPersonaggio, String nomeStanza, String nomePersonaggio, String presentazione) throws FormatoFileNonValidoException {
+		check(isStanzaValida(nomeStanza),"Stanza non valida: " + nomeStanza);
+		Stanza s = this.nome2stanza.get(nomeStanza);
+		
+		//Stanza stanza = this.nome2stanza.get(nomeStanza);
+		StringBuilder nomeClasse
+		= new StringBuilder("it.uniroma3.diadia.personaggi.");
+		nomeClasse.append( Character.toUpperCase(tipoPersonaggio.charAt(0)) );
+		// es. nomeClasse: ‘it.uniroma3.diadia.comandi.ComandoV’
+		nomeClasse.append( tipoPersonaggio.substring(1) ) ;
+		AbstractPersonaggio p = null;
+		try {
+			p = (AbstractPersonaggio)Class.forName(nomeClasse.toString()).newInstance();
+			p.setNome(nomePersonaggio);
+			p.setPresentazione(presentazione);
+			s.setPersonaggio(p);
+			System.out.println(s);
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	}
+	
+	private void leggiPersonaggi() throws FormatoFileNonValidoException {
+		String personaggi = this.leggiRigaCheCominciaPer(PERSONAGGI_MARKER);
+
+		try (Scanner scannerDiLinea = new Scanner(personaggi)) {			
+
+			while (scannerDiLinea.hasNext()) {
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("Tipo personaggio non presente."));
+				String tipoPersonaggio = scannerDiLinea.next();
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("Nome stanza assente."));
+				String nomeStanza = scannerDiLinea.next();
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("Nome personaggio assente"));
+				String nomePersonaggio = scannerDiLinea.next();
+				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("Presentazione personaggio assente"));
+				String salutoPersonaggio = scannerDiLinea.next().replace(",", "");
+				
+				impostaPersonaggio(tipoPersonaggio, nomeStanza, nomePersonaggio, salutoPersonaggio);
+			}
+		} 
+		
 	}
 
 

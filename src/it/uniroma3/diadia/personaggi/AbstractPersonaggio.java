@@ -13,6 +13,9 @@ public abstract class AbstractPersonaggio {
 	
 	private Attrezzo attrezzo;
 	
+	public AbstractPersonaggio() {
+	}
+	
 	public AbstractPersonaggio(String nome, String presentaz) {
 		this.nome = nome;
 		this.presentazione = presentaz;
@@ -69,6 +72,29 @@ public abstract class AbstractPersonaggio {
 	public void setAttrezzo(Attrezzo attrezzo) {
 		this.attrezzo = attrezzo;
 	}
+
+	/**
+	 * @return the presentazione
+	 */
+	public String getPresentazione() {
+		return presentazione;
+	}
+
+	/**
+	 * @param presentazione the presentazione to set
+	 */
+	public void setPresentazione(String presentazione) {
+		this.presentazione = presentazione;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	
 	
 	
 }
