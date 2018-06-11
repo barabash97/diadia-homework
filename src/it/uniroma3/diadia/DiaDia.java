@@ -2,7 +2,6 @@ package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
-import it.uniroma3.diadia.enums.Comandi;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.

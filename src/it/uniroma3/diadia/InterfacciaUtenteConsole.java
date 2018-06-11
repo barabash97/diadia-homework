@@ -12,7 +12,9 @@ public class InterfacciaUtenteConsole implements InterfacciaUtente {
 	@Override
 	public String prendiIstruzione() {
 		Scanner scannerDiLinee = new Scanner(System.in);
-		return scannerDiLinee.nextLine();
+		String result = scannerDiLinee.nextLine();
+		scannerDiLinee.close();
+		return result;
 	}
 
 }
