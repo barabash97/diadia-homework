@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -44,7 +46,6 @@ public class Partita {
 	 * Crea tutte le stanze e le porte di collegamento
 	 */
 	private void creaStanze() {
-
 		/* crea gli attrezzi */
 		Attrezzo lanterna = new Attrezzo("lanterna", 3);
 		Attrezzo osso = new Attrezzo("osso", 1);
@@ -86,9 +87,9 @@ public class Partita {
 		for (int i = 10; i < 20; i++) {
 			laboratorio.addAttrezzo(new Attrezzo("attrezzo" + i, i/2));
 		}
-
+		
 		// Generazione delle stanza di inizio e fine di gioco
-		this.labirinto = new Labirinto(atrio, biblioteca);
+		this.labirinto = new Labirinto("init.txt");
 
 	}
 

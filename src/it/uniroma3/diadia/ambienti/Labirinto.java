@@ -1,5 +1,10 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.io.FileNotFoundException;
+
+import it.uniroma3.diadia.CaricatoreLabirinto;
+import it.uniroma3.diadia.FormatoFileNonValidoException;
+
 public class Labirinto {
 	
 	private Stanza stanzaCorrente;
@@ -13,6 +18,32 @@ public class Labirinto {
 	public Labirinto(Stanza start, Stanza finish) {
 		this.setStanzaCorrente(start);
 		this.setStanzaFinale(finish);
+	}
+	
+	/**
+	 * Construttore del labirinto
+	 * 
+	 * @param start
+	 * @param finish
+	 */
+	public Labirinto(String nomeFile) {
+		CaricatoreLabirinto c = null;
+		try {
+			c = new CaricatoreLabirinto(nomeFile);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
+			c.carica();
+			this.stanzaCorrente = c.getStanzaIniziale();
+			this.stanzaFinale = c.getStanzaVincente();
+		} catch (FormatoFileNonValidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**

@@ -1,5 +1,9 @@
 package it.uniroma3.diadia;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 
@@ -29,10 +33,17 @@ public class DiaDia {
 
 	private Partita partita;
 	private InterfacciaUtente io;
+	private CaricatoreLabirinto caricatore;
 	
 	public DiaDia() {
 		this.partita = new Partita();
 		this.io = new InterfacciaUtenteConsole();
+		Path source = Paths.get("init.txt");
+		try {
+			this.caricatore = new CaricatoreLabirinto(source.toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void gioca() {
