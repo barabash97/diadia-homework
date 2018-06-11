@@ -3,7 +3,6 @@ package it.uniroma3.diadia.giocatore;
 import static org.junit.Assert.*;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,15 +29,12 @@ public class BorsaTest {
 	private Attrezzo pesoDue;
 	private Attrezzo pesoTre;
 	private Attrezzo pesoQuattro;
-	private Borsa borsaVuotaPesoMaxElevato;
 	private Borsa borsaVuotaPesoPoco;
-	private Attrezzo attrezzoPesoElevato;
-	
 	@Before
 	public void setUp() throws Exception {
 		this.borsa = new Borsa();
 		this.borsaVuota = new Borsa(100);
-		this.borsaVuotaPesoMaxElevato = new Borsa(100000);
+		new Borsa(100000);
 		this.borsaVuotaPesoPoco = new Borsa(1);
 		this.osso = new Attrezzo("osso",5);
 		this.chiave = new Attrezzo("chiave", 5);
@@ -55,7 +51,7 @@ public class BorsaTest {
 		this.pesoDue = new Attrezzo("pesoDue", 2);
 		this.pesoTre = new Attrezzo("pesoTre", 3);
 		this.pesoQuattro = new Attrezzo("pesoQuattro", 4);
-		this.attrezzoPesoElevato = new Attrezzo("attrezzo", 100000);
+		new Attrezzo("attrezzo", 100000);
 	}
 	
 	@Test

@@ -1,8 +1,11 @@
 package it.uniroma3.diadia;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class InterfacciaUtenteConsole implements InterfacciaUtente {
+
+	private Scanner scannerDiLinee;
 
 	@Override
 	public void mostraMessaggio(String messaggio) {
@@ -11,9 +14,13 @@ public class InterfacciaUtenteConsole implements InterfacciaUtente {
 
 	@Override
 	public String prendiIstruzione() {
-		Scanner scannerDiLinee = new Scanner(System.in);
-		String result = scannerDiLinee.nextLine();
-		scannerDiLinee.close();
+		scannerDiLinee = new Scanner(System.in);
+		String result = "";
+		try {
+			result = scannerDiLinee.nextLine();
+		} catch (NoSuchElementException e) {
+			this.mostraMessaggio("\n" + e.getMessage() + "\n");
+		}
 		return result;
 	}
 

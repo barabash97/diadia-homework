@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 		
+	private Scanner scannerDiParole;
+
 	@Override
 	public Comando costruisciComando(String istruzione) {
 
-		Scanner scannerDiParole = new Scanner(istruzione);
+		scannerDiParole = new Scanner(istruzione);
 		String nomeComando = null;
 		String parametro = null;
 		Comando comando = null;
