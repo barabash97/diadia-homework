@@ -74,7 +74,7 @@ public class CaricatoreLabirinto {
 				throw new RuntimeException(e);
 			}
 		}
-
+		
 	}
 
 	private String leggiRigaCheCominciaPer(String marker) throws FormatoFileNonValidoException {
@@ -109,21 +109,15 @@ public class CaricatoreLabirinto {
 						nomeClasse.append(tipoStanza.substring(1));
 					}
 
-					Stanza stanza = new Stanza();
+					Stanza stanza = new Stanza(nomeStanza);
 
-					try {
-						stanza = (Stanza) Class.forName(nomeClasse.toString()).newInstance();
-						stanza.setNome(nomeStanza);
-					} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-						stanza = new Stanza(nomeStanza);
-					}
 					if (stanza != null) {
 						// System.out.println(stanza);
 						this.nome2stanza.put(stanza.getNome(), stanza);
 					}
 				}
 			}
-
+		
 		}
 	}
 
@@ -211,8 +205,8 @@ public class CaricatoreLabirinto {
 	}
 
 	private void impostaUscita(String stanzaDa, String dir, String nomeA) throws FormatoFileNonValidoException {
-		check(isStanzaValida(stanzaDa),"Stanza di partenza sconosciuta "+dir);
-		check(isStanzaValida(nomeA),"Stanza di destinazione sconosciuta "+ dir);
+		//check(isStanzaValida(stanzaDa),"Stanza di partenza sconosciuta "+dir);
+		//check(isStanzaValida(nomeA),"Stanza di destinazione sconosciuta "+ dir);
 		Stanza partenzaDa = this.nome2stanza.get(stanzaDa);
 		Stanza arrivoA = this.nome2stanza.get(nomeA);
 		partenzaDa.impostaStanzaAdiacente(dir, arrivoA);

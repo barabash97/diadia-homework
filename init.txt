@@ -3,6 +3,6 @@ Inizio:biblioteca
 Vincente:N11
 Uscite:biblioteca nord N10, biblioteca sud N11
 Attrezzi:martello 10 biblioteca, pinza 2 N10
-Personaggi:mago biblioteca Faust Salve, cane N10 Pippo BAUBAU, strega N11 UrsulaKemp Salve
+Personaggi:mago biblioteca Fausts Salve, cane N10 Pippo BAUBAU, strega N11 UrsulaKemp Salve
 
 
