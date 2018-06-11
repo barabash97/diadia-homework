@@ -51,8 +51,7 @@ public class CaricatoreLabirinto {
 		try {
 			this.leggiECreaStanze(); //OK
 			this.leggiInizialeEvincente(); //OK
-			System.out.println("ok");
-			this.leggiECollocaAttrezzi();
+			this.leggiECollocaAttrezzi(); //ok
 			this.leggiEImpostaUscite();
 		} finally {
 			try {
@@ -144,6 +143,7 @@ public class CaricatoreLabirinto {
 
 	private void leggiEImpostaUscite() throws FormatoFileNonValidoException {
 		String specificheUscite = this.leggiRigaCheCominciaPer(USCITE_MARKER);
+
 		try (Scanner scannerDiLinea = new Scanner(specificheUscite)) {			
 
 			while (scannerDiLinea.hasNext()) {
@@ -152,7 +152,7 @@ public class CaricatoreLabirinto {
 				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la direzione di una uscita della stanza "+stanzaPartenza));
 				String dir = scannerDiLinea.next();
 				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la destinazione di una uscita della stanza "+stanzaPartenza+" nella direzione "+dir));
-				String stanzaDestinazione = scannerDiLinea.next();
+				String stanzaDestinazione = scannerDiLinea.next().replace(",", "");
 				
 				impostaUscita(stanzaPartenza, dir, stanzaDestinazione);
 			}
