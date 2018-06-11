@@ -2,6 +2,7 @@ package it.uniroma3.diadia;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -76,17 +77,26 @@ public class CaricatoreLabirinto {
 	private void leggiECreaStanze() throws FormatoFileNonValidoException  {
 		String nomiStanze = this.leggiRigaCheCominciaPer(STANZE_MARKER);
 		for(String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
+			System.out.println(nomeStanza.trim());
 			Stanza stanza = new Stanza(nomeStanza);
 			this.nome2stanza.put(nomeStanza, stanza);
 		}
 	}
 
 	private List<String> separaStringheAlleVirgole(String string) {
+//		List<String> result = new LinkedList<>();
+//		Scanner scanner = new Scanner(string);
+//		scanner.useDelimiter(",");
+//		try (Scanner scannerDiParole = scanner) {
+//			result.add(scannerDiParole.next());
+//		}
+//		System.out.println(result);
+//		return result;
+		
+		String[] splitString = string.split(Pattern.quote(","));
 		List<String> result = new LinkedList<>();
-		Scanner scanner = new Scanner(string);
-		scanner.useDelimiter(",");
-		try (Scanner scannerDiParole = scanner) {
-			result.add(scannerDiParole.next());
+		for(String value : splitString) {
+			result.add(value);
 		}
 		return result;
 	}

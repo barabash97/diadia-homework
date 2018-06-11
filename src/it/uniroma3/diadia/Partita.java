@@ -10,6 +10,7 @@ import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.enums.Direzioni;
+import it.uniroma3.diadia.enums.Values;
 import it.uniroma3.diadia.giocatore.Giocatore;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 import it.uniroma3.diadia.personaggi.Cane;
@@ -25,7 +26,7 @@ import it.uniroma3.diadia.personaggi.Strega;
  */
 
 public class Partita {
-	
+
 	private InterfacciaUtente io;
 	private boolean finita; // Flag se la partita è terminata
 	private Labirinto labirinto; // oggetto Labirinto
@@ -56,11 +57,11 @@ public class Partita {
 		Stanza aulaN10 = new Stanza("Aula N10");
 		Stanza laboratorio = new Stanza("Laboratorio Campus");
 		Stanza biblioteca = new Stanza("Biblioteca");
-		
+
 		AbstractPersonaggio mago = new Mago("Faust", "Salve...", new Attrezzo("attrezzoMagico", 8));
-		AbstractPersonaggio cane = new Cane("Pippo", "BAU BAU...", "carne",  new Attrezzo("carne", 1));
+		AbstractPersonaggio cane = new Cane("Pippo", "BAU BAU...", "carne", new Attrezzo("carne", 1));
 		AbstractPersonaggio strega = new Strega("Ursula Kemp", "Salve...");
-		
+
 		/* collega le stanze */
 		atrio.impostaStanzaAdiacente(Direzioni.NORD.toString(), biblioteca);
 		atrio.impostaStanzaAdiacente(Direzioni.EST.toString(), aulaN11);
@@ -83,11 +84,11 @@ public class Partita {
 		for (int i = 0; i < 10; i++) {
 			atrio.addAttrezzo(new Attrezzo("attrezzo" + i, i));
 		}
-		
+
 		for (int i = 10; i < 20; i++) {
-			laboratorio.addAttrezzo(new Attrezzo("attrezzo" + i, i/2));
+			laboratorio.addAttrezzo(new Attrezzo("attrezzo" + i, i / 2));
 		}
-		
+
 		// Generazione delle stanza di inizio e fine di gioco
 		this.labirinto = new Labirinto("init.txt");
 
@@ -223,9 +224,10 @@ public class Partita {
 	public boolean checkPartitaPersa() {
 		return (this.getGiocatore().getCfu() == 0) ? true : false;
 	}
-	
+
 	/**
 	 * Stanza ordinata per numero attrezzi
+	 * 
 	 * @param param
 	 * @return
 	 */
@@ -252,8 +254,8 @@ public class Partita {
 				minAttrezzi = stanza;
 			}
 		}
-		map.put("max", maxAttrezzi);
-		map.put("min", minAttrezzi);
+		map.put(Values.MAX.toString().toLowerCase(), maxAttrezzi);
+		map.put(Values.MIN.toString().toLowerCase(), minAttrezzi);
 		return map;
 	}
 

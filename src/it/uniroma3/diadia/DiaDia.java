@@ -33,14 +33,12 @@ public class DiaDia {
 
 	private Partita partita;
 	private InterfacciaUtente io;
-	private CaricatoreLabirinto caricatore;
-	
 	public DiaDia() {
 		this.partita = new Partita();
 		this.io = new InterfacciaUtenteConsole();
 		Path source = Paths.get("init.txt");
 		try {
-			this.caricatore = new CaricatoreLabirinto(source.toString());
+			new CaricatoreLabirinto(source.toString());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -49,7 +47,7 @@ public class DiaDia {
 	public void gioca() {
 		String istruzione;
 
-		System.out.println(MESSAGGIO_BENVENUTO);
+		this.io.mostraMessaggio(MESSAGGIO_BENVENUTO);
 
 		do
 			istruzione = this.io.prendiIstruzione();
@@ -74,8 +72,7 @@ public class DiaDia {
 			comandoDaEseguire = factory.costruisciComando("fine");
 			result = comandoDaEseguire.esegui(this.partita);
 		}
-		
-		System.out.println(result);
+		this.io.mostraMessaggio(result);
 		return this.partita.checkPartitaVinta();
 	}
 	
