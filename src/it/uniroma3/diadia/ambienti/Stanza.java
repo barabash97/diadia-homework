@@ -117,7 +117,7 @@ public class Stanza {
 			return false;
 		}
 		
-		Attrezzo a = this.attrezzi.put(attrezzo.getNome(), attrezzo);
+		this.attrezzi.put(attrezzo.getNome(), attrezzo);
 		return true;
 
 	}
