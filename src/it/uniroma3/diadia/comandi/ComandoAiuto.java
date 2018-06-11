@@ -6,7 +6,7 @@ import it.uniroma3.diadia.enums.Comandi;
 public class ComandoAiuto extends AbstractComando implements Comando {
 		
 	public ComandoAiuto() {
-		this.setNome("aiuto");
+		this.setNome(Comandi.AIUTO.toString().toLowerCase());
 	}
 	
 	@Override

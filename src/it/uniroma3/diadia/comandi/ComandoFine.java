@@ -1,11 +1,12 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.enums.Comandi;
 
 public class ComandoFine extends AbstractComando implements Comando {
 	
 	public ComandoFine() {
-		this.setNome("fine");
+		this.setNome(Comandi.FINE.toString().toLowerCase());
 	}
 
 	@Override

@@ -1,12 +1,13 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.enums.Comandi;
 
 public class ComandoPrendi extends AbstractComando implements Comando {
 	
 	
 	public ComandoPrendi() {
-		this.setNome("prendi");
+		this.setNome(Comandi.PRENDI.toString().toLowerCase());
 	}
 	
 	@Override

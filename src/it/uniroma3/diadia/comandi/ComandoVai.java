@@ -3,12 +3,13 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.enums.Comandi;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class ComandoVai extends AbstractComando implements Comando {
 	
 	public ComandoVai() {
-		this.setNome("vai");
+		this.setNome(Comandi.VAI.toString().toLowerCase());
 	}
 	
 	@Override

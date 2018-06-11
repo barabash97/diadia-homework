@@ -1,11 +1,12 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.enums.Comandi;
 
 public class ComandoGuarda extends AbstractComando implements Comando {
 
 	public ComandoGuarda() {
-		this.setNome("guarda");
+		this.setNome(Comandi.GUARDA.toString().toLowerCase());
 	}
 
 	@Override
