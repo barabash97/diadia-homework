@@ -10,7 +10,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class FabbricaDiComandiFisarmonicaTest {
 
-	private FabbricaDiComandiFisarmonica fabbricaComandi;
+	private FabbricaDiComandiRiflessiva fabbricaComandi;
 	private ComandoVai comandoVaiSud;
 	private ComandoPrendi comandoPrendiLampada;
 	private ComandoPosa comandoPosaLampada;
@@ -20,7 +20,7 @@ public class FabbricaDiComandiFisarmonicaTest {
 	private ComandoNonValido comandoNonValido;
 	@Before
 	public void setUp() throws Exception {
-		this.fabbricaComandi = new FabbricaDiComandiFisarmonica();
+		this.fabbricaComandi = new FabbricaDiComandiRiflessiva();
 		this.comandoVaiSud = new ComandoVai();
 		this.comandoVaiSud.setParametro("sud");
 		this.comandoPrendiLampada = new ComandoPrendi();
@@ -29,7 +29,7 @@ public class FabbricaDiComandiFisarmonicaTest {
 		this.comandoPosaLampada.setParametro("lampada");
 		this.comandoGuarda = new ComandoGuarda();
 		this.comandoFine = new ComandoFine();
-		this.comandoAiuto = new ComandoAiuto(FabbricaDiComandiFisarmonica.getElencoComandi());
+		this.comandoAiuto = new ComandoAiuto(FabbricaDiComandiRiflessiva.getElencoComandi());
 		this.comandoNonValido = new ComandoNonValido();
 	}
 

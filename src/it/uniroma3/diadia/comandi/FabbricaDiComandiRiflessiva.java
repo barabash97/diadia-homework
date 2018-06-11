@@ -2,7 +2,7 @@ package it.uniroma3.diadia.comandi;
 
 import java.util.Scanner;
 
-public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi {
+public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 	
 	static final private String[] elencoComandi = { "vai", "aiuto", "fine", "prendi", "posa", "guarda", "saluta", "interagisci"};
 	
