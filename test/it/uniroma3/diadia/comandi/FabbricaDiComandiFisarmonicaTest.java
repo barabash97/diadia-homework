@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.enums.Comandi;
+import it.uniroma3.diadia.enums.Direzioni;
+
 public class FabbricaDiComandiFisarmonicaTest {
 
 	private FabbricaDiComandiRiflessiva fabbricaComandi;
@@ -19,7 +22,7 @@ public class FabbricaDiComandiFisarmonicaTest {
 	public void setUp() throws Exception {
 		this.fabbricaComandi = new FabbricaDiComandiRiflessiva();
 		this.comandoVaiSud = new ComandoVai();
-		this.comandoVaiSud.setParametro("sud");
+		this.comandoVaiSud.setParametro(Direzioni.SUD.toString().toLowerCase());
 		this.comandoPrendiLampada = new ComandoPrendi();
 		this.comandoPrendiLampada.setParametro("lampada");
 		this.comandoPosaLampada = new ComandoPosa();
@@ -32,7 +35,8 @@ public class FabbricaDiComandiFisarmonicaTest {
 
 	@Test
 	public void testCostruisciComando_vai() {
-		Comando c = this.fabbricaComandi.costruisciComando("vai sud");
+		String nomeComando = Comandi.VAI.toString().toLowerCase() + " " + Direzioni.SUD.toString().toLowerCase();
+		Comando c = this.fabbricaComandi.costruisciComando(nomeComando);
 		assertEquals(this.comandoVaiSud.getNome(), c.getNome());
 		assertEquals(this.comandoVaiSud.getParametro(), c.getParametro());
 	}
@@ -46,35 +50,35 @@ public class FabbricaDiComandiFisarmonicaTest {
 	
 	@Test
 	public void testCostruisciComando_prendi() {
-		Comando c = this.fabbricaComandi.costruisciComando("prendi lampada");
+		Comando c = this.fabbricaComandi.costruisciComando(Comandi.PRENDI.toString().toLowerCase() + " lampada");
 		assertEquals(this.comandoPrendiLampada.getNome(), c.getNome());
 		assertEquals(this.comandoPrendiLampada.getParametro(), c.getParametro());
 	}
 	
 	@Test
 	public void testCostruisciComando_posa() {
-		Comando c = this.fabbricaComandi.costruisciComando("posa lampada");
+		Comando c = this.fabbricaComandi.costruisciComando(Comandi.POSA.toString().toLowerCase() + " lampada");
 		assertEquals(this.comandoPosaLampada.getNome(), c.getNome());
 		assertEquals(this.comandoPosaLampada.getParametro(), c.getParametro());
 	}
 
 	@Test
 	public void testCostruisciComando_guarda() {
-		Comando c = this.fabbricaComandi.costruisciComando("guarda");
+		Comando c = this.fabbricaComandi.costruisciComando(Comandi.GUARDA.toString().toLowerCase());
 		assertEquals(this.comandoGuarda.getNome(), c.getNome());
 		assertEquals(this.comandoGuarda.getParametro(), c.getParametro());
 	}
 	
 	@Test
 	public void testCostruisciComando_fine() {
-		Comando c = this.fabbricaComandi.costruisciComando("fine");
+		Comando c = this.fabbricaComandi.costruisciComando(Comandi.FINE.toString().toLowerCase());
 		assertEquals(this.comandoFine.getNome(), c.getNome());
 		assertEquals(this.comandoFine.getParametro(), c.getParametro());
 	}
 	
 	@Test
 	public void testCostruisciComando_aiuto() {
-		Comando c = this.fabbricaComandi.costruisciComando("aiuto");
+		Comando c = this.fabbricaComandi.costruisciComando(Comandi.AIUTO.toString().toLowerCase());
 		assertEquals(this.comandoAiuto.getNome(), c.getNome());
 		assertEquals(this.comandoAiuto.getParametro(), c.getParametro());
 	}

@@ -8,6 +8,7 @@ import org.junit.Test;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.comandi.ComandoVai;
+import it.uniroma3.diadia.enums.Direzioni;
 
 public class ComandoVaiTest {
 	
@@ -27,7 +28,7 @@ public class ComandoVaiTest {
 	@Test
 	public void testEsegui_direzioneInesistente() {
 		this.partita.getLabirinto().setStanzaCorrente(this.stanzaSenzaDirezioni);
-		this.comando.setParametro("nord");
+		this.comando.setParametro(Direzioni.NORD.toString().toLowerCase());
 		this.comando.esegui(partita);
 		assertEquals(this.partita.getLabirinto().getStanzaCorrente(), this.stanzaSenzaDirezioni);
 	}
@@ -43,7 +44,7 @@ public class ComandoVaiTest {
 	@Test
 	public void testEsegui() {
 		Stanza stanzaCorrente = this.partita.getLabirinto().getStanzaCorrente();
-		this.comando.setParametro("sud");
+		this.comando.setParametro(Direzioni.SUD.toString().toLowerCase());
 		this.comando.esegui(this.partita);
 		assertNotEquals(stanzaCorrente, this.partita.getLabirinto().getStanzaCorrente());
 	}

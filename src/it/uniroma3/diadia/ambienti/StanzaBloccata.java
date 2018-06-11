@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
+import it.uniroma3.diadia.enums.Direzioni;
+
 public class StanzaBloccata extends Stanza {
 	
 	private String nomeParticolare;
@@ -7,7 +9,7 @@ public class StanzaBloccata extends Stanza {
 	
 	final public static String SLOGAN = "Stanza bloccata";
 	final private static String NOME_ATTREZZO_PARTICOLARE_DEFAULT = "lanterna";
-	final private static String DIREZIONE_PARTICOLARE_DEFAULT = "nord";
+	final private static String DIREZIONE_PARTICOLARE_DEFAULT = Direzioni.NORD.toString().toLowerCase();
 	
 	public StanzaBloccata(String nome) {
 		this(nome, NOME_ATTREZZO_PARTICOLARE_DEFAULT, DIREZIONE_PARTICOLARE_DEFAULT);

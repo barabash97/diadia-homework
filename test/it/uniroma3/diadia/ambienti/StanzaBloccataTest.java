@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.enums.Direzioni;
 
 public class StanzaBloccataTest {
 
@@ -18,10 +19,10 @@ public class StanzaBloccataTest {
 	public void setUp() throws Exception {
 		this.attrezzoParticolare = new Attrezzo("particolare", 1);
 		this.attrezzoNonParticolare = new Attrezzo("nonParticolare", 1);
-		this.direzioneBloccata = "sud";
+		this.direzioneBloccata = Direzioni.SUD.toString().toLowerCase();
 		this.stanzaBloccata = new StanzaBloccata("bloccata", this.attrezzoParticolare.getNome(), this.direzioneBloccata);
 		this.stanza = new Stanza("stanza");
-		this.stanzaBloccata.impostaStanzaAdiacente("nord", this.stanza);
+		this.stanzaBloccata.impostaStanzaAdiacente(Direzioni.NORD.toString().toLowerCase(), this.stanza);
 	}
 
 	@Test
@@ -29,7 +30,7 @@ public class StanzaBloccataTest {
 		assertFalse(this.stanzaBloccata.hasAttrezzo(this.attrezzoParticolare.getNome()));
 		assertTrue(this.stanzaBloccata.addAttrezzo(this.attrezzoNonParticolare));
 		assertTrue(this.stanzaBloccata.hasAttrezzo(this.attrezzoNonParticolare.getNome()));
-		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente("nord"));
+		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente(Direzioni.NORD.toString().toLowerCase()));
 	}
 	
 	@Test
@@ -37,7 +38,7 @@ public class StanzaBloccataTest {
 		assertFalse(this.stanzaBloccata.hasAttrezzo(this.attrezzoParticolare.getNome()));
 		assertTrue(this.stanzaBloccata.addAttrezzo(this.attrezzoParticolare));
 		assertTrue(this.stanzaBloccata.hasAttrezzo(this.attrezzoParticolare.getNome()));
-		assertNotEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente("nord"));
+		assertNotEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente(Direzioni.NORD.toString().toLowerCase()));
 	}
 	
 	@Test
