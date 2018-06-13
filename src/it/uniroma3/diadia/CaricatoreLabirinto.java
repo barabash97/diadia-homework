@@ -1,6 +1,8 @@
 package it.uniroma3.diadia;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -74,7 +76,7 @@ public class CaricatoreLabirinto {
 				throw new RuntimeException(e);
 			}
 		}
-		
+
 	}
 
 	private String leggiRigaCheCominciaPer(String marker) throws FormatoFileNonValidoException {
@@ -87,7 +89,9 @@ public class CaricatoreLabirinto {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void leggiECreaStanze() throws FormatoFileNonValidoException {
+		Stanza stanza = null;
 		String nomiStanze = this.leggiRigaCheCominciaPer(STANZE_MARKER);
 		for (String stringaStanza : separaStringheAlleVirgole(nomiStanze)) {
 			try (Scanner scannerDiLinea = new Scanner(stringaStanza)) {
@@ -109,7 +113,37 @@ public class CaricatoreLabirinto {
 						nomeClasse.append(tipoStanza.substring(1));
 					}
 
-					Stanza stanza = new Stanza(nomeStanza);
+					Constructor<Stanza>[] stanzaConstructorArray = null; // RECUPERO COSTRUTTORI
+					List<String> parameters = new ArrayList<String>(); // RECUPERO PARAMETRI
+
+					try {
+						stanzaConstructorArray = (Constructor<Stanza>[]) Class.forName(nomeClasse.toString())
+								.getDeclaredConstructors();
+					} catch (SecurityException | ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					List<Constructor<Stanza>> stanzaConstructorList = new ArrayList<>(
+							Arrays.asList(stanzaConstructorArray));
+					parameters.add(nomeStanza);
+					
+					if(tipoStanza != null) {
+						parameters.add(tipoStanza);
+					}
+					Iterator<Constructor<Stanza>> iterConstructor = stanzaConstructorList.iterator();
+					while(iterConstructor.hasNext()) {
+						Constructor<Stanza> stanzaConstructor= iterConstructor.next();
+						if(stanzaConstructor.getParameterCount() == parameters.size()) { //SE IL NUMERO DI PARAMETRI DEL COSTRUTTORE COMBACIA COI PARAMETRI EFFETTIVAMENTE PRESENTI
+							try {
+								stanza = stanzaConstructor.newInstance(parameters.toArray());
+							} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+									| InvocationTargetException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}
+					
 
 					if (stanza != null) {
 						// System.out.println(stanza);
@@ -117,7 +151,7 @@ public class CaricatoreLabirinto {
 					}
 				}
 			}
-		
+
 		}
 	}
 
@@ -161,7 +195,7 @@ public class CaricatoreLabirinto {
 			posaAttrezzo(nomeAttrezzo, pesoAttrezzo, nomeStanza);
 		}
 	}
-	
+
 	private void leggiECollocaAttrezziPersonaggi() throws FormatoFileNonValidoException {
 		String specificheAttrezzi = this.leggiRigaCheCominciaPer(ATTREZZI_PERSONAGGI_MARKER);
 
@@ -181,8 +215,7 @@ public class CaricatoreLabirinto {
 			posaAttrezzoPersonaggio(nomeAttrezzo, pesoAttrezzo, nomeStanza);
 		}
 	}
-	
-	
+
 	private void posaAttrezzo(String nomeAttrezzo, String pesoAttrezzo, String nomeStanza)
 			throws FormatoFileNonValidoException {
 		int peso;
@@ -196,33 +229,29 @@ public class CaricatoreLabirinto {
 			check(false, "Peso attrezzo " + nomeAttrezzo + " non valido");
 		}
 	}
-	
+
 	private void posaAttrezzoPersonaggio(String nomeAttrezzo, String pesoAttrezzo, String nomeStanza)
 			throws FormatoFileNonValidoException {
 		int peso;
 		try {
 			peso = Integer.parseInt(pesoAttrezzo);
 			Attrezzo attrezzo = new Attrezzo(nomeAttrezzo, peso);
-			check(isStanzaValida(nomeStanza),
-					"Stanza: " + nomeStanza + " non trovata");
+			check(isStanzaValida(nomeStanza), "Stanza: " + nomeStanza + " non trovata");
 			AbstractPersonaggio personaggio = this.nome2stanza.get(nomeStanza).getPersonaggio();
-			if(personaggio != null) {
+			if (personaggio != null) {
 				personaggio.setAttrezzo(attrezzo);
 				this.nome2stanza.get(nomeStanza).setPersonaggio(personaggio);
 			}
-			
-			
+
 		} catch (NumberFormatException e) {
 			check(false, "Peso attrezzo " + nomeAttrezzo + " non valido");
 		}
 	}
-	
-
 
 	private boolean isStanzaValida(String nomeStanza) {
 		return this.nome2stanza.containsKey(nomeStanza);
 	}
-	
+
 	/**
 	 * 
 	 * @param nomeStanza
@@ -232,10 +261,10 @@ public class CaricatoreLabirinto {
 	private boolean isPersonaggioValido(String nomePersonaggio) {
 		Set<String> keys = this.nome2stanza.keySet();
 		Iterator<String> it = keys.iterator();
-		
-		while(it.hasNext()) {
+
+		while (it.hasNext()) {
 			Stanza s = this.nome2stanza.get(it.next());
-			if(s.getPersonaggio().getNome() == nomePersonaggio) {
+			if (s.getPersonaggio().getNome() == nomePersonaggio) {
 				return true;
 			}
 		}
@@ -244,7 +273,7 @@ public class CaricatoreLabirinto {
 
 	private void leggiEImpostaUscite() throws FormatoFileNonValidoException {
 		String specificheUscite = this.leggiRigaCheCominciaPer(USCITE_MARKER);
-	
+
 		try (Scanner scannerDiLinea = new Scanner(specificheUscite)) {
 
 			while (scannerDiLinea.hasNext()) {
@@ -253,11 +282,11 @@ public class CaricatoreLabirinto {
 				check(scannerDiLinea.hasNext(),
 						msgTerminazionePrecoce("la direzione di una uscita della stanza " + stanzaPartenza));
 				String dir = scannerDiLinea.next();
-				
+
 				check(scannerDiLinea.hasNext(), msgTerminazionePrecoce(
 						"la destinazione di una uscita della stanza " + stanzaPartenza + " nella direzione " + dir));
 				String stanzaDestinazione = scannerDiLinea.next().replace(",", "");
-				
+
 				impostaUscita(stanzaPartenza, dir, stanzaDestinazione.replace(",", " "));
 			}
 		}
@@ -268,8 +297,8 @@ public class CaricatoreLabirinto {
 	}
 
 	private void impostaUscita(String stanzaDa, String dir, String nomeA) throws FormatoFileNonValidoException {
-		//check(isStanzaValida(stanzaDa),"Stanza di partenza sconosciuta "+dir);
-		//check(isStanzaValida(nomeA),"Stanza di destinazione sconosciuta "+ dir);
+		// check(isStanzaValida(stanzaDa),"Stanza di partenza sconosciuta "+dir);
+		// check(isStanzaValida(nomeA),"Stanza di destinazione sconosciuta "+ dir);
 		Stanza partenzaDa = this.nome2stanza.get(stanzaDa);
 		Stanza arrivoA = this.nome2stanza.get(nomeA);
 		partenzaDa.impostaStanzaAdiacente(dir, arrivoA);
@@ -341,7 +370,8 @@ public class CaricatoreLabirinto {
 	}
 
 	/**
-	 * @param reader the reader to set
+	 * @param reader
+	 *            the reader to set
 	 */
 	public void setReader(LineNumberReader reader) {
 		this.reader = reader;
@@ -355,7 +385,8 @@ public class CaricatoreLabirinto {
 	}
 
 	/**
-	 * @param nome2stanza the nome2stanza to set
+	 * @param nome2stanza
+	 *            the nome2stanza to set
 	 */
 	public void setNome2stanza(Map<String, Stanza> nome2stanza) {
 		this.nome2stanza = nome2stanza;
@@ -411,18 +442,19 @@ public class CaricatoreLabirinto {
 	}
 
 	/**
-	 * @param stanzaIniziale the stanzaIniziale to set
+	 * @param stanzaIniziale
+	 *            the stanzaIniziale to set
 	 */
 	public void setStanzaIniziale(Stanza stanzaIniziale) {
 		this.stanzaIniziale = stanzaIniziale;
 	}
 
 	/**
-	 * @param stanzaVincente the stanzaVincente to set
+	 * @param stanzaVincente
+	 *            the stanzaVincente to set
 	 */
 	public void setStanzaVincente(Stanza stanzaVincente) {
 		this.stanzaVincente = stanzaVincente;
 	}
-	
-	
+
 }
