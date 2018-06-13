@@ -1,7 +1,7 @@
 Stanze: biblioteca, N10, N11, buia buia, block bloccata
 Inizio:biblioteca
 Vincente:N11
-Uscite:biblioteca nord N10, biblioteca sud N11
+Uscite:biblioteca nord N10, biblioteca sud N11, N10 nord buia, buia sud block
 Attrezzi:martello 10 biblioteca, pinza 2 N10
 Personaggi:mago biblioteca Fausts Salve, cane N10 Pippo BAUBAU, strega N11 UrsulaKemp Salve
 AttrezziPersonaggi: attrezzoMagico 1 biblioteca, attrezzoCane 1 N10, attrezzoStrega 1 N11

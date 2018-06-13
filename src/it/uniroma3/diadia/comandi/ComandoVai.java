@@ -34,7 +34,7 @@ public class ComandoVai extends AbstractComando implements Comando {
 			labirinto.setStanzaCorrente(prossimaStanza);
 			giocatore.decrementaCfu();
 		}
-		s.append(stanzaCorrente.getDescrizione() + "\n");
+		s.append(prossimaStanza.getDescrizione() + "\n");
 		return s.toString();
 	}
 
