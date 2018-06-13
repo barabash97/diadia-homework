@@ -105,6 +105,7 @@ public class CaricatoreLabirintoTest {
 		assertNotNull(this.caricatore.getStanzaIniziale());
 
 	}
+	
 	@Test
 	public void testLeggiECreaStanze_stanzeNonPresenti() {
 		try {
