@@ -253,9 +253,10 @@ public class CaricatoreLabirinto {
 				check(scannerDiLinea.hasNext(),
 						msgTerminazionePrecoce("la direzione di una uscita della stanza " + stanzaPartenza));
 				String dir = scannerDiLinea.next();
+				
 				check(scannerDiLinea.hasNext(), msgTerminazionePrecoce(
 						"la destinazione di una uscita della stanza " + stanzaPartenza + " nella direzione " + dir));
-				String stanzaDestinazione = scannerDiLinea.next();
+				String stanzaDestinazione = scannerDiLinea.next().replace(",", "");
 				
 				impostaUscita(stanzaPartenza, dir, stanzaDestinazione.replace(",", " "));
 			}
