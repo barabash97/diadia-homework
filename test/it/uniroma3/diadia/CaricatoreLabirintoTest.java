@@ -68,7 +68,43 @@ public class CaricatoreLabirintoTest {
 		assertNotNull(this.caricatore.getStanzaVincente());
 	}
 	
+	@Test
+	public final void testGetStanzaVincente() {
+		try {
+			this.caricatore = new CaricatoreLabirinto(this.test1);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+
+		try {
+			this.caricatore.carica();
+		} catch (FormatoFileNonValidoException e) {
+
+		}
+		assertNotNull(this.caricatore.getStanzaVincente());
+
+	}
 	
+	@Test
+	public final void testGetStanzaIniziale() {
+		try {
+			this.caricatore = new CaricatoreLabirinto(this.test1);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+
+		try {
+			this.caricatore.carica();
+		} catch (FormatoFileNonValidoException e) {
+
+		}
+		assertNotNull(this.caricatore.getStanzaIniziale());
+
+	}
 	@Test
 	public void testLeggiECreaStanze_stanzeNonPresenti() {
 		try {
