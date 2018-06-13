@@ -312,7 +312,6 @@ public class CaricatoreLabirinto {
 				String nomePersonaggio = scannerDiLinea.next();
 				check(scannerDiLinea.hasNext(), msgTerminazionePrecoce("Presentazione personaggio assente"));
 				String salutoPersonaggio = scannerDiLinea.next().replace(",", "");
-
 				impostaPersonaggio(tipoPersonaggio, nomeStanza, nomePersonaggio, salutoPersonaggio);
 			}
 		}
