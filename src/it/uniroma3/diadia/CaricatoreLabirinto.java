@@ -107,35 +107,35 @@ public class CaricatoreLabirinto {
 					StringBuilder nomeClasse = new StringBuilder("it.uniroma3.diadia.ambienti.stanze.");
 
 					nomeClasse.append("Stanza");
-					// es. nomeClasse: ‘it.uniroma3.diadia.comandi.ComandoV’
+					
 					if (tipoStanza != null) {
 						nomeClasse.append(tipoStanza.toUpperCase().charAt(0));
 						nomeClasse.append(tipoStanza.substring(1));
 					}
 
-					Constructor<Stanza>[] stanzaConstructorArray = null; // RECUPERO COSTRUTTORI
-					List<String> parameters = new ArrayList<String>(); // RECUPERO PARAMETRI
+					Constructor<Stanza>[] constructurArrayStanza = null; // RECUPERO COSTRUTTORI
+					List<String> parametriStanza = new ArrayList<String>(); // RECUPERO PARAMETRI
 
 					try {
-						stanzaConstructorArray = (Constructor<Stanza>[]) Class.forName(nomeClasse.toString())
+						constructurArrayStanza = (Constructor<Stanza>[]) Class.forName(nomeClasse.toString())
 								.getDeclaredConstructors();
 					} catch (SecurityException | ClassNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					List<Constructor<Stanza>> stanzaConstructorList = new ArrayList<>(
-							Arrays.asList(stanzaConstructorArray));
-					parameters.add(nomeStanza);
+							Arrays.asList(constructurArrayStanza));
+					parametriStanza.add(nomeStanza);
 					
 					if(tipoStanza != null) {
-						parameters.add(tipoStanza);
+						parametriStanza.add(tipoStanza);
 					}
 					Iterator<Constructor<Stanza>> iterConstructor = stanzaConstructorList.iterator();
 					while(iterConstructor.hasNext()) {
 						Constructor<Stanza> stanzaConstructor= iterConstructor.next();
-						if(stanzaConstructor.getParameterCount() == parameters.size()) { //SE IL NUMERO DI PARAMETRI DEL COSTRUTTORE COMBACIA COI PARAMETRI EFFETTIVAMENTE PRESENTI
+						if(stanzaConstructor.getParameterCount() == parametriStanza.size()) { //SE IL NUMERO DI PARAMETRI DEL COSTRUTTORE COMBACIA COI PARAMETRI EFFETTIVAMENTE PRESENTI
 							try {
-								stanza = stanzaConstructor.newInstance(parameters.toArray());
+								stanza = stanzaConstructor.newInstance(parametriStanza.toArray());
 							} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 									| InvocationTargetException e) {
 								// TODO Auto-generated catch block
