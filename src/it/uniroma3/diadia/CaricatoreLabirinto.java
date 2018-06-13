@@ -1,7 +1,6 @@
 package it.uniroma3.diadia;
 
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -65,6 +64,7 @@ public class CaricatoreLabirinto {
 			this.leggiEImpostaUscite();
 			this.leggiECollocaAttrezzi();
 			this.leggiPersonaggi();
+			this.leggiECollocaAttrezziPersonaggi();
 
 		} finally {
 			try {
@@ -87,7 +87,7 @@ public class CaricatoreLabirinto {
 		}
 	}
 
-	private void leggiECreaStanze() throws FormatoFileNonValidoException {
+	public void leggiECreaStanze() throws FormatoFileNonValidoException {
 		String nomiStanze = this.leggiRigaCheCominciaPer(STANZE_MARKER);
 		for (String stringaStanza : separaStringheAlleVirgole(nomiStanze)) {
 			try (Scanner scannerDiLinea = new Scanner(stringaStanza)) {
@@ -163,12 +163,12 @@ public class CaricatoreLabirinto {
 	}
 	
 	private void leggiECollocaAttrezziPersonaggi() throws FormatoFileNonValidoException {
-		String specificheAttrezzi = this.leggiRigaCheCominciaPer(ATTREZZI_MARKER);
+		String specificheAttrezzi = this.leggiRigaCheCominciaPer(ATTREZZI_PERSONAGGI_MARKER);
 
 		for (String specificaAttrezzo : separaStringheAlleVirgole(specificheAttrezzi)) {
 			String nomeAttrezzo = null;
 			String pesoAttrezzo = null;
-			String tipoPersonaggio = null;
+			String nomeStanza = null;
 			try (Scanner scannerLinea = new Scanner(specificaAttrezzo)) {
 				check(scannerLinea.hasNext(), msgTerminazionePrecoce("il nome di un attrezzo."));
 				nomeAttrezzo = scannerLinea.next();
@@ -176,12 +176,13 @@ public class CaricatoreLabirinto {
 				pesoAttrezzo = scannerLinea.next();
 				check(scannerLinea.hasNext(), msgTerminazionePrecoce(
 						"il nome della stanza in cui collocare l'attrezzo " + nomeAttrezzo + "."));
-				tipoPersonaggio = scannerLinea.next();
+				nomeStanza = scannerLinea.next();
 			}
-			posaAttrezzo(nomeAttrezzo, pesoAttrezzo, tipoPersonaggio);
+			posaAttrezzoPersonaggio(nomeAttrezzo, pesoAttrezzo, nomeStanza);
 		}
 	}
-
+	
+	
 	private void posaAttrezzo(String nomeAttrezzo, String pesoAttrezzo, String nomeStanza)
 			throws FormatoFileNonValidoException {
 		int peso;
@@ -196,15 +197,21 @@ public class CaricatoreLabirinto {
 		}
 	}
 	
-	private void posaAttrezzoPersonaggio(String nomeAttrezzo, String pesoAttrezzo, String nomeTipoPersonaggio)
+	private void posaAttrezzoPersonaggio(String nomeAttrezzo, String pesoAttrezzo, String nomeStanza)
 			throws FormatoFileNonValidoException {
 		int peso;
 		try {
 			peso = Integer.parseInt(pesoAttrezzo);
 			Attrezzo attrezzo = new Attrezzo(nomeAttrezzo, peso);
-			check(isStanzaValida(nomeTipoPersonaggio),
-					"Attrezzo " + nomeAttrezzo + " non collocabile: stanza " + nomeTipoPersonaggio + " inesistente");
-			this.nome2stanza.get(nomeTipoPersonaggio).addAttrezzo(attrezzo);
+			check(isStanzaValida(nomeStanza),
+					"Stanza: " + nomeStanza + " non trovata");
+			AbstractPersonaggio personaggio = this.nome2stanza.get(nomeStanza).getPersonaggio();
+			if(personaggio != null) {
+				personaggio.setAttrezzo(attrezzo);
+				this.nome2stanza.get(nomeStanza).setPersonaggio(personaggio);
+			}
+			
+			
 		} catch (NumberFormatException e) {
 			check(false, "Peso attrezzo " + nomeAttrezzo + " non valido");
 		}
@@ -222,13 +229,17 @@ public class CaricatoreLabirinto {
 	 * @param nomePersonaggio
 	 * @return
 	 */
-	private boolean isPersonaggioValido(String nomeStanza, String nomePersonaggio) {
-		boolean flagStanza = this.nome2stanza.containsKey(nomeStanza);
-		if(flagStanza) {
-			Stanza s = this.nome2stanza.get(nomeStanza);
-			return s.getPersonaggio().getNome().equals(nomePersonaggio);
-		} 
-		return flagStanza;
+	private boolean isPersonaggioValido(String nomePersonaggio) {
+		Set<String> keys = this.nome2stanza.keySet();
+		Iterator<String> it = keys.iterator();
+		
+		while(it.hasNext()) {
+			Stanza s = this.nome2stanza.get(it.next());
+			if(s.getPersonaggio().getNome() == nomePersonaggio) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void leggiEImpostaUscite() throws FormatoFileNonValidoException {
@@ -321,4 +332,97 @@ public class CaricatoreLabirinto {
 	public Stanza getStanzaVincente() {
 		return this.stanzaVincente;
 	}
+
+	/**
+	 * @return the reader
+	 */
+	public LineNumberReader getReader() {
+		return reader;
+	}
+
+	/**
+	 * @param reader the reader to set
+	 */
+	public void setReader(LineNumberReader reader) {
+		this.reader = reader;
+	}
+
+	/**
+	 * @return the nome2stanza
+	 */
+	public Map<String, Stanza> getNome2stanza() {
+		return nome2stanza;
+	}
+
+	/**
+	 * @param nome2stanza the nome2stanza to set
+	 */
+	public void setNome2stanza(Map<String, Stanza> nome2stanza) {
+		this.nome2stanza = nome2stanza;
+	}
+
+	/**
+	 * @return the stanzeMarker
+	 */
+	public static String getStanzeMarker() {
+		return STANZE_MARKER;
+	}
+
+	/**
+	 * @return the stanzaInizialeMarker
+	 */
+	public static String getStanzaInizialeMarker() {
+		return STANZA_INIZIALE_MARKER;
+	}
+
+	/**
+	 * @return the stanzaVincenteMarker
+	 */
+	public static String getStanzaVincenteMarker() {
+		return STANZA_VINCENTE_MARKER;
+	}
+
+	/**
+	 * @return the attrezziMarker
+	 */
+	public static String getAttrezziMarker() {
+		return ATTREZZI_MARKER;
+	}
+
+	/**
+	 * @return the usciteMarker
+	 */
+	public static String getUsciteMarker() {
+		return USCITE_MARKER;
+	}
+
+	/**
+	 * @return the personaggiMarker
+	 */
+	public static String getPersonaggiMarker() {
+		return PERSONAGGI_MARKER;
+	}
+
+	/**
+	 * @return the attrezziPersonaggiMarker
+	 */
+	public static String getAttrezziPersonaggiMarker() {
+		return ATTREZZI_PERSONAGGI_MARKER;
+	}
+
+	/**
+	 * @param stanzaIniziale the stanzaIniziale to set
+	 */
+	public void setStanzaIniziale(Stanza stanzaIniziale) {
+		this.stanzaIniziale = stanzaIniziale;
+	}
+
+	/**
+	 * @param stanzaVincente the stanzaVincente to set
+	 */
+	public void setStanzaVincente(Stanza stanzaVincente) {
+		this.stanzaVincente = stanzaVincente;
+	}
+	
+	
 }

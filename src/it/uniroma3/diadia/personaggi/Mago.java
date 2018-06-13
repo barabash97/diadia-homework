@@ -21,7 +21,7 @@ public class Mago extends AbstractPersonaggio {
 	@Override
 	public String agisci(Partita partita) {
 		String msg;
-		if (attrezzo != null) {
+		if (this.attrezzo != null) {
 			partita.getLabirinto().getStanzaCorrente().addAttrezzo(attrezzo);
 			this.attrezzo = null;
 			msg = MESSAGGIO_DONO;

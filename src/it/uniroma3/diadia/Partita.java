@@ -38,9 +38,11 @@ public class Partita {
 	 */
 	public Partita() {
 		this.io = new InterfacciaUtenteConsole();
-		creaStanze(); // Inizializzazione delle stanza e attrezzi
+		//creaStanze(); // Inizializzazione delle stanza e attrezzi
 		this.finita = false;
 		this.giocatore = new Giocatore("Vladimir");
+		this.labirinto = new Labirinto("init.txt");
+		System.out.println(this.getLabirinto().getStanzaCorrente().getPersonaggio().getAttrezzo());
 	}
 
 	/**
@@ -89,9 +91,8 @@ public class Partita {
 			laboratorio.addAttrezzo(new Attrezzo("attrezzo" + i, i / 2));
 		}
 
-		// Generazione delle stanza di inizio e fine di gioco
-		this.labirinto = new Labirinto("init.txt");
-
+		
+		
 	}
 
 	/**

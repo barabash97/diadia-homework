@@ -3,7 +3,7 @@ package it.uniroma3.diadia.comandi;
 import java.util.Scanner;
 
 public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
-		
+
 	private Scanner scannerDiParole;
 
 	@Override
@@ -16,28 +16,27 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 
 		if (scannerDiParole.hasNext()) {
 			nomeComando = scannerDiParole.next().toLowerCase();
+		} else {
+			return comando = new ComandoNonValido();
 		}
 
 		if (scannerDiParole.hasNext()) {
 			parametro = scannerDiParole.next().toLowerCase();
 		}
 		scannerDiParole.close();
-		StringBuilder nomeClasse
-		= new StringBuilder("it.uniroma3.diadia.comandi.Comando");
-		nomeClasse.append( Character.toUpperCase(nomeComando.charAt(0)) );
+		StringBuilder nomeClasse = new StringBuilder("it.uniroma3.diadia.comandi.Comando");
+		nomeClasse.append(Character.toUpperCase(nomeComando.charAt(0)));
 		// es. nomeClasse: ‘it.uniroma3.diadia.comandi.ComandoV’
-		nomeClasse.append( nomeComando.substring(1) ) ;
+		nomeClasse.append(nomeComando.substring(1));
 		// es. nomeClasse: ‘it.uniroma3.diadia.comandi.ComandoVai’
 		try {
-			comando = (Comando)Class.forName(nomeClasse.toString()).newInstance();
+			comando = (Comando) Class.forName(nomeClasse.toString()).newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			comando = new ComandoNonValido();
 		}
-	
+
 		comando.setParametro(parametro);
 		return comando;
 	}
-
-	
 
 }
