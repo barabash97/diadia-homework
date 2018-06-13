@@ -56,7 +56,12 @@ public class CaricatoreLabirinto {
 
 	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
 		this.nome2stanza = new HashMap<String, Stanza>();
-		this.reader = new LineNumberReader(new FileReader(nomeFile));
+		if(nomeFile != null && nomeFile.matches("^(.+).txt$")) {
+			this.reader = new LineNumberReader(new FileReader(nomeFile));
+		} else {
+			this.reader = new LineNumberReader(new StringReader(nomeFile));
+		}
+		
 	}
 
 	public void carica() throws FormatoFileNonValidoException {
@@ -166,7 +171,7 @@ public class CaricatoreLabirinto {
 		return result;
 	}
 
-	private void leggiInizialeEvincente() throws FormatoFileNonValidoException {
+	public void leggiInizialeEvincente() throws FormatoFileNonValidoException {
 		String nomeStanzaIniziale = null;
 		nomeStanzaIniziale = this.leggiRigaCheCominciaPer(STANZA_INIZIALE_MARKER);
 		check(this.isStanzaValida(nomeStanzaIniziale), nomeStanzaIniziale + " non definita");
@@ -176,7 +181,7 @@ public class CaricatoreLabirinto {
 		this.stanzaVincente = this.nome2stanza.get(nomeStanzaVincente);
 	}
 
-	private void leggiECollocaAttrezzi() throws FormatoFileNonValidoException {
+	public void leggiECollocaAttrezzi() throws FormatoFileNonValidoException {
 		String specificheAttrezzi = this.leggiRigaCheCominciaPer(ATTREZZI_MARKER);
 
 		for (String specificaAttrezzo : separaStringheAlleVirgole(specificheAttrezzi)) {
@@ -196,7 +201,7 @@ public class CaricatoreLabirinto {
 		}
 	}
 
-	private void leggiECollocaAttrezziPersonaggi() throws FormatoFileNonValidoException {
+	public void leggiECollocaAttrezziPersonaggi() throws FormatoFileNonValidoException {
 		String specificheAttrezzi = this.leggiRigaCheCominciaPer(ATTREZZI_PERSONAGGI_MARKER);
 
 		for (String specificaAttrezzo : separaStringheAlleVirgole(specificheAttrezzi)) {
@@ -271,7 +276,7 @@ public class CaricatoreLabirinto {
 		return false;
 	}
 
-	private void leggiEImpostaUscite() throws FormatoFileNonValidoException {
+	public void leggiEImpostaUscite() throws FormatoFileNonValidoException {
 		String specificheUscite = this.leggiRigaCheCominciaPer(USCITE_MARKER);
 
 		try (Scanner scannerDiLinea = new Scanner(specificheUscite)) {
@@ -327,7 +332,7 @@ public class CaricatoreLabirinto {
 
 	}
 
-	private void leggiPersonaggi() throws FormatoFileNonValidoException {
+	public void leggiPersonaggi() throws FormatoFileNonValidoException {
 		String personaggi = this.leggiRigaCheCominciaPer(PERSONAGGI_MARKER);
 
 		try (Scanner scannerDiLinea = new Scanner(personaggi)) {
@@ -375,6 +380,14 @@ public class CaricatoreLabirinto {
 	 */
 	public void setReader(LineNumberReader reader) {
 		this.reader = reader;
+	}
+	
+	/**
+	 * 
+	 * @param reader
+	 */
+	public void setReader(String reader) {
+		this.reader = new LineNumberReader(new StringReader(reader));
 	}
 
 	/**
