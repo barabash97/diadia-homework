@@ -15,15 +15,15 @@ public class Mago extends AbstractPersonaggio {
 	}
 	public Mago(String nome, String presentazione, Attrezzo attrezzo) {
 		super(nome, presentazione);
-		this.attrezzo = attrezzo;
+		this.setAttrezzo(attrezzo);
 	}
 
 	@Override
 	public String agisci(Partita partita) {
 		String msg;
-		if (this.attrezzo != null) {
-			partita.getLabirinto().getStanzaCorrente().addAttrezzo(this.attrezzo);
-			this.attrezzo = null;
+		if (this.getAttrezzo() != null) {
+			partita.getLabirinto().getStanzaCorrente().addAttrezzo(this.getAttrezzo());
+			this.setAttrezzo(null);
 			msg = MESSAGGIO_DONO;
 		} else {
 			msg = MESSAGGIO_SCUSE;
