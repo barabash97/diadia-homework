@@ -17,7 +17,7 @@ public class ComandoInteragisci extends AbstractComando implements Comando {
 
 		AbstractPersonaggio personaggio;
 		personaggio = partita.getLabirinto().getStanzaCorrente().getPersonaggio();
-
+		System.out.println(personaggio);
 		if (personaggio != null) {
 			s.append(personaggio.agisci(partita));
 		} else

@@ -22,7 +22,7 @@ public class Mago extends AbstractPersonaggio {
 	public String agisci(Partita partita) {
 		String msg;
 		if (this.attrezzo != null) {
-			partita.getLabirinto().getStanzaCorrente().addAttrezzo(attrezzo);
+			partita.getLabirinto().getStanzaCorrente().addAttrezzo(this.attrezzo);
 			this.attrezzo = null;
 			msg = MESSAGGIO_DONO;
 		} else {
