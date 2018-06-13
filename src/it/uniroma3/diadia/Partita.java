@@ -42,7 +42,6 @@ public class Partita {
 		this.finita = false;
 		this.giocatore = new Giocatore("Vladimir");
 		this.labirinto = new Labirinto("init.txt");
-		System.out.println(this.getLabirinto().getStanzaCorrente().getPersonaggio().getAttrezzo());
 	}
 
 	/**
