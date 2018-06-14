@@ -24,10 +24,12 @@ public class ComandoRegala extends AbstractComando implements Comando {
 				String result = personaggio.riceviRegalo(attrezzo, partita);
 				borsa.removeAttrezzo(attrezzo.getNome());
 				s.append(result + "\n");
+			} else {
+				s.append("Attrezzo non presente\n");
 			}
 
 		} else {
-			s.append("Devi indicare il nome dell\'attrezzo");
+			s.append("Devi indicare il nome dell\'attrezzo\n");
 		}
 
 		return s.toString();
